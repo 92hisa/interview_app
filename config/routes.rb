@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root 'top#index'
 
   resources :users, only: [:show]
+  resources :posts
 end
