@@ -1,4 +1,9 @@
 <%= render "partial/navbar" %>
+<% if @user.profile_image.url.nil? %>
+  <div class="profile-default-img"></div>
+<% else %>
+  <%= image_tag @user.profile_image.url, class: "profile-img" %>
+<% end %>
 
 <%= @user.name %>
 <%= @user.about_me %>
