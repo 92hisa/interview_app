@@ -1,3 +1,8 @@
-<p>このページはプロフィールページです。</p>
+<%= render "partial/navbar" %>
 
-<i class="fas fa-fire"></i>
+<%= @user.name %>
+
+<% if current_user.id == @user.id %>
+<span>ログアウト</span>
+<span>情報を編集</span>
+<% end %>
