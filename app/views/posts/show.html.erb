@@ -3,4 +3,6 @@
 <%= @post.due_date %><br>
 <%= @post.experience %><br>
 <%= @post.detail %><br>
+<%= link_to "ルーム作成", new_room_path %>
+<%= link_to "購入画面", new_post_purchase_path(@post.id) %>
 <%= link_to "トップページ", root_path %>

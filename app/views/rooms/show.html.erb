@@ -1,0 +1,9 @@
+<p><%= "ルーム名：#{@room.name}" %></p>
+
+<input type="text" data-behavior="room_speaker"> // 投稿フォーム
+
+<div id="posts">
+  <% @chats.each do |chat| %>
+  <p><%= chat.message %></p>
+<% end %>
+</div>

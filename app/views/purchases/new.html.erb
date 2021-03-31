@@ -1,0 +1,7 @@
+<%= @post.title %><br>
+<%= @post.fee %><br>
+<%= @post.experience %><br>
+<%= @post.detail %><br>
+<%= form_with(model: [@post, @purchase], local: true) do |f| %>
+  <%= f.submit "確認して購入する", class: "btn btn-primary" %><br>
+<% end %>

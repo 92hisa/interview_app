@@ -1,0 +1,7 @@
+<% if @purchase_logs.present? %>
+  <%= @purchase_logs.each do |logs| %>
+    <%= logs.title %>
+  <% end %>
+<% else %>
+  <%= link_to "トップ", root_path %>
+<% end %>
