@@ -40,10 +40,13 @@ ActiveRecord::Schema.define(version: 2021_03_30_131351) do
   create_table "purchases", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
-    t.text "content"
+    t.bigint "saler_id", null: false
+    t.bigint "buyer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["buyer_id"], name: "index_purchases_on_buyer_id"
     t.index ["post_id"], name: "index_purchases_on_post_id"
+    t.index ["saler_id"], name: "index_purchases_on_saler_id"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
@@ -83,6 +86,8 @@ ActiveRecord::Schema.define(version: 2021_03_30_131351) do
   add_foreign_key "posts", "users"
   add_foreign_key "purchases", "posts"
   add_foreign_key "purchases", "users"
+  add_foreign_key "purchases", "users", column: "buyer_id"
+  add_foreign_key "purchases", "users", column: "saler_id"
   add_foreign_key "user_rooms", "rooms"
   add_foreign_key "user_rooms", "users"
 end

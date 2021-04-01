@@ -1,6 +1,7 @@
 <h2>購入履歴</h2>
 <% if @purchase_logs.present? %><br>
   <% @purchase_logs.each do |logs| %><br>
+    <%= logs.user.name %><br>
     <%= logs.title %><br>
     <%= logs.fee %><br>
     <%= logs.due_date %><br>

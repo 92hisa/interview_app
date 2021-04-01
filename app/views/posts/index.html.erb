@@ -1,8 +1,6 @@
-投稿一覧
-<% if user_signed_in? %><br>
+<h1>トップページ</h1>
+<h2>案件一覧</h2>
   <% @post.each do |p| %><br>
     <%= p.title %><br>
     <%= link_to "詳細", post_path(p.id) %><br>
   <% end %><br>
-  <%= link_to "トップページ", root_path %>
-<% end %>

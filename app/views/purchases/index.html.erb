@@ -1,5 +1,7 @@
+<h2>取引中</h2>
 <% if @post.user_id == current_user.id %>
   <% @post_purchase.each do |post_purchase| %><br>
+    <%= post_purchase.user.name %><br>
     <%= post_purchase.user_id %><br>
     <%= post_purchase.post_id %><br>
     <%= post_purchase.created_at %><br>
@@ -8,3 +10,5 @@
 <% else %>
   <%= link_to "トップ", root_path %>
 <% end %>
+<%= link_to "戻る", :back %><br>
+<%= link_to "トップ", root_path %><br>
