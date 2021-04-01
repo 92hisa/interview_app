@@ -9,6 +9,9 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
       <li class="nav-item disabled">
+        <span class="nav-link"><%= "ID:#{current_user.id}" %></span>
+      </li>
+      <li class="nav-item disabled">
         <span class="nav-link"><%= current_user.name + "さん" %></span>
       </li>
       <% end %>
@@ -29,9 +32,9 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メニュー</a>
         <div class="dropdown-menu">
           <%= link_to "購入履歴", purchases_record_path(current_user), class: "dropdown-item" %><br>
-          <%= link_to "販売中の案件", post_list_user_path(current_user), class: "dropdown-item" %><br>
+          <%= link_to "掲載中の案件", post_list_user_path(current_user), class: "dropdown-item" %><br>
           <%= link_to "案件を登録する", new_post_path, class: "dropdown-item" %><br>
-        </div>  
+        </div>
       </li>  
       <% end %>
     </ul>

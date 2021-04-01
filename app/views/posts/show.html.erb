@@ -1,13 +1,42 @@
-<h2>案件詳細</h2>
-<%= @post.title %><br>
-<%= @post.fee %><br>
-<%= @post.due_date %><br>
-<%= @post.experience %><br>
-<%= @post.detail %><br>
-<% if not @post.user_id == current_user.id %>
-  <%= link_to "ルーム作成", new_room_path %><br>
-  <%= link_to "購入画面", new_post_purchase_path(@post.id) %><br>
-  <%= link_to "トップページ", root_path %><br>
-<% else %>
-  <%= link_to "トップページ", root_path %><br>
-<% end %>
+<div class="container">
+    <h1 class="text-center">案件詳細</h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>Post_ID</th>
+                <th>投稿者ID</th>
+                <th>掲載日</th>
+                <th>案件名</th>
+                <th>案件掲載終了日</th>
+                <th>販売価格</th>
+                <th>経験</th>
+                <th>備考</th>
+                <th></th>
+                <th></th>
+                </tr>
+                </thread>
+                  <tbody>
+                    <td><%= @post.id %></td>
+                    <td><%= @post.user_id %></td>
+                    <td><%= @post.created_at.to_s(:datetime_jp)  %></td>
+                    <td><%= @post.title %></td>
+                    <td><%= @post.due_date %></td>
+                    <td><%= @post.fee %></td>
+                    <td><%= @post.experience %></td>
+                    <td><%= @post.detail %></td>
+                    <% if not @post.user_id == current_user.id %>
+                    <td><%= link_to "ルーム", '#', class: "btn btn-primary" %></td>
+                    <td><%= link_to "購入ページ", new_post_purchase_path(@post.id), class: "btn btn-primary" %></td>
+                    <% end %>
+                  </tbody>
+            </table>
+            <div class="text-right">
+              <%= link_to "戻る", :back %><br>
+              <%= link_to "トップページ", root_path %><br>
+            </div>
+        </div>
+    </div>
+</div>
+
