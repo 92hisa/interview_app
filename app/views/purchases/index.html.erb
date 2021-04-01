@@ -1,6 +1,10 @@
 <% if @purchase_logs.present? %><br>
   <% @purchase_logs.each do |logs| %><br>
     <%= logs.title %><br>
+    <%= logs.fee %><br>
+    <%= logs.due_date %><br>
+    <%= logs.experience %><br>
+    <%= logs.detail %><br>
   <% end %><br>
 <% else %><br>
   <%= link_to "トップ", root_path %><br>

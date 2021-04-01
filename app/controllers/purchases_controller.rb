@@ -7,7 +7,7 @@ class PurchasesController < ApplicationController
 
   def create
     @post = Post.find(params[:post_id])
-    @purchase = @post.purchases.create(user_id: current_user.id, post_id: @post.id)
+    @purchase = @post.purchases.new(user_id: current_user.id, post_id: @post.id)
     if @purchase.save
       flash[:notice] = "購入が完了しました"
       redirect_to root_path
