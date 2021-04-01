@@ -1,0 +1,10 @@
+<% if @post_list.present? %>
+  <% @post_list.each do |list| %><br>
+    <%= list.title %><br>
+    <% list.purchases.each do |p| %><br>
+    <%= link_to "取引中", post_purchases_path(list.id, p.id) %><br>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= link_to "トップ", root_path %>
+<% end %>

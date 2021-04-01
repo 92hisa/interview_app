@@ -1,8 +1,13 @@
+<h2>案件詳細</h2>
 <%= @post.title %><br>
 <%= @post.fee %><br>
 <%= @post.due_date %><br>
 <%= @post.experience %><br>
 <%= @post.detail %><br>
-<%= link_to "ルーム作成", new_room_path %>
-<%= link_to "購入画面", new_post_purchase_path(@post.id) %>
-<%= link_to "トップページ", root_path %>
+<% if not @post.user_id == current_user.id %>
+  <%= link_to "ルーム作成", new_room_path %><br>
+  <%= link_to "購入画面", new_post_purchase_path(@post.id) %><br>
+  <%= link_to "トップページ", root_path %><br>
+<% else %>
+  <%= link_to "トップページ", root_path %><br>
+<% end %>

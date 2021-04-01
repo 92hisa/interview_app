@@ -22,8 +22,13 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.find(id: params[:id])
   end
 
-  def index
+  def record
     purchase_logs = Purchase.where(user_id: current_user.id).pluck(:post_id)
     @purchase_logs = Post.find(purchase_logs)
+  end
+
+  def index
+    @post = Post.find(params[:post_id])
+    @post_purchase = @post.purchases
   end
 end

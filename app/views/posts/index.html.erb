@@ -1,6 +1,8 @@
 投稿一覧
-<% @post.each do |p| %><br>
-  <%= p.title %><br>
-  <%= link_to "詳細", post_path(p.id) %><br>
-<% end %><br>
-<%= link_to "トップページ", root_path %>
+<% if user_signed_in? %><br>
+  <% @post.each do |p| %><br>
+    <%= p.title %><br>
+    <%= link_to "詳細", post_path(p.id) %><br>
+  <% end %><br>
+  <%= link_to "トップページ", root_path %>
+<% end %>
