@@ -1,0 +1,44 @@
+<div class="container">
+    <h1 class="text-center">取引中の案件</h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>Purchase_ID</th>
+                <th>Saler_ID</th>
+                <th>Buyer_ID</th>
+                <th>Post_ID</th>
+                <th>User_ID</th>
+                <th>掲載日</th>
+                <th>案件名</th>
+                <th>販売価格</th>
+                <th>詳細</th>
+                <th></th>
+                <th></th>
+                </tr>
+                </thread>
+                <% if @post.user_id == current_user.id %>
+                  <% @post_purchase.each do |post_purchase| %>
+                    <tbody>
+                      <td><%= post_purchase.id %></td>
+                      <td><%= post_purchase.saler_id %></td>
+                      <td><%= post_purchase.buyer_id %></td>
+                      <td><%= post_purchase.post_id %></td>
+                      <td><%= post_purchase.created_at.to_s(:datetime_jp)  %></td>
+                      <td><%= post_purchase.post.title %></td>
+                      <td><%= post_purchase.post.fee %></td>
+                      <td><%= post_purchase.post.experience %></td>
+                      <td><%= post_purchase.post.detail %></td>
+                      <td><%= link_to "チャットルーム", '#', class: "btn btn-primary" %></td>
+                    </tbody>
+                  <% end %>
+                <% end %>
+            </table>
+            <div class="text-right">
+              <%= link_to "戻る", :back %><br>
+              <%= link_to "トップページ", root_path %><br>
+            </div>
+        </div>
+    </div>
+</div>

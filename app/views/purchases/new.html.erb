@@ -1,0 +1,45 @@
+<div class="container">
+    <h1 class="text-center">購入画面</h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>Post_ID</th>
+                <th>投稿者ID</th>
+                <th>掲載日</th>
+                <th>案件名</th>
+                <th>案件掲載終了日</th>
+                <th>販売価格</th>
+                <th>経験</th>
+                <th>備考</th>
+                <th></th>
+                <th></th>
+                </tr>
+                </thread>
+                  <tbody>
+                    <td><%= @post.id %></td>
+                    <td><%= @post.user_id %></td>
+                    <td><%= @post.created_at.to_s(:datetime_jp)  %></td>
+                    <td><%= @post.title %></td>
+                    <td><%= @post.due_date %></td>
+                    <td><%= @post.fee %></td>
+                    <td><%= @post.experience %></td>
+                    <td><%= @post.detail %></td>
+                  </tbody>
+            </table>
+            <div class="text-center">
+              <% if not @post.user_id == current_user.id %>
+                <%= form_with(model: [@post, @purchase], local: true) do |f| %>
+                  <%= f.submit "確認して購入する", class: "btn btn-primary" %>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="text-right">
+              <%= link_to "戻る", :back %><br>
+              <%= link_to "トップページ", root_path %><br>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -3,4 +3,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  def post_list
+    @post_list = current_user.posts
+  end
 end

@@ -1,0 +1,42 @@
+<div class="container">
+    <h1 class="text-center">掲載案件一覧</h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>Post_ID</th>
+                <th>投稿者ID</th>
+                <th>掲載日</th>
+                <th>案件名</th>
+                <th>案件掲載終了日</th>
+                <th>販売価格</th>
+                <th>経験</th>
+                <th>備考</th>
+                <th></th>
+                <th></th>
+                </tr>
+                </thread>
+                <% if @post_list.present? %>
+                  <% @post_list.each do |post_list| %>
+                    <tbody>
+                      <td><%= post_list.id %></td>
+                      <td><%= post_list.user_id %></td>
+                      <td><%= post_list.created_at.to_s(:datetime_jp)  %></td>
+                      <td><%= post_list.title %></td>
+                      <td><%= post_list.due_date %></td>
+                      <td><%= post_list.fee %></td>
+                      <td><%= post_list.experience %></td>
+                      <td><%= post_list.detail %></td>
+                      <td><%= link_to "取引画面", post_purchases_path(post_id: post_list.id), class: "btn btn-primary" %></td>
+                    </tbody>
+                  <% end %>
+            </table>
+            <% end %>
+            <div class="text-right">
+              <%= link_to "戻る", :back %><br>
+              <%= link_to "トップ", root_path %><br>
+            </div>
+        </div>
+    </div>
+</div>
