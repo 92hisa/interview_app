@@ -23,7 +23,7 @@
                         <td><%= purchase_logs.id %></td>
                         <td><%= purchase_logs.post.user_id %></td>
                         <td><%= purchase_logs.post.id %></td>
-                        <td><%= purchase_logs.created_at.to_s %></td>
+                        <td><%= purchase_logs.created_at.to_s(:datetime_jp) %></td>
                         <td><%= purchase_logs.post.title %></td>
                         <td><%= purchase_logs.post.fee %></td>
                         <td><%= purchase_logs.post.experience %></td>

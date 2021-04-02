@@ -23,7 +23,7 @@
                       <td><%= "ID:#{@saler.id} #{@saler.name}" %></td>
                       <td><%= "ID:#{@buyer.id} #{@buyer.name}" %></td>
                       <td><%= @post.id %></td>
-                      <td><%= @post.created_at.to_s %></td>
+                      <td><%= @post.created_at.to_s(:datetime_jp) %></td>
                       <td><%= @post.title %></td>
                       <td><%= @post.fee %></td>
                       <td><%= @post.experience %></td>
