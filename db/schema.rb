@@ -15,16 +15,6 @@ ActiveRecord::Schema.define(version: 2021_03_30_131351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "chats", force: :cascade do |t|
-    t.string "message"
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_chats_on_room_id"
-    t.index ["user_id"], name: "index_chats_on_user_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.text "title", null: false
     t.integer "fee", null: false
@@ -51,18 +41,10 @@ ActiveRecord::Schema.define(version: 2021_03_30_131351) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.string "name"
+    t.bigint "purchase_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_rooms", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["room_id"], name: "index_user_rooms_on_room_id"
-    t.index ["user_id"], name: "index_user_rooms_on_user_id"
+    t.index ["purchase_id"], name: "index_rooms_on_purchase_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -81,13 +63,10 @@ ActiveRecord::Schema.define(version: 2021_03_30_131351) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "chats", "rooms"
-  add_foreign_key "chats", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "purchases", "posts"
   add_foreign_key "purchases", "users"
   add_foreign_key "purchases", "users", column: "buyer_id"
   add_foreign_key "purchases", "users", column: "saler_id"
-  add_foreign_key "user_rooms", "rooms"
-  add_foreign_key "user_rooms", "users"
+  add_foreign_key "rooms", "purchases"
 end
