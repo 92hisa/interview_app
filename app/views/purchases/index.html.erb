@@ -1,18 +1,3 @@
-<h2>取引中</h2>
-<% if @post.user_id == current_user.id %>
-  <% @post_purchase.each do |post_purchase| %><br>
-    <%= post_purchase.user.name %><br>
-    <%= post_purchase.user_id %><br>
-    <%= post_purchase.post_id %><br>
-    <%= post_purchase.created_at %><br>
-    <%= link_to "チャットルーム", '#' %><br>
-  <% end %>
-<% else %>
-  <%= link_to "トップ", root_path %>
-<% end %>
-<%= link_to "戻る", :back %><br>
-<%= link_to "トップ", root_path %><br>
-
 <div class="container">
     <h1 class="text-center">取引中の案件</h1>
     <div class="row">
@@ -36,20 +21,24 @@
                 <% if @post.user_id == current_user.id %>
                   <% @post_purchase.each do |post_purchase| %>
                     <tbody>
-                      <td><%= post_purchase.purchase_id %></td>
+                      <td><%= post_purchase.id %></td>
                       <td><%= post_purchase.saler_id %></td>
                       <td><%= post_purchase.buyer_id %></td>
                       <td><%= post_purchase.post_id %></td>
                       <td><%= post_purchase.created_at.to_s(:datetime_jp)  %></td>
-                      <td><%= post_purchase.title %></td>
-                      <td><%= post_purchase.fee %></td>
-                      <td><%= post_purchase.experience %></td>
-                      <td><%= post_purchase.detail %></td>
+                      <td><%= post_purchase.post.title %></td>
+                      <td><%= post_purchase.post.fee %></td>
+                      <td><%= post_purchase.post.experience %></td>
+                      <td><%= post_purchase.post.detail %></td>
                       <td><%= link_to "チャットルーム", '#', class: "btn btn-primary" %></td>
                     </tbody>
                   <% end %>
                 <% end %>
             </table>
+            <div class="text-right">
+              <%= link_to "戻る", :back %><br>
+              <%= link_to "トップページ", root_path %><br>
+            </div>
         </div>
     </div>
 </div>

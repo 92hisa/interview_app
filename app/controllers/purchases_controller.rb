@@ -18,10 +18,10 @@ class PurchasesController < ApplicationController
     end
   end
 
-  def show
-    @post = Post.find_by(id: params[:post_id])
-    @purchase = Purchase.find(id: params[:id])
-  end
+  # def show
+  #   @post = Post.find(params[:post_id])
+  #   @post_purchase = @post.purchases.includes(:user)
+  # end
 
   #（購入者向け）取引履歴
   def record

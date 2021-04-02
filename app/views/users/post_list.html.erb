@@ -18,7 +18,7 @@
                 </tr>
                 </thread>
                 <% if @post_list.present? %>
-                  <% @post_list.each do |post_list| %><br>
+                  <% @post_list.each do |post_list| %>
                     <tbody>
                       <td><%= post_list.id %></td>
                       <td><%= post_list.user_id %></td>
@@ -28,13 +28,11 @@
                       <td><%= post_list.fee %></td>
                       <td><%= post_list.experience %></td>
                       <td><%= post_list.detail %></td>
-                        <% post_list.purchases.each do |post_list_purchase| %>
-                          <td><%= link_to "取引画面", post_purchases_path(post_list.id, post_list_purchase.id), class: "btn btn-primary" %></td>
-                        <% end %>
+                      <td><%= link_to "取引画面", post_purchases_path(post_id: post_list.id), class: "btn btn-primary" %></td>
                     </tbody>
-                  <% end%>
-                <% end %>
+                  <% end %>
             </table>
+            <% end %>
             <div class="text-right">
               <%= link_to "戻る", :back %><br>
               <%= link_to "トップ", root_path %><br>

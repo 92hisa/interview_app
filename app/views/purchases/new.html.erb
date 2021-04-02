@@ -26,13 +26,15 @@
                     <td><%= @post.fee %></td>
                     <td><%= @post.experience %></td>
                     <td><%= @post.detail %></td>
-                    <% if not @post.user_id == current_user.id %>
-                      <%= form_with(model: [@post, @purchase], local: true) do |f| %>
-                        <td><%= f.submit "確認して購入する", class: "btn btn-primary" %></td>
-                      <% end %>
-                    <% end %>
                   </tbody>
             </table>
+            <div class="text-center">
+              <% if not @post.user_id == current_user.id %>
+                <%= form_with(model: [@post, @purchase], local: true) do |f| %>
+                  <%= f.submit "確認して購入する", class: "btn btn-primary" %>
+                <% end %>
+              <% end %>
+            </div>
             <div class="text-right">
               <%= link_to "戻る", :back %><br>
               <%= link_to "トップページ", root_path %><br>
