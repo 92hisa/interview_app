@@ -8,12 +8,12 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     get :post_list, on: :member
-    get :deal_list, on: :member
+    get :purchase_logs, on: :member
   end
 
   resources :posts do
     resources :purchases
   end
 
-  resources :rooms, only: [:new, :create, :show]
+  resources :rooms
 end

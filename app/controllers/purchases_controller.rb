@@ -18,17 +18,6 @@ class PurchasesController < ApplicationController
     end
   end
 
-  # def show
-  #   @post = Post.find(params[:post_id])
-  #   @post_purchase = @post.purchases.includes(:user)
-  # end
-
-  #（購入者向け）取引履歴
-  def record
-    purchase_logs = Purchase.where(user_id: current_user.id).includes(:user).pluck(:post_id)
-    @purchase_logs = Post.find(purchase_logs)
-  end
-
   #（投稿者向け）取引一覧
   def index
     @post = Post.find(params[:post_id])
