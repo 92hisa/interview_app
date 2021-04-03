@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+ 
+  def index
+    @post = Post.all
+  end
+
   def new
   @post = Post.new
   end
@@ -14,12 +19,34 @@ class PostsController < ApplicationController
     end
   end
 
-  def index
-    @post = Post.all
-  end
-
   def show
     @post = Post.find(params[:id])
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.create(post_params)
+    if @post.save
+      flash[:notice] = "編集が完了しました"
+      redirect_to post_list_user_path(id: current_user.id)
+    else
+      flash[:alert] = "編集できませんでした"
+      render :edit
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.delete
+      flash[:notice] = "削除が完了しました"
+      redirect_to post_list_user_path(id: current_user.id)
+    else
+      flash[:alert] = "削除ができませんでした"
+      redirect_to new_post_path
+    end
   end
 
   private

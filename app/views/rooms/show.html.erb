@@ -38,7 +38,7 @@
 </div>
 <div class="container">
   <h2 class="text-center">メッセージ</h2>
-    <%= form_with(model: @message, url: messages_path(@room.id), local: true) do |f| %>
+    <%= form_with(model: @message, url: {controller: 'messages', action: 'create'}, local: true) do |f| %>
       <div class="row">
         <div class="col-md-6 col-sm-6 offset-md-3">
           <div class="form-group">              
