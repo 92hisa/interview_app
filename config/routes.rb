@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'posts#index'
 
-  get '/purchases/record', to: 'purchases#record'
-
   resources :users, only: [:show] do
     get :post_list, on: :member
     get :purchase_logs, on: :member
@@ -16,4 +14,6 @@ Rails.application.routes.draw do
   end
 
   resources :rooms
+  resources :messages, only: [:index, :create]
+  post 'rooms/:id' => 'rooms#show'
 end

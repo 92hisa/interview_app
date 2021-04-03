@@ -10,6 +10,7 @@ class PurchasesController < ApplicationController
     @post = Post.find(params[:post_id])
     @purchase = @post.purchases.new(user_id: current_user.id, post_id: @post.id, saler_id: @post.user_id, buyer_id: current_user.id)
     if @purchase.save
+      @room = Room.create(id: @purchase.id, purchase_id: @purchase.id)
       flash[:notice] = "購入が完了しました"
       redirect_to root_path
     else

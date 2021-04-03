@@ -6,6 +6,8 @@ class RoomsController < ApplicationController
       @post = Post.find_by(id: @purchase.post_id)
       @saler = User.find_by(id: @purchase.saler_id)
       @buyer = User.find_by(id: @purchase.buyer_id)
+      @room = Room.find(params[:id])
+      @messages = @room.messages.includes(:user)
   end
 
   private
