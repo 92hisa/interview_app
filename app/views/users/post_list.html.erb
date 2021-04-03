@@ -9,10 +9,10 @@
                 <th>投稿者ID</th>
                 <th>掲載日</th>
                 <th>案件名</th>
-                <th>案件掲載終了日</th>
                 <th>販売価格</th>
                 <th>経験</th>
                 <th>備考</th>
+                <th></th>
                 <th></th>
                 <th></th>
                 </tr>
@@ -24,11 +24,18 @@
                       <td><%= post_list.user_id %></td>
                       <td><%= post_list.created_at.to_s(:datetime_jp)  %></td>
                       <td><%= post_list.title %></td>
-                      <td><%= post_list.due_date %></td>
                       <td><%= post_list.fee %></td>
                       <td><%= post_list.experience %></td>
                       <td><%= post_list.detail %></td>
-                      <td><%= link_to "取引画面", post_purchases_path(post_id: post_list.id), class: "btn btn-primary" %></td>
+                      <% if post_list.purchases.ids.present?%>
+                        <td><%= link_to "編集", '', class: "btn btn-secondary"%></td>
+                        <td><%= link_to "削除", '', class: "btn btn-secondary"%></td>
+                        <td><%= link_to "取引画面", post_purchases_path(post_id: post_list.id), class: "btn btn-primary" %></td>
+                      <% else %>
+                        <td><%= link_to "編集", edit_post_path(id: post_list.id), class: "btn btn-primary"%></td>
+                        <td><%= link_to "削除", post_path(id: post_list.id), method: :delete, class: "btn btn-primary"%></td>
+                        <td><%= link_to "購入待ち", '', class: "btn btn-secondary" %></td>
+                      <% end %>
                     </tbody>
                   <% end %>
             </table>

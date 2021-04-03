@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center">案件を登録する</h1>
+  <h1 class="text-center">案件を編集する</h1>
     <%= form_with(model: @post, local: true) do |f| %>  
       <div class="row">
         <div class="col-md-6 col-sm-6 offset-md-3">
@@ -25,7 +25,7 @@
               <%= f.text_field :detail,  autofocus: true, autocomplete: "detail", class: "form-control" %>
               </div><br>            
               <div class="actions text-right">
-                <%= f.submit "投稿する", class: "btn btn-primary" %>
+                <%= f.submit "編集する", class: "btn btn-primary" %>
               </div><br>
               <div class="text-right">
                 <%= link_to "戻る", :back %>

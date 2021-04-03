@@ -8,7 +8,7 @@
                 <th>Purchase_ID</th>
                 <th>投稿者ID</th>
                 <th>Post_ID</th>
-                <th>掲載日</th>
+                <th>購入日</th>
                 <th>案件名</th>
                 <th>価格</th>
                 <th>経験</th>
@@ -18,17 +18,17 @@
                 </tr>
                 </thread>
                   <% if @purchase_logs.present? %><br>
-                    <% @purchase_logs.each do |purchase_logs| %><br>
+                    <% @purchase_logs.each do |purchase_logs| %>
                       <tbody>
-                        <td><%= purchase_logs.purchase_ids %></td>
-                        <td><%= purchase_logs.user.id %></td>
                         <td><%= purchase_logs.id %></td>
-                        <td><%= purchase_logs.created_at.to_s(:datetime_jp)  %></td>
-                        <td><%= purchase_logs.title %></td>
-                        <td><%= purchase_logs.fee %></td>
-                        <td><%= purchase_logs.experience %></td>
-                        <td><%= purchase_logs.detail %></td>
-                        <td><%= link_to "ルーム", '#', class: "btn btn-primary" %></td>
+                        <td><%= purchase_logs.post.user_id %></td>
+                        <td><%= purchase_logs.post.id %></td>
+                        <td><%= purchase_logs.created_at.to_s(:datetime_jp) %></td>
+                        <td><%= purchase_logs.post.title %></td>
+                        <td><%= purchase_logs.post.fee %></td>
+                        <td><%= purchase_logs.post.experience %></td>
+                        <td><%= purchase_logs.post.detail %></td>
+                        <td><%= link_to "MSG", room_path(id: purchase_logs.id), class: "btn btn-primary" %></td>
                       </tbody>
                     <% end %>
                   <% end %>

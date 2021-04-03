@@ -1,9 +1,82 @@
-<p><%= "ルーム名：#{@room.name}" %></p>
-
-<input type="text" data-behavior="room_speaker"> // 投稿フォーム
-
-<div id="posts">
-  <% @chats.each do |chat| %>
-  <p><%= chat.message %></p>
-<% end %>
+<% if current_user.id == @purchase.saler_id || @purchase.buyer_id %>
+<div class="container">
+    <h2 class="text-center">取引内容</h2>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>Room_ID</th>
+                <th>Purchase_ID</th>
+                <th>販売者ID</th>
+                <th>購入者ID</th>
+                <th>Post_ID</th>
+                <th>掲載日</th>
+                <th>案件名</th>
+                <th>価格</th>
+                <th>経験</th>
+                </tr>
+                </thread>
+                    <tbody>
+                      <td><%= @room.id %></td>
+                      <td><%= @purchase.id %></td>
+                      <td><%= "ID:#{@saler.id} #{@saler.name}" %></td>
+                      <td><%= "ID:#{@buyer.id} #{@buyer.name}" %></td>
+                      <td><%= @post.id %></td>
+                      <td><%= @post.created_at.to_s(:datetime_jp) %></td>
+                      <td><%= @post.title %></td>
+                      <td><%= @post.fee %></td>
+                      <td><%= @post.experience %></td>
+                    </tbody>
+            </table>
+            <div class="text-right">
+              <%= link_to "戻る", :back %><br>
+              <%= link_to "トップページ", root_path %><br>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="container">
+  <h2 class="text-center">メッセージ</h2>
+    <%= form_with(model: @message, url: {controller: 'messages', action: 'create'}, local: true) do |f| %>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 offset-md-3">
+          <div class="form-group">              
+              <div class="field">
+              <%= f.label "メッセージ" %>
+              <%= f.text_field :message,  autofocus: true, autocomplete: "message", class: "form-control" %>
+              </div><br>
+              <%= f.hidden_field :room_id, value: @room.id %>
+              <div class="actions text-right">
+                <%= f.submit "送信する", class: "btn btn-primary" %>
+              </div><br>
+            </div>  
+          </div>
+      </div>
+    <% end %>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>User_ID</th>
+                <th>名前</th>
+                <th>メッセージ</th>
+                <th>投稿時間</th>
+                </tr>
+                </thread>
+                  <% @messages.each do |m| %>
+                    <tbody>
+                      <td><%= m.user.id %></td>
+                      <td><%= m.user.name %></td>
+                      <td><%= m.message %></td>
+                      <td><%= m.created_at.to_s(:datetime_jp) %></td>
+                    </tbody>
+                  <% end %>
+            </table>
+        </div>
+    </div>
+</div>
+<% end%>
