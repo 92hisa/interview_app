@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :correct_user
+
   def show
     @user = User.find(params[:id])
   end
@@ -12,4 +14,13 @@ class UsersController < ApplicationController
   def purchase_logs
     @purchase_logs = Purchase.where(user_id: current_user.id).includes(post: :user)
   end
+
+  private
+  def correct_user
+    user = User.find(params[:id])
+    if not user.id == current_user.id
+      redirect_to root_path
+    end
+  end
+  
 end
