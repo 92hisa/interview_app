@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def new
     @post = Post.find(params[:post_id])
     @purchase = Purchase.new
@@ -19,7 +19,7 @@ class PurchasesController < ApplicationController
     end
   end
 
-  #（投稿者向け）取引一覧
+  # （投稿者向け）取引一覧
   def index
     @post = Post.find(params[:post_id])
     @post_purchase = @post.purchases.includes(:user)
