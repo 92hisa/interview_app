@@ -11,6 +11,7 @@ class RoomsController < ApplicationController
   end
 
   private
+
   def set_room
     @room = Room.find_by(purchase_id: params[:id])
     if @room.nil?
@@ -20,37 +21,37 @@ class RoomsController < ApplicationController
   end
 end
 
-  # def private
-  #   def set_room
-  #     @room = Room.find_by(purchase_id: params[:id]
-      
-  #     if @room.nil?
-  #       @room = Room.new(purchase_id: params[:id]
-  #       @room.save
-  #     end
-  #   end
-  # end
-  # def new
-  #   if user_signed_in?
-  #     @room = Room.new
-  #     @rooms = current_user.rooms
-  #     @nonrooms = Room.where(id: UserRoom.where.not(user_id: current_user.id).pluck(:id))
-  #   end
-  # end
+# def private
+#   def set_room
+#     @room = Room.find_by(purchase_id: params[:id]
 
-  # def create
-  #   @room = Room.new(room_params)
-  #   @room.save
-  #   current_user.user_rooms.create(room_id: @room.id)
-  #   redirect_to action: :show, id: @room.id
-  # end
+#     if @room.nil?
+#       @room = Room.new(purchase_id: params[:id]
+#       @room.save
+#     end
+#   end
+# end
+# def new
+#   if user_signed_in?
+#     @room = Room.new
+#     @rooms = current_user.rooms
+#     @nonrooms = Room.where(id: UserRoom.where.not(user_id: current_user.id).pluck(:id))
+#   end
+# end
 
-  # def show
-  #   @room = Room.find(params[:id])
-  #   @chats = @room.chats
-  # end
+# def create
+#   @room = Room.new(room_params)
+#   @room.save
+#   current_user.user_rooms.create(room_id: @room.id)
+#   redirect_to action: :show, id: @room.id
+# end
 
-  # private
-  # def room_params
-  #   params.require(:room).permit(:name)
-  # end
+# def show
+#   @room = Room.find(params[:id])
+#   @chats = @room.chats
+# end
+
+# private
+# def room_params
+#   params.require(:room).permit(:name)
+# end

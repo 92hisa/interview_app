@@ -40,6 +40,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem "factory_bot_rails", "~> 4.10.0"
   gem 'faker'
+  gem 'rubocop-airbnb'
 end
 
 group :development do

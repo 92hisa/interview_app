@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :purchases
   has_many :messages
-  
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -14,7 +14,6 @@ class User < ApplicationRecord
   mount_uploader :profile_image, ProfileImageUploader
 
   def update_without_current_password(params, *options)
-
     if params[:password].blank? && params[:password_confirmation].blank?
       params.delete(:password)
       params.delete(:password_confirmation)
