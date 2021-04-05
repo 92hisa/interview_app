@@ -6,6 +6,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    if current_user.update(user_params)
+      flash[:notice] = "ユーザー情報が更新されました"
+      redirect_to user_path(current_user.id)
+    else
+      flash[:notice] = "ユーザー情報が更新できませんでした"
+      redirect_to user_path(current_user.id)
+    end
+  end
+
   def post_list
     @post_list = current_user.posts
   end
@@ -16,6 +26,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(:gender, :about_me)
+  end
 
   def correct_user
     user = User.find(params[:id])
