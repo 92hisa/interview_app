@@ -44,19 +44,19 @@ RSpec.describe "Users", type: :system do
 
     context "入力情報が存在する場合" do
       it "ログイン後、トップページへ遷移すること" do
-        fill_in "Email", with: user.email
-        fill_in "Password", with: user.password
+        fill_in "Eメール", with: user.email
+        fill_in "パスワード", with: user.password
         click_on "Log in"
         expect(current_path).to eq root_path
         expect(page).not_to have_content("新規登録")
-        expect(page).not_to have_content("ログイン")
+        expect(page).not_to have_content("/^ログイン$/")
       end
     end
 
     context "入力情報が誤っている場合" do
       it "ログイン後、トップページへ遷移すること" do
-        fill_in "Email", with: ""
-        fill_in "Password", with: user.password
+        fill_in "Eメール", with: ""
+        fill_in "パスワード", with: user.password
         click_on "Log in"
         expect(current_path).to eq new_user_session_path
         expect(page).not_to have_content("登録情報")
@@ -92,7 +92,7 @@ RSpec.describe "Users", type: :system do
         fill_in "パスワード", with: user.password
         fill_in "パスワードの確認", with: user.password_confirmation
         click_on "保存"
-        expect(page). to have_content "Email can't be blank"
+        expect(page). to have_content "Eメールを入力してください"
         expect(user.reload.email).not_to eq ""
       end
     end

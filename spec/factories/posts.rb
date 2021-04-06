@@ -5,5 +5,6 @@ FactoryBot.define do
     due_date { '2021-03-01' }
     experience { "rails" }
     detail { "nothing to do" }
+    association :user
   end
 end
