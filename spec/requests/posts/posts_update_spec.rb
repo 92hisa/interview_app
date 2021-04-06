@@ -1,14 +1,15 @@
 require "rails_helper"
 
-RSpec.describe "User infomation update", type: :request do
-  let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
+RSpec.describe "Post content update", type: :request do
+  let!(:user) { create(:user) }
   let!(:other_user) { create(:user, name: "other_user", email: "other_user@example.com", gender: "woman") }
+  let!(:first_post) { create(:post, user: user, title: "sample", due_date: '2021-03-01', fee: 100, experience: "rails") }
 
-  describe "登録情報変更（#edit）" do
+  describe "投稿内容の変更（#edit）" do
     context "ログインしてる場合" do
       before do
         sign_in(user)
-        get edit_user_registration_path
+        get edit_post_path(first_post.id)
       end
 
       it "正常なレスポンスを返すこと" do
@@ -19,7 +20,7 @@ RSpec.describe "User infomation update", type: :request do
 
     context "ログインしてない場合" do
       before do
-        get edit_user_registration_path
+        get edit_post_path(first_post.id)
       end
 
       it "ログインページへリダイレクトすること" do
@@ -28,29 +29,31 @@ RSpec.describe "User infomation update", type: :request do
     end
   end
 
-  describe "登録情報変更（#update）" do
-  let!(:params) { { user: { name: "user_2" } } }
+  describe "投稿内容の変更（#update）" do
+    let!(:params) { { post: { title: "sample_2" } } }
 
     context "ログインしてる場合" do
       before do
         sign_in(user)
-        put user_registration_path, params: params
+        put post_path(first_post.id), params: params
       end
 
       it "正常なレスポンスを返すこと" do
         expect(response.status).to eq 302
       end
-      it "編集した内容に更新されること" do
-        expect(user.reload.name).to eq "user_2"
+
+      it "編集した内容に更新されていること" do
+        expect(first_post.reload.title).to eq "sample_2"
       end
-      it "マイページにリダイレクトすること" do
-        expect(response).to redirect_to user_path(user)
+
+      it "編集完了後、掲載案件一覧へリダイレクトすること" do
+        expect(response).to redirect_to post_list_user_path(user)
       end
     end
 
     context "ログインしてない場合" do
       it "トップページへリダイレクトすること" do
-        put user_path(user.id), params: params
+        put post_path(first_post.id), params: params
         expect(response).to redirect_to new_user_session_path
       end
     end
@@ -58,7 +61,7 @@ RSpec.describe "User infomation update", type: :request do
     context "他アカウントのユーザーの場合" do
       it "トップページへリダイレクトすること" do
         sign_in(other_user)
-        put user_path(user.id), params: params
+        put post_path(first_post.id), params: params
         expect(response).to redirect_to root_path
       end
     end
