@@ -24,7 +24,7 @@
                       <td><%= post_list.user_id %></td>
                       <td><%= post_list.created_at.to_s(:datetime_jp)  %></td>
                       <td><%= post_list.title %></td>
-                      <td><%= post_list.fee.to_s(:delimited) + "円"%></td>
+                      <td><%= post_list.price.to_s(:delimited) + "円"%></td>
                       <td><%= post_list.experience %></td>
                       <td><%= post_list.detail %></td>
                       <% if post_list.purchases.ids.present?%>

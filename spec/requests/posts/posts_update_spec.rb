@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "Post content update", type: :request do
   let!(:user) { create(:user) }
   let!(:other_user) { create(:user, name: "other_user", email: "other_user@example.com", gender: "woman") }
-  let!(:first_post) { create(:post, user: user, title: "sample", due_date: '2021-03-01', fee: 100, experience: "rails") }
+  let!(:first_post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
 
   describe "投稿内容の変更（#edit）" do
     context "ログインしてる場合" do

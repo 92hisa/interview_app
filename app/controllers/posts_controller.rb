@@ -50,7 +50,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :email, :fee, :due_date, :experience, :detail).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :email, :price, :experience, :detail).merge(user_id: current_user.id)
   end
 
   def correct_post_user

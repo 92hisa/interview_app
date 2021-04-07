@@ -9,7 +9,6 @@
                 <th>投稿者ID</th>
                 <th>掲載日</th>
                 <th>案件名</th>
-                <th>案件掲載終了日</th>
                 <th>販売価格</th>
                 <th>経験</th>
                 <th>備考</th>
@@ -22,8 +21,7 @@
                     <td><%= @post.user_id %></td>
                     <td><%= @post.created_at.to_s(:datetime_jp)  %></td>
                     <td><%= @post.title %></td>
-                    <td><%= @post.due_date %></td>
-                    <td><%= @post.fee.to_s(:delimited) + "円"%></td>
+                    <td><%= @post.price.to_s(:delimited) + "円"%></td>
                     <td><%= @post.experience %></td>
                     <td><%= @post.detail %></td>
                     <% if not @post.user_id == current_user.id %>
