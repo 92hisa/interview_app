@@ -11,6 +11,7 @@
                 <th>購入日</th>
                 <th>案件名</th>
                 <th>価格</th>
+                <th>価格(税込)</th>
                 <th>経験</th>
                 <th>詳細</th>
                 <th></th>
@@ -25,7 +26,8 @@
                         <td><%= purchase_logs.post.id %></td>
                         <td><%= purchase_logs.created_at.to_s(:datetime_jp) %></td>
                         <td><%= purchase_logs.post.title %></td>
-                        <td><%= purchase_logs.post.fee %></td>
+                        <td><%= purchase_logs.post.price.to_s(:delimited) + "円" %></td>
+                        <td><%= purchase_logs.post.tax + "円" %></td>
                         <td><%= purchase_logs.post.experience %></td>
                         <td><%= purchase_logs.post.detail %></td>
                         <td><%= link_to "MSG", room_path(id: purchase_logs.id), class: "btn btn-primary" %></td>

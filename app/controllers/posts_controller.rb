@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
-  def index
-    @post = Post.all
-  end
+  before_action :authenticate_user!
+  before_action :correct_post_user, only: [:edit, :update, :destroy]
 
   def new
   @post = Post.new
@@ -27,8 +26,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.create(post_params)
-    if @post.save
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
       flash[:notice] = "編集が完了しました"
       redirect_to post_list_user_path(id: current_user.id)
     else
@@ -51,6 +50,13 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :email, :fee, :due_date, :experience, :detail).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :email, :price, :experience, :detail).merge(user_id: current_user.id)
+  end
+
+  def correct_post_user
+    post = Post.find_by(id: params[:id])
+    if post.user.id != current_user.id
+       redirect_to root_path
+    end
   end
 end

@@ -4,5 +4,6 @@ FactoryBot.define do
     email { "foobar@foobar.com" }
     password { "password" }
     password_confirmation { "password" }
+    gender { "man" }
   end
 end

@@ -13,6 +13,7 @@
                 <th>掲載日</th>
                 <th>案件名</th>
                 <th>販売価格</th>
+                <th>販売価格(税込)</th>
                 <th>経験</th>
                 <th>詳細</th>
                 <th></th>
@@ -28,7 +29,8 @@
                       <td><%= current_user.id %></td>
                       <td><%= post_purchase.created_at.to_s(:datetime_jp)  %></td>
                       <td><%= post_purchase.post.title %></td>
-                      <td><%= post_purchase.post.fee %></td>
+                      <td><%= post_purchase.post.price.to_s(:delimited) %></td>
+                      <td><%= post_purchase.post.tax %></td>
                       <td><%= post_purchase.post.experience %></td>
                       <td><%= post_purchase.post.detail %></td>
                       <td><%= link_to "MSG", room_path(id: post_purchase.id), class: "btn btn-primary" %></td>
