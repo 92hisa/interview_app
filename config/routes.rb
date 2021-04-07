@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resources :purchases
+    resources :comments, only: [:create, :destroy]
   end
 
   resources :rooms
