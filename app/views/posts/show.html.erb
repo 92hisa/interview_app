@@ -13,7 +13,6 @@
                 <th>経験</th>
                 <th>備考</th>
                 <th></th>
-                <th></th>
                 </tr>
                 </thread>
                   <tbody>
@@ -24,9 +23,10 @@
                     <td><%= @post.price.to_s(:delimited) + "円"%></td>
                     <td><%= @post.experience %></td>
                     <td><%= @post.detail %></td>
-                    <% if not @post.user_id == current_user.id %>
-                    <td><%= link_to "ルーム", '#', class: "btn btn-primary" %></td>
-                    <td><%= link_to "購入ページ", new_post_purchase_path(@post.id), class: "btn btn-primary" %></td>
+                    <% if  user_signed_in? && @post.user_id != current_user.id %>
+                      <td><%= link_to "購入ページ", new_post_purchase_path(@post.id), class: "btn btn-primary" %></td>
+                    <% else %>
+                      <td></td>
                     <% end %>
                   </tbody>
             </table>
@@ -34,6 +34,55 @@
               <%= link_to "戻る", :back %><br>
               <%= link_to "トップページ", root_path %><br>
             </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+  <h2 class="text-center">コメント</h2>
+    <%= form_with(model: [@post, Comment.new], local: true) do |f| %>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 offset-md-3">
+          <div class="form-group">              
+              <div class="field">
+              <%= f.label "コメント" %>
+              <%= f.text_field :comment,  autofocus: true, autocomplete: "comment", class: "form-control" %>
+              </div><br>
+              <%= f.hidden_field :post_id, value: @post.id %>
+              <div class="actions text-right">
+                <%= f.submit "送信する", class: "btn btn-primary" %>
+              </div><br>
+            </div>  
+          </div>
+      </div>
+    <% end %>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>User_ID</th>
+                <th>名前</th>
+                <th>メッセージ</th>
+                <th>投稿時間</th>
+                <th></th>
+                </tr>
+                </thread>
+                  <% @comments.each do |comment| %>
+                    <tbody>
+                      <td><%= comment.user.id %></td>
+                      <td><%= comment.user.name %></td>
+                      <td><%= comment.comment %></td>
+                      <td><%= comment.created_at.to_s(:datetime_jp) %></td>
+                      <% if user_signed_in? && current_user.id == comment.user.id %>
+                        <td><%= link_to "削除", post_comment_path(post_id: comment.post_id, id: comment.id), method: :delete, class: "btn btn-primary"%></td>
+                      <% else %>
+                        <td></td>
+                      <% end%>
+                    </tbody>
+                  <% end %>
+            </table>
         </div>
     </div>
 </div>
