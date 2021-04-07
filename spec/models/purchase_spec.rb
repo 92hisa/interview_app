@@ -32,7 +32,7 @@ RSpec.describe Purchase, type: :model do
         expect(purchase).to be_invalid
       end
 
-      it "post_idがなければ登録できないこと" do
+      it "saler_idがなければ登録できないこと" do
         purchase.saler_id = nil
         purchase.valid?
         expect(purchase).to be_invalid
@@ -78,7 +78,7 @@ RSpec.describe Purchase, type: :model do
     end
 
     context "buyerとの関連" do
-      let(:target) { :buyer}
+      let(:target) { :buyer }
 
       it "buyerとの関連はbelongs_toであること" do
         expect(association.macro).to eq :belongs_to

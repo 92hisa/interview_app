@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
-  let!(:post) { create(:post, user: user, title: "sample", price: 100, experience: "rails" ) }
+  let!(:post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
 
   describe "バリデーションテスト" do
     context "登録ができるとき" do
@@ -15,11 +15,9 @@ RSpec.describe Post, type: :model do
         post.valid?
         expect(post).to be_valid
       end
-
     end
 
     context "登録できないとき" do
-
       it "user_idがなければ登録できないこと" do
         post.user_id = nil
         post.valid?
@@ -75,6 +73,7 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
   describe "関連付けテスト" do
     let(:association) do
       described_class.reflect_on_association(target)
