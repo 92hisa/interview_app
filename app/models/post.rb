@@ -6,4 +6,8 @@ class Post < ApplicationRecord
   validates :fee, presence: true
   validates :due_date, presence: true
   validates :experience, presence: true
+
+  def tax
+    (fee * 1.1).floor.to_s(:delimited)
+  end
 end

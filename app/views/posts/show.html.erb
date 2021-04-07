@@ -23,7 +23,7 @@
                     <td><%= @post.created_at.to_s(:datetime_jp)  %></td>
                     <td><%= @post.title %></td>
                     <td><%= @post.due_date %></td>
-                    <td><%= @post.fee %></td>
+                    <td><%= @post.fee.to_s(:delimited) + "円"%></td>
                     <td><%= @post.experience %></td>
                     <td><%= @post.detail %></td>
                     <% if not @post.user_id == current_user.id %>
