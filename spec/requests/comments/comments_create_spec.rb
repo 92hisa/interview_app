@@ -8,7 +8,7 @@ RSpec.describe "comments#create", type: :request do
   describe "ログインしている場合" do
     before do
       sign_in(user)
-      get post_path(new_post.id)
+      get post_path(new_post)
     end
 
     it "正常なレスポンスを返すこと" do

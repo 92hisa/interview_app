@@ -13,6 +13,7 @@
                 <th>経験</th>
                 <th>備考</th>
                 <th></th>
+                <th></th>
                 </tr>
                 </thread>
                   <tbody>
@@ -26,7 +27,12 @@
                     <% if  user_signed_in? && @post.user_id != current_user.id %>
                       <td><%= link_to "購入ページ", new_post_purchase_path(@post.id), class: "btn btn-primary" %></td>
                     <% else %>
-                      <td></td>
+                     <td></td>
+                    <% end %>
+                    <% if not @post_favorite.present? %>
+                      <td><%= link_to "お気に入り", post_favorites_path(@post.id), method: :post, class: "btn btn-primary" %></td>
+                    <% else %>
+                      <td><%= link_to "お気に入り済", "", class: "btn btn-secondary" %></td>
                     <% end %>
                   </tbody>
             </table>
