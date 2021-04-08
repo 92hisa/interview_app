@@ -8,25 +8,25 @@ class FavoritesController < ApplicationController
     @same_favorite = Favorite.where(user_id: current_user.id, post_id: @post.id)
     if @favorite.save
       flash[:notice] = "お気に入りされました"
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post)
     elsif @same_favorite.present?
       flash[:alert] = "すでにお気に入りされています"
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post)
     else
       flash[:alert] = "お気に入りできませんでした"
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post)
     end
   end
 
   def destroy
     @post = Post.find(params[:post_id])
-    @favorite = Favorite.find(params[:id])
+    @favorite = @post.favorites.find_by(user_id: current_user)
     if @favorite.destroy
       flash[:notice] = "お気に入りを削除しました"
-      redirect_to post_path(id: @post.id)
+      redirect_to post_path(id: @post)
     else
       flash[:alert] = "お気に入りを削除できませんでした"
-      redirect_to post_path(id: @post.id)
+      redirect_to post_path(id: @post)
     end
   end
 
@@ -44,11 +44,10 @@ class FavoritesController < ApplicationController
   end
 
   def correct_user_destory
-    post = Post.find(params[:post_id])
-    favorite = Favorite.find(params[:id])
-    if not favorite.user_id == current_user.id
-      flash[alert] = "削除できません"
-      redirect_to post_path(id: @post.id)
+
+    if not user_signed_in?
+      flash[:alert] = "削除できませんでした"
+      redirect_to root_path
     end
   end
 end

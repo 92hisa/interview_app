@@ -34,7 +34,7 @@ RSpec.describe "comments#destroy", type: :request do
         get post_path(new_post.id)
       end
 
-      it "コメントの削除はできずトップページへリダイレクトされること" do
+      it "コメントの削除はできずログインページへリダイレクトされること" do
         delete post_comment_path(new_post.id, comment.id)
         expect(response).to redirect_to new_user_session_path
       end

@@ -32,7 +32,7 @@
                     <% if not @post_favorite.present? %>
                       <td><%= link_to "お気に入り", post_favorites_path(@post.id), method: :post, class: "btn btn-primary" %></td>
                     <% else %>
-                      <td><%= link_to "お気に入り済", "", class: "btn btn-secondary" %></td>
+                      <td><%= link_to "お気に入り済", post_favorite_path(post_id: @post, id: @post_favorite), method: :delete, class: "btn btn-secondary" %></td>
                     <% end %>
                   </tbody>
             </table>
