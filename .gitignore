@@ -36,3 +36,5 @@ yarn-debug.log*
 .yarn-integrity
 public/uploads/
 *.tmp
+/models/workspace.code-workspace
+
