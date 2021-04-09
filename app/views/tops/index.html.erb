@@ -27,11 +27,11 @@
                     <td><%= post.detail %></td>
                     <td><%= link_to "詳細", post_path(post.id), class: "btn btn-primary" %></td>
                     <% if user_signed_in? && post.same_favorite(current_user).present? == true %>
-                        <td><%= link_to "お気に入り済", "", class: "btn btn-secondary" %></td>
+                        <td><%= link_to "お気に入り済", post_favorite_path(post_id: post, id: post.same_favorite(current_user), type: 'tops'), method: :delete, class: "btn btn-secondary" %></td>
                         <% elsif user_signed_in? %>
-                        <td><%= link_to "お気に入り", post_favorites_path(post.id), method: :post, class: "btn btn-primary" %></td>
+                        <td><%= link_to "お気に入り", post_favorites_path(post.id, type: 'tops'), method: :post, class: "btn btn-primary" %></td>
                       <% else %>
-                        <td><%= link_to "お気に入り", post_favorites_path(post.id), method: :post, class: "btn btn-primary" %></td>
+                        <td><%= link_to "お気に入り", post_favorites_path(post.id, type: 'tops'), method: :post, class: "btn btn-primary" %></td>
                     <% end %>
                   </tbody>
                 <% end %>

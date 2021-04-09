@@ -1,18 +1,20 @@
 class FavoritesController < ApplicationController
   before_action :correct_user_create, only: [:create]
   before_action :correct_user_destory, only: [:destroy]
-  
+
   def create
     @post = Post.find(params[:post_id])
     @favorite = Favorite.new(favorite_params)
-    @same_favorite = Favorite.where(user_id: current_user.id, post_id: @post.id)
-    if @favorite.save
+    if params[:type] == 'tops' && @favorite.save # topページからのリクエスト＆保存できた場合
+      flash[:notice] = "お気に入りされました"
+      redirect_to root_path
+    elsif @favorite.save # showページからリクエスト＆保存できた場合
       flash[:notice] = "お気に入りされました"
       redirect_to post_path(@post)
-    elsif @same_favorite.present?
-      flash[:alert] = "すでにお気に入りされています"
-      redirect_to post_path(@post)
-    else
+    elsif params[:type] # topページからリクエスト＆保存できなかった場合
+      flash[:alert] = "お気に入りを削除できませんでした"
+      redirect_to root_path
+    else # showページからリクエスト＆保存できなかった場合
       flash[:alert] = "お気に入りできませんでした"
       redirect_to post_path(@post)
     end
@@ -21,31 +23,35 @@ class FavoritesController < ApplicationController
   def destroy
     @post = Post.find(params[:post_id])
     @favorite = @post.favorites.find_by(user_id: current_user)
-    if @favorite.destroy
+    if params[:type] == 'tops' && @favorite.destroy # topページからのリクエスト＆削除できた場合
+      flash[:notice] = "お気に入りを削除しました"
+      redirect_to root_path
+    elsif @favorite.destroy # showページからリクエスト＆削除できた場合
       flash[:notice] = "お気に入りを削除しました"
       redirect_to post_path(id: @post)
-    else
+    elsif params[:type] # topページからリクエスト＆削除できなかった場合
       flash[:alert] = "お気に入りを削除できませんでした"
-      redirect_to post_path(id: @post)
+      redirect_to root_path
+    else # showページからリクエスト＆削除できなかった場合
+      post_path(id: @post)
     end
   end
 
-
   private
+
   def favorite_params
     params.permit(:post_id).merge(user_id: current_user.id)
   end
 
   def correct_user_create
-    if not user_signed_in?
+    if !user_signed_in?
       flash[:alert] = "お気に入り機能はログインが必要です"
       redirect_to new_user_session_path
     end
   end
 
   def correct_user_destory
-
-    if not user_signed_in?
+    if !user_signed_in?
       flash[:alert] = "削除できませんでした"
       redirect_to root_path
     end
