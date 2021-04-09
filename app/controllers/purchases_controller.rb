@@ -10,11 +10,16 @@ class PurchasesController < ApplicationController
     @post = Post.find(params[:post_id])
     @purchase = @post.purchases.new(user_id: current_user.id, post_id: @post.id, saler_id: @post.user_id, buyer_id: current_user.id)
     if @purchase.save
-      @room = Room.create(id: @purchase.id, purchase_id: @purchase.id)
-      flash[:notice] = "購入が完了しました"
-      redirect_to root_path
+      @room = Room.new(id: @purchase.id, purchase_id: @purchase.id)
+      if @room.save!
+        flash[:notice] = "購入が完了しました"
+        redirect_to root_path
+      else
+        flash[:alert] = "roomが開設できませんでした"
+        redirect_to new_post_purchase_path
+      end
     else
-      flash[:alert] = "投稿に失敗しました"
+      flash[:alert] = "購入できませんでした"
       redirect_to new_post_purchase_path
     end
   end
@@ -24,4 +29,5 @@ class PurchasesController < ApplicationController
     @post = Post.find(params[:post_id])
     @post_purchase = @post.purchases.includes(:user)
   end
+
 end

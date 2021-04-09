@@ -84,15 +84,7 @@ RSpec.describe User, type: :model do
       context "messageとの関連" do
         let(:target) { :messages }
 
-        it "purchaseとの関連はhas_manyであること" do
-          expect(association.macro).to eq :has_many
-        end
-      end
-
-      context "roomとの関連" do
-        let(:target) { :rooms }
-
-        it "purchaseとの関連はhas_manyであること" do
+        it "messageとの関連はhas_manyであること" do
           expect(association.macro).to eq :has_many
         end
       end

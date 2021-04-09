@@ -1,3 +1,7 @@
+<%= javascript_pack_tag 'hello_vue' %>
+<%= stylesheet_pack_tag 'hello_vue' %>
+
+
 <% if current_user.id == @purchase.saler_id || @purchase.buyer_id %>
 <div class="container">
     <h2 class="text-center">取引内容</h2>
