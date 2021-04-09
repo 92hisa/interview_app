@@ -1,5 +1,5 @@
 class TopsController < ApplicationController
   def index
-    @post = Post.all
+    @post = Post.includes(:favorites, :user).all
   end
 end

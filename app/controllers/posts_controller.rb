@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @comments = @post.comments.includes(:user)
+    @post_favorite = @post.favorites.where(user_id: current_user)
   end
 
   def edit

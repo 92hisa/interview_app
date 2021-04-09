@@ -102,5 +102,13 @@ RSpec.describe Post, type: :model do
         expect(post.tax).to eq "110"
       end
     end
+
+    context "same_favoriteメソッド" do
+      let!(:favorite) { create(:favorite, user_id: user.id, post_id: post.id) }
+
+      it "消費税を含めた金額に変換すること" do
+        expect(post.same_favorite(user)).to be_truthy
+      end
+    end
   end
 end
