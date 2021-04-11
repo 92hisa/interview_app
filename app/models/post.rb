@@ -17,4 +17,8 @@ class Post < ApplicationRecord
   def same_favorite(user)
     Favorite.find_by(user_id: user.id, post_id: id)
   end
+
+  def favorite_count
+    Favorite.where(post_id: id).count
+  end
 end
