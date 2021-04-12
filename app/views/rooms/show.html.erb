@@ -17,17 +17,17 @@
                 <th>経験</th>
                 </tr>
                 </thread>
-                    <tbody>
-                      <td><%= @room.id %></td>
-                      <td><%= @purchase.id %></td>
-                      <td><%= "ID:#{@saler.id} #{@saler.name}" %></td>
-                      <td><%= "ID:#{@buyer.id} #{@buyer.name}" %></td>
-                      <td><%= @post.id %></td>
-                      <td><%= @post.created_at.to_s(:datetime_jp) %></td>
-                      <td><%= @post.title %></td>
-                      <td><%= @post.price %></td>
-                      <td><%= @post.experience %></td>
-                    </tbody>
+                  <tbody>
+                    <td><%= @room.id %></td>
+                    <td><%= @purchase.id %></td>
+                    <td><%= "ID:#{@saler.id} #{@saler.name}" %></td>
+                    <td><%= "ID:#{@buyer.id} #{@buyer.name}" %></td>
+                    <td><%= @post.id %></td>
+                    <td><%= @post.created_at.to_s(:datetime_jp) %></td>
+                    <td><%= @post.title %></td>
+                    <td><%= @post.price %></td>
+                    <td><%= @post.experience %></td>
+                  </tbody>
             </table>
             <div class="text-right">
               <%= link_to "戻る", :back %><br>
@@ -37,10 +37,10 @@
     </div>
 </div>
 <div id="room">
- <room />
+  <room />
 </div>
-<%= javascript_pack_tag 'room' %>
-<%= stylesheet_pack_tag 'room' %>
+  <%= javascript_pack_tag 'room' %>
+  <%= stylesheet_pack_tag 'room' %>
 <div class="container">
   <h2 class="text-center">メッセージ</h2>
   <div class="row">
