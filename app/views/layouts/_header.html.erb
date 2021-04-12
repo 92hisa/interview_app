@@ -31,6 +31,7 @@
       <li class="nav-item dropdown disabled">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メニュー</a>
         <div class="dropdown-menu">
+          <%= link_to "お気に入り一覧", favorite_list_user_path(current_user), class: "dropdown-item" %><br>
           <%= link_to "購入履歴", purchase_logs_user_path(current_user), class: "dropdown-item" %><br>
           <%= link_to "掲載中の案件", post_list_user_path(current_user), class: "dropdown-item" %><br>
           <%= link_to "案件を登録する", new_post_path, class: "dropdown-item" %><br>

@@ -17,13 +17,6 @@ RSpec.describe "User login", type: :request do
             expect(response.status).to eq 200
           end
         end
-
-        context "本人ではない場合" do
-          it "トップページへリダイレクトすること" do
-            get user_path(other_user)
-            expect(response).to redirect_to root_path
-          end
-        end
     end
 
     context "ログインしていない場合" do

@@ -1,0 +1,40 @@
+<div class="container">
+    <h1 class="text-center">お気に入り一覧</h1>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 offset-md-12">
+            <table class="table text-center">
+                <thread>
+                <tr>
+                <th>favorite_ID</th>
+                <th>Post_ID</th>
+                <th>投稿者ID</th>
+                <th>投稿者名</th>
+                <th>登録日</th>
+                <th>案件名</th>
+                <th>販売価格</th>
+                <th>経験</th>
+                <th></th>
+                </tr>
+                </thread>
+                <% if @favorite_posts.present? %>
+                  <% @favorite_posts.each do |favorite_post| %>
+                    <tbody>
+                      <td><%= favorite_post.id %></td>
+                      <td><%= favorite_post.post_id %></td>
+                      <td><%= favorite_post.post.user_id %></td>
+                      <td><%= link_to favorite_post.post.user.name, user_path(id: favorite_post.post.user_id) %></td>
+                      <td><%= favorite_post.created_at.to_s(:datetime_jp)  %></td>
+                      <td><%= favorite_post.post.title %></td>
+                      <td><%= favorite_post.post.price.to_s(:delimited) + "円"%></td>
+                      <td><%= favorite_post.post.experience %></td>
+                      <td><%= link_to "詳細", post_path(favorite_post.post_id), class: "btn btn-primary" %></td>
+                    </tbody>
+                  <% end %>
+                <% end %>
+            </table>
+            <div class="text-right">
+              <%= link_to "トップ", root_path %><br>
+            </div>
+        </div>
+    </div>
+</div>

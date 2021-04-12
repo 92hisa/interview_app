@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user
+  before_action :correct_user, except: [:show]
 
   def show
     @user = User.find(params[:id])
@@ -24,6 +24,11 @@ class UsersController < ApplicationController
   def purchase_logs
     @purchase_logs = Purchase.where(user_id: current_user.id).includes(post: :user)
   end
+
+  def favorite_list
+    @favorite_posts = current_user.favorites.includes(:post)
+  end
+
 
   private
 
