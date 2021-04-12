@@ -12,7 +12,7 @@
                 <th>販売価格</th>
                 <th>経験</th>
                 <th>備考</th>
-                <th></th>
+                <th>お気に入り数</th>
                 <th></th>
                 </tr>
                 </thread>
@@ -25,6 +25,7 @@
                     <td><%= post.price.to_s(:delimited) + "円" %></td>
                     <td><%= post.experience %></td>
                     <td><%= post.detail %></td>
+                    <td><%= post.favorite_count %></td>
                     <td><%= link_to "詳細", post_path(post.id), class: "btn btn-primary" %></td>
                     <% if user_signed_in? && post.same_favorite(current_user).present? == true %>
                         <td><%= link_to "お気に入り済", post_favorite_path(post_id: post, id: post.same_favorite(current_user), type: 'tops'), method: :delete, class: "btn btn-secondary" %></td>

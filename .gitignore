@@ -37,4 +37,4 @@ yarn-debug.log*
 public/uploads/
 *.tmp
 /models/workspace.code-workspace
-
+/.env

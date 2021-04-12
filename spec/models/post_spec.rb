@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
   let!(:post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
+  let!(:favorite) { create(:favorite, user_id: user.id, post_id: post.id) }
 
   describe "バリデーションテスト" do
     context "登録ができるとき" do
@@ -104,10 +105,14 @@ RSpec.describe Post, type: :model do
     end
 
     context "same_favoriteメソッド" do
-      let!(:favorite) { create(:favorite, user_id: user.id, post_id: post.id) }
-
-      it "消費税を含めた金額に変換すること" do
+      it "user_idとpost_id に紐付いたお気に入りを取得できること" do
         expect(post.same_favorite(user)).to be_truthy
+      end
+    end
+
+    context "favorite_countメソッド" do
+      it "お気に入りの数をカウントできること" do
+        expect(post.favorite_count).to eq 1
       end
     end
   end
