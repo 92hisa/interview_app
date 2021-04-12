@@ -1,109 +1,137 @@
 <template>
-    <div id="app">
-        <video id="their-video" width="200" autoplay playsinline></video>
-        <video id="my-video" muted="true" width="500" autoplay playsinline></video>
-        <p>Your Peer ID: <span id="my-id">{{peerId}}</span></p>
-        <input v-model="calltoid" placeholder="call id">
-        <button @click="makeCall" class="button--green">Call</button>
-        <br />
+  <div id="app">
+    <video id="their-video" width="200" autoplay playsinline></video>
+    <video id="my-video" muted="true" width="500" autoplay playsinline></video>
+    <p>
+      Your Peer ID: <span id="my-id">{{ peerId }}</span>
+    </p>
+    <input v-model="calltoid" placeholder="call id" />
+    <button @click="makeCall" class="button--green">Call</button>
+    <br />
 
-        マイク:
-        <select v-model="selectedAudio" @change="onChange">
-          <option disabled value="">Please select one</option>
-          <option v-for="(audio, key, index) in audios" v-bind:key="index" :value="audio.value">
-            {{ audio.text }}
-          </option>
-        </select>
+    マイク:
+    <select v-model="selectedAudio" @change="onChange">
+      <option disabled value="">Please select one</option>
+      <option
+        v-for="(audio, key, index) in audios"
+        v-bind:key="index"
+        :value="audio.value"
+      >
+        {{ audio.text }}
+      </option>
+    </select>
 
-        カメラ: 
-        <select v-model="selectedVideo" @change="onChange">
-          <option disabled value="">Please select one</option>
-          <option v-for="(video, key, index) in videos" v-bind:key="index" :value="video.value">
-            {{ video.text }}
-          </option>
-        </select>
-
-    </div>
+    カメラ:
+    <select v-model="selectedVideo" @change="onChange">
+      <option disabled value="">Please select one</option>
+      <option
+        v-for="(video, key, index) in videos"
+        v-bind:key="index"
+        :value="video.value"
+      >
+        {{ video.text }}
+      </option>
+    </select>
+  </div>
 </template>
 
 <script>
-const API_KEY = "ea7a61e5-09e0-4fc3-886b-306cf73bca6a"; 
+const API_KEY = "ea7a61e5-09e0-4fc3-886b-306cf73bca6a";
 // const Peer = require('../skyway-js');
-console.log(Peer)
+console.log(Peer);
 export default {
-    data: function () {
-        return {
-            audios: [],
-            videos: [],
-            selectedAudio: '',
-            selectedVideo: '',
-            peerId: '',
-            calltoid: '',
-            localStream: {}
-        }
-    },
-    methods: {
-        onChange: function(){
-            if(this.selectedAudio != '' && this.selectedVideo != ''){
-                this.connectLocalCamera();
-            }
-        },
-
-        connectLocalCamera: async function(){
-            const constraints = {
-                audio: this.selectedAudio ? { deviceId: { exact: this.selectedAudio } } : false,
-                video: this.selectedVideo ? { deviceId: { exact: this.selectedVideo } } : false
-            }
-
-            const stream = await navigator.mediaDevices.getUserMedia(constraints);
-            document.getElementById('my-video').srcObject = stream;
-            this.localStream = stream;
-        },
-
-        makeCall: function(){
-            const call = this.peer.call(this.calltoid, this.localStream);
-            this.connect(call);
-        },
-
-        connect: function(call){
-            call.on('stream', stream => {
-                const el = document.getElementById('their-video');
-                el.srcObject = stream;
-                el.play();
-            });
-        }
+  data: function () {
+    return {
+      audios: [],
+      videos: [],
+      selectedAudio: "",
+      selectedVideo: "",
+      peerId: "",
+      calltoid: "",
+      localStream: {},
+    };
+  },
+  methods: {
+    onChange: function () {
+      if (this.selectedAudio != "" && this.selectedVideo != "") {
+        this.connectLocalCamera();
+      }
     },
 
-    created: async function(){
-        console.log(API_KEY)
-        this.peer = new Peer({key: API_KEY, debug: 3}); //新規にPeerオブジェクトの作成
-        this.peer.on('open', () => this.peerId = this.peer.id); //PeerIDを反映
-        this.peer.on('call', call => {
-            call.answer(this.localStream);
-            this.connect(call);
-        });
+    connectLocalCamera: async function () {
+      const constraints = {
+        audio: this.selectedAudio
+          ? { deviceId: { exact: this.selectedAudio } }
+          : false,
+        video: this.selectedVideo
+          ? { deviceId: { exact: this.selectedVideo } }
+          : false,
+      };
 
-        //デバイスへのアクセス
-        const deviceInfos = await navigator.mediaDevices.enumerateDevices();
+      const stream = await navigator.mediaDevices.getUserMedia(constraints);
+      document.getElementById("my-video").srcObject = stream;
+      this.localStream = stream;
+    },
 
-        //オーディオデバイスの情報を取得
-        deviceInfos
-        .filter(deviceInfo => deviceInfo.kind === 'audioinput')
-        .map(audio => this.audios.push({text: audio.label || `Microphone ${this.audios.length + 1}`, value: audio.deviceId}));
+    makeCall: function () {
+      const call = this.peer.call(this.calltoid, this.localStream);
+      this.connect(call);
+    },
 
-        //カメラの情報を取得
-        deviceInfos
-        .filter(deviceInfo => deviceInfo.kind === 'videoinput')
-        .map(video => this.videos.push({text: video.label || `Camera  ${this.videos.length - 1}`, value: video.deviceId}));
+    connect: function (call) {
+      call.on("stream", (stream) => {
+        const el = document.getElementById("their-video");
+        el.srcObject = stream;
+        el.play();
+      });
+    },
+  },
 
-        console.log(this.audios, this.videos);        
+  created: async function () {
+    this.peer = new Peer({ key: API_KEY, debug: 3 }); //新規にPeerオブジェクトの作成
+    this.peer.on("open", () => (this.peerId = this.peer.id)); //PeerIDを反映
+    this.peer.on("call", (call) => {
+      call.answer(this.localStream);
+      this.connect(call);
+    });
+
+    const constraints = { audio: true, video: { width: 1280, height: 720 } };
+
+    // カメラの許可をとる
+    const userMedia = await navigator.mediaDevices.getUserMedia(constraints);
+
+    let deviceInfos;
+    if (userMedia.active) {
+      //デバイスへのアクセス
+      deviceInfos = await navigator.mediaDevices.enumerateDevices();
     }
-}
+
+    //オーディオデバイスの情報を取得
+    deviceInfos
+      .filter((deviceInfo) => deviceInfo.kind === "audioinput")
+      .map((audio) =>
+        this.audios.push({
+          text: audio.label || `Microphone ${this.audios.length + 1}`,
+          value: audio.deviceId,
+        })
+      );
+
+    //カメラの情報を取得
+    deviceInfos
+      .filter((deviceInfo) => deviceInfo.kind === "videoinput")
+      .map((video) => {
+        this.videos.push({
+          text: video.label || `Camera  ${this.videos.length - 1}`,
+          value: video.deviceId,
+        });
+      });
+  },
+};
 </script>
 
 <style scoped>
-    p {
-    font-size: 2em;
-    text-align: center;
-    }
+p {
+  font-size: 2em;
+  text-align: center;
+}
 </style>

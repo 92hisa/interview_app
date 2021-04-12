@@ -29,5 +29,4 @@ class PurchasesController < ApplicationController
     @post = Post.find(params[:post_id])
     @post_purchase = @post.purchases.includes(:user)
   end
-
 end

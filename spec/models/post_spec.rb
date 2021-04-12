@@ -105,14 +105,12 @@ RSpec.describe Post, type: :model do
     end
 
     context "same_favoriteメソッド" do
-
       it "user_idとpost_id に紐付いたお気に入りを取得できること" do
         expect(post.same_favorite(user)).to be_truthy
       end
     end
 
     context "favorite_countメソッド" do
-
       it "お気に入りの数をカウントできること" do
         expect(post.favorite_count).to eq 1
       end
