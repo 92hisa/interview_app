@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :update] do
     get :post_list, on: :member
     get :purchase_logs, on: :member
+    get :favorite_list, on: :member
   end
 
   resources :posts do

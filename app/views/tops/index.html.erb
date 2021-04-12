@@ -8,6 +8,7 @@
                 <th>Post_ID</th>
                 <th>User_ID</th>
                 <th>掲載日</th>
+                <th>投稿者</th>
                 <th>案件名</th>
                 <th>販売価格</th>
                 <th>経験</th>
@@ -21,6 +22,7 @@
                     <td><%= post.id %></td>
                     <td><%= post.user_id %></td>
                     <td><%= post.created_at.to_s(:datetime_jp)  %></td>
+                    <td><%= link_to post.user.name, user_path(id: post.user_id) %></td>
                     <td><%= post.title %></td>
                     <td><%= post.price.to_s(:delimited) + "円" %></td>
                     <td><%= post.experience %></td>
