@@ -37,9 +37,9 @@
     </div>
 </div>
 <div id="room">
-  <a id="video-end" class="btn btn-primary">ビデオ通話を止める</a>
   <room />
 </div>
+<%= link_to('通話終了', 'javascript:void(0);', onclick: "window.location.reload();", class: "btn btn-primary")  %> 
   <%= javascript_pack_tag 'room' %>
   <%= stylesheet_pack_tag 'room' %>
 <div class="container">
