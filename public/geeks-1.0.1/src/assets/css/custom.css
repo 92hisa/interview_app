@@ -1,0 +1,22 @@
+.bg-primary {
+  background-color: #d1eaf1 !important;
+}
+
+.text-dark-warning {
+  color: #fff !important;
+}
+
+.bg-light-warning {
+  background-color: #45bbc2 !important;
+}
+
+.nav-lb-tab .nav-item .nav-link.active,
+.nav-lb-tab .nav-item .nav-link:hover {
+  background-color: transparent;
+  border-bottom: 2px solid #45bbc2;
+  color: #45bbc2;
+}
+
+.navbar-default .navbar-nav .nav-item .nav-link:hover {
+  color: #45bbc2;
+}

@@ -14,6 +14,10 @@ class Post < ApplicationRecord
     (price * 1.1).floor.to_s(:delimited)
   end
 
+    def display_price
+    price.floor.to_s(:delimited) + "円"
+  end
+
   def same_favorite(user)
     Favorite.find_by(user_id: user.id, post_id: id)
   end
