@@ -66,3 +66,8 @@
     background-color: #548c8c;
     border-color: #548c8c;
 }
+
+.sidenav.navbar .navbar-nav .nav-item .nav-link:hover {
+    background-color: #dcf4f4;
+    color: #45bbc2;
+}
