@@ -20,3 +20,19 @@
 .navbar-default .navbar-nav .nav-item .nav-link:hover {
   color: #45bbc2;
 }
+
+.btn-success {
+    color: #fff;
+    background-color: #45bbc2;
+    border-color: #45bbc2;
+}
+
+.btn-outline-success {
+    color: #45bbc2;
+    border-color: #45bbc2;
+}
+
+element.style {
+    background-color: #d1eaf1;
+    background-position: center;
+}
