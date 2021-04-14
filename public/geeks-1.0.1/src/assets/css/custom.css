@@ -32,7 +32,37 @@
     border-color: #45bbc2;
 }
 
-element.style {
-    background-color: #d1eaf1;
-    background-position: center;
+.pb-20, .py-20 {
+    padding-bottom: 4.0rem!important;
+    padding-top: 4.0rem!important;
+}
+
+.list-group, .pb-3, .py-3 {
+    padding-bottom: 1rem !important;
+    padding-top: 1rem !important;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #45bbc2;
+    border-color: #45bbc2;
+}
+
+.btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #45bbc2;
+    border-color: #45bbc2;
+}
+
+.btn-success:focus, .btn-success.focus {
+    color: #fff;
+    background-color: #548c8c;
+    border-color: #548c8c;
+    box-shadow: 0 0 0 0.2rem rgb(72 180 97 / 50%);
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #548c8c;
+    border-color: #548c8c;
 }
