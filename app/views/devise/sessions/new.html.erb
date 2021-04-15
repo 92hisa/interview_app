@@ -1,26 +1,52 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<!-- Page content -->
+<div class="container d-flex flex-column">
+  <div class="row align-items-center justify-content-center no-gutters min-vh-100">
+    <div class="col-lg-5 col-md-8 py-8 py-xl-0">
+      <!-- Card -->
+      <div class="card shadow ">
+        <!-- Card body -->
+        <div class="card-body p-6">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="mb-4">
+            <!-- <a href="../index.html"><img src="/geeks-1.0.1/dist/assets/images/brand/logo/logo-icon.svg" class="mb-4" alt=""></a> -->
+            <h1 class="mb-1 font-weight-bold text-center" style="color: #45bbc2;">ログイン</h1>
+          </div>
+          <!-- Form -->
+          <form>
+              <!-- メールアドレス -->
+            <div class="form-group">
+              <%= f.label "メールアドレス", class: "form-label"%>
+              <%= f.email_field :email, autofocus: true, placeholder: "info@roughview.com", class: "form-control" %>
+            </div>
+              <!-- Password -->
+            <div class="form-group">
+              <%= f.label "パスワード", class: "form-label"%>
+              <%= f.password_field :password, autocomplete: "password", class: "form-control" %>
+            </div>
+              <!-- Checkbox -->
+            <div class="d-lg-flex justify-content-between align-items-center mb-4">
+              <% if devise_mapping.rememberable? %>
+                <div class="custom-control custom-checkbox">
+                  <%= f.check_box :remember_me, class: "custom-control-input", id: "rememberme" %>
+                  <%= f.label "ログインしたままにする", class: "custom-control-label ", for: "rememberme" %>
+                </div>
+              <% end %>
+            </div>
+            <div>
+              <!-- Button -->
+              <%= f.submit "ログイン", class: "btn btn-success btn-block" %>
+            </div>
+            <div class="mt-3">
+              <span>アカウントをお持ちでない方はこちら「<%= link_to "無料登録", new_user_registration_path, style: "color: #45bbc2;"%> 」</span>
+            </div>
+            <div class="mt-3 text-center">
+              <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path, style: "color: #45bbc2;"%>
+            </div>
+          </form>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

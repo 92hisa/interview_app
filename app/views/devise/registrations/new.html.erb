@@ -1,45 +1,61 @@
-<div class="sign-up-page">
-  <div class="card">
-    <div class="card-header">
-      アカウントを作成する
-    </div>
-
-    <div class="card-body">
-      <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
-
-        <div class="form-group">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
+<!-- Page content -->
+<div class="container d-flex flex-column">
+  <div class="row align-items-center justify-content-center no-gutters min-vh-100">
+    <div class="col-lg-5 col-md-8 py-8 py-xl-0">
+      <!-- Card -->
+      <div class="card shadow ">
+        <!-- Card body -->
+        <div class="card-body p-6">
+          <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="mb-4">
+            <!-- <a href="../index.html"><img src="/geeks-1.0.1/dist/assets/images/brand/logo/logo-icon.svg" class="mb-4" alt=""></a> -->
+            <h1 class="mb-1 font-weight-bold text-center" style="color: #45bbc2;">新規登録</h1>
+          </div>
+          <!-- Form -->
+          <form>
+            <div class="form-group">
+              <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "ユーザー名", class: "form-label"%>
+              <%= f.text_field :name, id: "fname", class: "form-control", placeholder: "50文字以内" %>
+            </div>
+              <!-- メールアドレス -->
+            <div class="form-group">
+              <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "メールアドレス", class: "form-label"%>
+              <%= f.email_field :email, class: "form-control", placeholder: "メールアドレス" %>
+            </div>
+              <!-- Password -->
+            <div class="form-group">
+            <span class="badge badge-light-danger text-danger mr-2">必須</span>  <%= f.label "パスワード", class: "form-label"%>
+              <%= f.password_field :password, autocomplete: "password", class: "form-control", placeholder: "6文字以上" %>
+            </div>
+            <div>
+              <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "性別", class: "form-label"%>
+              <div class="btn-group btn-group-toggle d-flex mb-3" data-toggle="buttons">
+                <label class="btn btn-light flex-fill mr-2 active">
+                  <%= f.radio_button :gender, :man, class: "form-check-input" %>
+                  <label class="form-check-label">男性</label>
+                </label>
+                <label class="btn btn-light flex-fill">
+                  <%= f.radio_button :gender, :woman, class: "form-check-input" %>
+                  <label class="form-check-label">女性</label>
+                </label>
+              </div>
+            </div>
+              <!-- Checkbox -->
+            <div class="form-group text-center">
+              <span style="font-size: 13px"><a href="#!", style="color: #45bbc2;">利用規約</a>と<a href="#!", style="color: #45bbc2;">プライバシーポリシー</a>をご覧ください</span>
+            </div>
+            <div>
+              <!-- Button -->
+              <%= f.submit "上記同意のうえ無料会員登録する", class: "btn btn-success btn-block", style: "font-weight: bold;" %>
+            </div>
+            <div class="mt-3 text-center">
+              <span>アカウントをお持ちの方はこちら「<%= link_to "ログイン", new_user_session_path, style: "color: #45bbc2;"%> 」</span>
+            </div>
+          </form>
+          <% end %>
         </div>
-
-        <div class="form-group">
-          <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
-        </div>
-
-        <div class="form-group">
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "パスワード" %>
-        </div>
-
-        <div class="btn-group btn-group-toggle d-flex mb-3" data-toggle="buttons">
-          <label class="btn btn-light flex-fill mr-2 active">
-            <%= f.radio_button :gender, :man, class: "form-check-input" %>
-            <label class="form-check-label">男性</label>
-          </label>
-          <label class="btn btn-light flex-fill">
-            <%= f.radio_button :gender, :woman, class: "form-check-input" %>
-            <label class="form-check-label">女性</label>
-          </label>
-        </div>
-
-        <div class="sign-up__submit-btn">
-          <%= f.submit "登録する", class: "btn btn-block text-white" %>
-        </div>
-      <% end %>
-
-      <div class="mt-3">
-        <%= render "devise/shared/links" %>
       </div>
     </div>
-
   </div>
 </div>
