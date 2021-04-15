@@ -71,3 +71,8 @@
     background-color: #dcf4f4;
     color: #45bbc2;
 }
+
+.mb-5, .my-5 {
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+}

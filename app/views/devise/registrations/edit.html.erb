@@ -63,7 +63,12 @@
 								<h2 class="mb-0">
 									<%= @user.name %>
 								</h2>
-								<p class="mb-0 d-block"><%= @user.email %></p>
+                <li class="list-unstyled mb-2"><i class="fa fa-envelope nav-icon mr-2"></i><%= @user.email %></li>
+                <% if @user.gender == "man" %>
+                  <li class="list-unstyled mb-2"><i class="fa fa-user nav-icon mr-2"></i>男性</li>
+                <% else %>
+                  <li class="list-unstyled mb-2"><i class="fa fa-user nav-icon mr-2"></i>女性</li>
+                <% end %>
 							</div>
 						</div>
 						<div>
@@ -91,7 +96,7 @@
 						<!-- Collapse navbar -->
 						<div class="collapse navbar-collapse" id="sidenav">
 							<div class="navbar-nav flex-column">
-								<span class="navbar-header">Account Settings</span>
+								<span class="navbar-header">アカウント</span>
                 <!-- List -->
 								<ul class="list-unstyled ml-n2 mb-0">
 									<!-- Nav item -->
@@ -133,9 +138,8 @@
 					<div class="card">
 						<!-- Card header -->
 						<div class="card-header">
-							<h3 class="mb-0">Profile Details</h3>
+							<h3 class="mb-0">プロフィール</h3>
 							<p class="mb-0">
-								You have full control to manage your own account setting.
 							</p>
 						</div>
 						<!-- Card body -->
@@ -143,91 +147,55 @@
 						<div class="card-body">
 							<div class="d-lg-flex align-items-center justify-content-between">
 								<div class="d-flex align-items-center mb-4 mb-lg-0">
-                  <div class="profile">
+                  <div class="profile ml-1 mt-2">
                     <img id="profile-img-prev" src="#" class='hidden'/>
                     <% if @user.profile_image.url.nil? %>
-                      <div class="img"><%= image_tag 'profile_default_img_128.png', style:"height: 128px; width: 128px; border-radius: 50%; object-fit: cover;" %></div>
+                      <div class="img"><%= image_tag 'profile_default_img_128.png', style:"height: 100px; width: 100px; border-radius: 50%; object-fit: cover;" %></div>
                     <% else %>
                       <%= image_tag @user.profile_image.url, class: "profile-img", id: "profile-img" %>
                     <% end %>
-                  </div>
-									<div class="ml-3">
-										<h4 class="mb-0">アイコン画像</h4>
-										<p class="mb-0">画像をアップロードする（縦横200px×200px以上推奨、5MB未満）</p>
-								  </div>
-  								<div class="ml-4 mt-3">
+                    <div class="mt-4">
                     <label class="profile-img-upload">
-                      <a class="btn btn-outline-success btn-sm">
+                      <a class="btn btn-outline-success btn-sm text-nowrap">
                         ファイルを選択
                          <%= f.file_field :profile_image, id: "profile_image_upload", style: "display:none"%>
                       </a>
-                  </label>
+                    </label>
+                    </div>
+                  </div>
+  								<div class="ml-4">
+                    <div class="ml-3">
+                      <h3 class="mb-0">アイコン</h3>
+                      <p class="mb-0">アップロード画像（縦横200px×200px以上推奨、5MB未満）</p>
+                    </div>
   								</div>
                 </div>
 							</div>
 							<hr class="my-5" />
 							<div>
-								<h4 class="mb-0">Personal Details</h4>
+								<h4 class="mb-0 text-center">基本情報</h4>
 								<p class="mb-4">
-									Edit your personal information and address.
 								</p>
 								<!-- Form -->
 								<form class="form-row">
-									<!-- First name -->
+									<!-- ユーザー名 -->
 									<div class="form-group col-12 col-md-6">
-										<label class="form-label" for="fname">First Name</label>
-										<input type="text" id="fname" class="form-control" placeholder="First Name" required />
+                    <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "ユーザー名", class: "form-label"%>
+                    <%= f.text_field :name, id: "fname", class: "form-control", placeholder: "50文字以内" %>
 									</div>
-									<!-- Last name -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label" for="lname">Last Name</label>
-										<input type="text" id="lname" class="form-control" placeholder="Last Name" required />
+									<!-- メールアドレス -->
+									<div class="form-group col-12 col-md-12">
+                    <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "メールアドレス", class: "form-label"%>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
 									</div>
-									<!-- Phone -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label" for="phone">Phone</label>
-										<input type="text" id="phone" class="form-control" placeholder="Phone" required />
+									<!-- 自己紹介 -->
+									<div class="form-group col-12 col-md-12">
+                    <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "自己紹介", class: "form-label"%>
+                    <%= f.text_area :about_me, class: "form-control", placeholder: "自己紹介", rows: "10" %>
 									</div>
-									<!-- Birthday -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label" for="birth">Birthday</label>
-										<input class="form-control flatpickr" type="text" placeholder="Birth of Date" id="birth"
-											name="birth" />
-									</div>
-									<!-- Address -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label" for="address">Address Line 1</label>
-										<input type="text" id="address" class="form-control" placeholder="Address" required />
-									</div>
-									<!-- Address -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label" for="address2">Address Line 2</label>
-										<input type="text" id="address2" class="form-control" placeholder="Address" required />
-									</div>
-									<!-- State -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label">State</label>
-										<select class="selectpicker" data-width="100%">
-											<option value="">Select State</option>
-											<option value="1">Gujarat</option>
-											<option value="2">Rajasthan</option>
-											<option value="3">Maharashtra</option>
-										</select>
-									</div>
-									<!-- Country -->
-									<div class="form-group col-12 col-md-6">
-										<label class="form-label">Country</label>
-										<select class="selectpicker" data-width="100%">
-											<option value="">Select Country</option>
-											<option value="1">India</option>
-											<option value="2">UK</option>
-											<option value="3">USA</option>
-										</select>
-									</div>
-									<div class="col-12">
+									<div class="col-12 text-center">
 										<!-- Button -->
-										<button class="btn btn-primary" type="submit">
-											Update Profile
+                    <%= f.submit "保存する", class: "btn btn-success btn-lg" %>
 										</button>
 									</div>
 								</form>
