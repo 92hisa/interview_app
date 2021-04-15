@@ -50,7 +50,7 @@
     <%= form_with(model: [@post, Comment.new], local: true) do |f| %>
       <div class="row">
         <div class="col-md-6 col-sm-6 offset-md-3">
-          <div class="form-group">              
+          <div class="form-group">
               <div class="field">
               <%= f.label "コメント" %>
               <%= f.text_field :comment,  autofocus: true, autocomplete: "comment", class: "form-control" %>
@@ -59,7 +59,7 @@
               <div class="actions text-right">
                 <%= f.submit "送信する", class: "btn btn-primary" %>
               </div><br>
-            </div>  
+            </div>
           </div>
       </div>
     <% end %>
@@ -95,3 +95,334 @@
     </div>
 </div>
 
+
+<div class="p-lg-5 py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 col-lg-8 col-md-12 col-12 mb-5 mt-4">
+        <div class="d-flex justify-content-betwee align-items-center">
+          <h2 class="font-weight-semi-bold mb-2">海外留学を目指す方におすすめ。</<h2>
+        </div>
+          <h3 class="font-weight-semi-bold">留学準備・海外生活について何でも話します！</h3>
+        <div class="rounded-lg embed-responsive embed-responsive-16by9" style="height: auto;">
+          <%= image_tag "study-abroad.jpg", class: "embed-responsive-item"%>
+        </div>
+
+        <!-- Content -->
+          <!-- Card -->
+          <div class="card mb-5">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="d-flex align-items-center justify-content-between">
+                <% if @post.user.profile_image.present? %>
+                <%= image_tag @post.user.profile_image.url, class: "rounded-circle avatar-md" %>
+                <% else %>
+                <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-md" %>
+                <% end %>
+                <div class="ml-2 lh-1">
+                  <h4 class="mb-1"><%= @post.user.name %></h4>
+                </div>
+                <div style="margin-left: auto;">
+                  <% if not @post_favorite.present? %>
+                    <%= link_to post_favorites_path(@post.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
+                      <i class="fe fe-bookmark font-size-lg text-inherit"></i>
+                    <% end %>
+                  <% else %>
+                    <%= link_to post_favorite_path(post_id: @post, id: @post_favorite), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
+                      <i class="fa fa-bookmark font-size-lg text-inherit"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="d-flex mb-5">
+                <span>
+                  <li class="list-inline-item mr-3"><a data-toggle="tooltip" data-original-title="お気に入りされた数"><i class="mdi mdi-star text-warning mr-1"></i><%= @favorite_count %></a></li>
+                  <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= @post.experience %></li>
+                </span>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="font-size-s mr-3">料金:<%= @post.display_price %></span>
+                <span class="font-size-s">形式:ビデオ通話・チャットどちらも可</span>
+              </div>
+            </div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-lt-tab" id="tab" role="tablist">
+               <!-- Nav item -->
+              <li class="nav-item">
+                <a class="nav-link active" id="description-tab" data-toggle="pill" href="#description" role="tab"
+                  aria-controls="description" aria-selected="false">経験の詳細</a>
+              </li>
+              <!-- Nav item -->
+              <li class="nav-item">
+                <a class="nav-link" id="comment-tab" data-toggle="pill" href="#comment" role="tab" aria-controls="comment"
+                  aria-selected="false">コメント</a>
+              </li>
+              <!-- Nav item -->
+              <li class="nav-item">
+                <a class="nav-link" id="other_plan-tab" data-toggle="pill" href="#other_plan" role="tab"
+                  aria-controls="other_plan" aria-selected="false">その他のプラン</a>
+              </li>
+              <!-- Nav item -->
+              <li class="nav-item">
+                <a class="nav-link" id="faq-tab" data-toggle="pill" href="#faq" role="tab" aria-controls="faq"
+                  aria-selected="false">FAQ</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Card -->
+          <div class="card rounded-lg">
+            <!-- Card body -->
+            <div class="card-body">
+              <div class="tab-content" id="tabContent">
+                <!-- Tab pane -->
+                <div class="tab-pane fade show active" id="description" role="tabpanel"
+                  aria-labelledby="description-tab">
+                  <div class="mb-4">
+                    <h3 class="mb-2">経験の詳細</h3>
+                    <p><%= @post.detail %></p>
+                  </div>
+                  <h4 class="mb-3">What you’ll learn</h4>
+                  <div class="row mb-3">
+                    <div class="col-12 col-md-6">
+                      <!-- List group -->
+                      <ul class="list-unstyled">
+                        <li class="d-flex align-item-center mb-2">
+                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                          <span>
+                            Recognize the importance of understanding your objectives when addressing an audience.
+                          </span>
+                        </li>
+                        <li class="d-flex align-item-center mb-2">
+                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                          <span>
+                            Identify the fundaments of composing a successful close.
+                          </span>
+                        </li>
+                        <li class="d-flex align-item-center mb-2">
+                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                          <span>
+                            Explore how to connect with your audience through crafting compelling stories.
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-12 col-md-6">
+                      <!-- List group -->
+                      <ul class="list-unstyled">
+                        <li class="d-flex align-item-center mb-2">
+                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                          <span>
+                            Examine ways to connect with your audience by personalizing your content.
+                          </span>
+                        </li>
+                        <li class="d-flex align-item-center mb-2">
+                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                          <span>
+                            Break down the best ways to exude executive presence.
+                          </span>
+                        </li>
+                        <li class="d-flex align-item-center mb-2">
+                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                          <span>
+                            Explore how to communicate the unknown in an impromptu communication.
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <p>Maecenas viverra condimentum nulla molestie condimentum. Nunc ex libero, feugiat quis lectus vel,
+                    ornare euismod ligula. Aenean sit amet arcu nulla.</p>
+                  <p>
+                    Duis facilisis ex a urna blandit ultricies. Nullam sagittis ligula non eros semper, nec mattis odio
+                    ullamcorper. Phasellus feugiat sit amet leo eget consectetur.
+                  </p>
+                </div>
+                <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+                  <div class="mb-2">
+                    <!-- Content -->
+                    <h3 class="mb-4">コメント<span class="text-muted font-size-xs"><%= "( #{@comments.count} )" %></span></h3>
+
+                  </div>
+                  <hr class="my-3" />
+                  <div class="mb-3">
+                    <!-- Comment -->
+                    <div class="d-lg-flex align-items-center justify-content-between mb-5">
+                      <div class="mb-3 mb-lg-0">
+                        <h4 class="mb-0">最新のコメント</h4>
+                      </div>
+                      <div>
+                        <!-- Search -->
+                        <form class="form-inline">
+                          <div class="d-flex align-items-center mr-2">
+                            <span class="position-absolute pl-3">
+                              <i class="fe fe-search"></i>
+                            </span>
+                            <input type="search" class="form-control pl-6" placeholder="Search Review" />
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <% @comments.each do |comment| %>
+                    <div class="media border-bottom pb-4 mb-4">
+                      <!-- Media -->
+                      <% if comment.user.profile_image.present? %>
+                        <%= image_tag comment.user.profile_image.url, class: "rounded-circle avatar-lg" %>
+                      <% else %>
+                        <%= image_tag 'profile_default_img_128', class:"rounded-circle avatar-lg" %>
+                      <% end %>
+                      <!-- Content -->
+                      <div class="d-lg-flex align-items-center justify-content-between media-body ml-3">
+                        <h4 class="mb-1">
+                          <%= comment.user.name %>
+                          <span class="ml-1 font-size-xs text-muted"><%= time_ago_in_words(comment.created_at) + "前" %></span>
+                        </h4>
+                        <div class="text-right" style="margin-left: auto;">
+                          <% if user_signed_in? && current_user.id == comment.user.id %>
+                            <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id), "data-toggle": :"tooltip", "data-original-title": :"コメントを削除する", method: :delete do %>
+                              <i class="far fa-trash-alt font-size-lg text-inherit"></i>
+                            <% end %>
+                          <% end %>
+                        </div>
+
+                        <div class="d-lg-flex align-items-center justify-content-between mt-3">
+                          <p><%= comment.comment %></p>
+                        </div>
+                      </div>
+                    </div>
+                    <% end %>
+
+                    <div class="container">
+                      <%= form_with(model: [@post, Comment.new], local: true) do |f| %>
+                        <div class="row">
+                          <div class="form-group col-12 col-md-12">
+                            <%= f.label "コメント" %>
+                            <%= f.text_area :comment,  autofocus: true, autocomplete: "comment", class: "form-control", rows: "3" %>
+                            <%= f.hidden_field :post_id, value: @post.id %>
+                          </div>
+                          <div class="col-12 text-center">
+                            <%= f.submit "コメントする", class: "btn btn-success btn-lg" %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="other_plan" role="tabpanel" aria-labelledby="other_plan-tab">
+                    <!-- Card header -->
+                    <div class="card-header" style="background-color: #fff;">
+                      <h4 class="mb-0">
+                        掲載中のプラン <span class="text-muted font-size-xs"><%= "( #{@user.posts.count} )" %></span>
+                      </h4>
+                    </div>
+                    <!-- Description -->
+                    <div class="card-body">
+                      <!-- List group -->
+                      <ul class="list-group list-group-flush">
+                        <!-- List group item -->
+                        <% @user_posts.each do |user_posts| %>
+                        <li class="list-group-item px-0 pb-3 pt-0">
+                          <div class="d-flex align-items-center justify-content-between">
+                            <%= link_to post_path(id: user_posts) do %>
+                              <div class="d-lg-flex align-items-center">
+                                <div>
+                                  <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
+                                </div>
+                                <div class="ml-lg-3 mt-2 mt-lg-0">
+                                  <h4 class="text-inherit">
+                                    <%= user_posts.title %>
+                                  </h4>
+                                  <ul class="list-inline font-size-xs mb-0 text-inherit">
+                                    <li class="list-inline-item">
+                                      <i class="mdi mdi-star text-warning mr-1"></i>
+                                      <%= user_posts.favorites.count %>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <i class="fa fa-comments mr-1"></i>
+                                      <span class="text-muted">
+                                        <%= user_posts.comments.count %>
+                                      </span>
+                                    </li>
+                                    <li class="list-inline-item">
+                                      <i class="fa fa-tags mr-1"></i>
+                                      <%= user_posts.experience %>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            <% end %>
+                            <div>
+                              <!-- Dropdown -->
+                              <span class="dropdown dropleft">
+                                <i class="far fa-clock mr-1"></i>
+                                <%= time_ago_in_words(user_posts.created_at) + "前" %>
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                        <% end %>
+                      </ul>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
+                  <!-- FAQ -->
+                  <div>
+                    <h3 class="mb-3">Course - Frequently Asked Questions</h3>
+                    <div class="mb-4">
+                      <h4>How this course help me to design layout?</h4>
+                      <p>
+                        My name is Jason Woo and I work as human duct tape at Gatsby, that means that I do a lot of
+                        different things. Everything from dev roll to writing content to writing code. And I used to
+                        work as an architect at IBM. I live in Portland, Oregon.
+                      </p>
+                    </div>
+                    <div class="mb-4">
+                      <h4>
+                        What is important of this course?
+                      </h4>
+                      <p>
+                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+                        your markdown.
+                      </p>
+                    </div>
+                    <div class="mb-4">
+                      <h4>Why Take This Course?</h4>
+                      <p>
+                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+                        your markdown.
+                      </p>
+                    </div>
+                    <div class="mb-4">
+                      <h4>
+                        Is able to create application after this course?
+                      </h4>
+                      <p>
+                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+                        your markdown.
+                      </p>
+                      <p>
+                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+                        your markdown.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <%= render 'post_sidebar' %>
+    </div>
+  </div>
+</div>
