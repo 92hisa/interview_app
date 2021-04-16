@@ -1,3 +1,7 @@
+body {
+  background-color: #FBFDFD;
+}
+
 .bg-primary {
   background-color: #d1eaf1 !important;
 }
@@ -81,4 +85,5 @@
     background-color: transparent;
     border-top: 2px solid #45bbc2;
     color: #45bbc2;
+    font-weight: bold;
 }

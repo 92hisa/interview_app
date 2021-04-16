@@ -1,56 +1,57 @@
-<div class="col-xl-4 col-lg-4 col-md-12 col-12 mt-4">
+<div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-4">
   <!-- Card -->
   <div class="card border-0 mb-4">
     <!-- Card body -->
     <div class="position-relative text-center">
       <% if @post.user.profile_image.present? %>
-      <%= image_tag @post.user.profile_image.url, class: "rounded-circle avatar-xxl border-white border-width-4 position-relative" %>
+      <%= image_tag @post.user.profile_image.url, class: "rounded-circle avatar-xxl border-white border-width-4 position-relative mt-3" %>
       <% else %>
-      <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xxl border-white border-width-4 position-relative" %>
+      <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xxl border-white border-width-4 position-relative mt-3" %>
       <% end %>
-      <div class="card-body">
-        <p><%= @post.user.name %></p>
+      <div class="card-body pb-0 pt-1" style="font-weight: bold;">
+        <p class="mb-1"><%= @post.user.name %></p>
+        <p class="mb-1"><%= "ID:#{@post.user.id}" %></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card -->
+  <div class="card border-0 mb-4 ">
+    <!-- Card body -->
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+        <div style="color: #45bbc2;">
+          <span><i class="fe fe-file-text font-size-lg mr-2"></i>掲載プラン数</span>
+        </div>
+        <div class="d-flex flex-column text-right">
+          <p class="font-size-s mb-0 font-weight-bold"></p>
+          <p class="font-size-s mb-0 font-weight-bold"><%= @user_posts.count %></p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+        <div style="color: #45bbc2;">
+          <span><i class="fe fe-users font-size-lg mr-2"></i>お気入りされた数</span>
+        </div>
+        <div class="d-flex flex-column text-right">
+          <p class="font-size-s mb-0 font-weight-bold"></p>
+          <p class="font-size-s mb-0 font-weight-bold"><%= @favorite_count %></p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <div style="color: #45bbc2;">
+          <span><i class="fe fe-star font-size-lg mr-2"></i>お気入りした数</span>
+        </div>
+        <div class="d-flex flex-column text-right">
+          <p class="font-size-s mb-0 font-weight-bold"></p>
+        </div>
       </div>
     </div>
   </div>
   <div class="card border-0 mb-4">
     <!-- Card body -->
     <div class="card-body">
-      <h4>自己紹介</h4>
+      <h4 style="color: #45bbc2;">自己紹介</h4>
       <p><%= @post.user.about_me %></p>
-    </div>
-  </div>
-  <!-- Card -->
-  <div class="card border-0 mb-4 mb-lg-0">
-    <!-- Card body -->
-    <div class="card-body">
-      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-        <div>
-          <h4 class="mb-0 font-weight-bold"></h4>
-          <p class="font-size-xs mb-0">掲載中のチケット</p>
-        </div>
-        <div>
-          <span><i class="fe fe-file-text font-size-lg"></i></span>
-        </div>
-      </div>
-      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-        <div>
-          <h4 class="mb-0 font-weight-bold"></h4>
-          <p class="font-size-xs mb-0">お気に入りされた数</p>
-        </div>
-        <div>
-          <span><i class="fe fe-users font-size-lg"></i></span>
-        </div>
-      </div>
-      <div class="d-flex align-items-center justify-content-between">
-        <div>
-          <h4 class="mb-0 font-weight-bold"></h4>
-          <p class="font-size-xs mb-0">お気に入りした数</p>
-        </div>
-        <div>
-          <span><i class="fe fe-star font-size-lg"></i></span>
-        </div>
-      </div>
     </div>
   </div>
 </div>
