@@ -25,4 +25,5 @@ class Post < ApplicationRecord
   def favorite_count
     Favorite.where(post_id: id).count
   end
+
 end

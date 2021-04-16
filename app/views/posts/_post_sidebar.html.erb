@@ -3,14 +3,14 @@
   <div class="card border-0 mb-4">
     <!-- Card body -->
     <div class="position-relative text-center">
-      <% if @post.user.profile_image.present? %>
-      <%= image_tag @post.user.profile_image.url, class: "rounded-circle avatar-xxl border-white border-width-4 position-relative mt-3" %>
+      <% if user.profile_image.present? %>
+      <%= image_tag user.profile_image.url, class: "rounded-circle avatar-xxl border-white border-width-4 position-relative mt-3" %>
       <% else %>
       <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xxl border-white border-width-4 position-relative mt-3" %>
       <% end %>
       <div class="card-body pb-0 pt-1" style="font-weight: bold;">
-        <p class="mb-1"><%= @post.user.name %></p>
-        <p class="mb-1"><%= "ID:#{@post.user.id}" %></p>
+        <p class="mb-1"><%= user.name %></p>
+        <p class="mb-1"><%= "ID:#{user.id}" %></p>
       </div>
     </div>
   </div>
@@ -24,25 +24,23 @@
           <span><i class="fe fe-file-text font-size-lg mr-2"></i>掲載プラン数</span>
         </div>
         <div class="d-flex flex-column text-right">
-          <p class="font-size-s mb-0 font-weight-bold"></p>
-          <p class="font-size-s mb-0 font-weight-bold"><%= @user_posts.count %></p>
+          <p class="font-size-s mb-0 font-weight-bold"><%= user.post_order_recent.count %></p>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
         <div style="color: #45bbc2;">
-          <span><i class="fe fe-users font-size-lg mr-2"></i>お気入りされた数</span>
+          <span><i class="fe fe-users font-size-lg mr-2"></i>フォロー</span>
         </div>
         <div class="d-flex flex-column text-right">
-          <p class="font-size-s mb-0 font-weight-bold"></p>
-          <p class="font-size-s mb-0 font-weight-bold"><%= @favorite_count %></p>
+          <p class="font-size-s mb-0 font-weight-bold">xxx</p>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between">
         <div style="color: #45bbc2;">
-          <span><i class="fe fe-star font-size-lg mr-2"></i>お気入りした数</span>
+          <span><i class="fe fe-star font-size-lg mr-2"></i>フォロワー</span>
         </div>
         <div class="d-flex flex-column text-right">
-          <p class="font-size-s mb-0 font-weight-bold"></p>
+          <p class="font-size-s mb-0 font-weight-bold">xxx</p>
         </div>
       </div>
     </div>

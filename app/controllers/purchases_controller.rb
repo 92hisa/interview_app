@@ -4,6 +4,7 @@ class PurchasesController < ApplicationController
   def new
     @post = Post.find(params[:post_id])
     @purchase = Purchase.new
+    @user = @post.user
   end
 
   def create
