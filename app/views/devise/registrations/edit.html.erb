@@ -152,7 +152,7 @@
                     <% if @user.profile_image.url.nil? %>
                       <div class="img"><%= image_tag 'profile_default_img_128.png', style:"height: 100px; width: 100px; border-radius: 50%; object-fit: cover;" %></div>
                     <% else %>
-                      <%= image_tag @user.profile_image.url, class: "profile-img", id: "profile-img" %>
+                      <%= image_tag @user.profile_image.url, class: "profile-img", id: "profile-img", style:"height: 100px; width: 100px; border-radius: 50%; object-fit: cover;" %>
                     <% end %>
                     <div class="mt-4">
                     <label class="profile-img-upload">
