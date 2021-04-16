@@ -1,128 +1,87 @@
-<div class="container">
-    <h1 class="text-center">購入画面</h1>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 offset-md-12">
-            <table class="table text-center">
-                <thread>
-                <tr>
-                <th>Post_ID</th>
-                <th>投稿者ID</th>
-                <th>掲載日</th>
-                <th>案件名</th>
-                <th>販売価格</th>
-                <th>販売価格(税込)</th>
-                <th>経験</th>
-                <th>備考</th>
-                <th></th>
-                <th></th>
-                </tr>
-                </thread>
-                  <tbody>
-                    <td><%= @post.id %></td>
-                    <td><%= @post.user_id %></td>
-                    <td><%= @post.created_at.to_s(:datetime_jp)  %></td>
-                    <td><%= @post.title %></td>
-                    <td><%= @post.price.to_s(:delimited) + "円" %></td>
-                    <td><%= @post.tax + "円" %></td>
-                    <td><%= @post.experience %></td>
-                    <td><%= @post.detail %></td>
-                  </tbody>
-            </table>
-            <div class="text-center">
-              <% if not @post.user_id == current_user.id %>
-                <%= form_with(model: [@post, @purchase], local: true) do |f| %>
-                  <%= f.submit "確認して購入する", class: "btn btn-primary" %>
-                <% end %>
-              <% end %>
-            </div>
-            <div class="text-right">
-              <%= link_to "戻る", :back %><br>
-              <%= link_to "トップページ", root_path %><br>
-            </div>
-        </div>
-    </div>
-</div>
-
-
 <div class="p-lg-5 py-5">
   <div class="container">
     <div class="row">
       <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
-
-        <div class="card mb-5">
+        <div class="card">
           <!-- Card body -->
           <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-              <h1 class="font-weight-semi-bold mb-2">
-                Getting Started with JavaScript
-              </h1>
-              <a href="#!" data-toggle="tooltip" data-placement="top" title="" data-original-title="Add to Bookmarks">
-                <i class="fe fe-bookmark font-size-lg text-inherit"></i>
-              </a>
-            </div>
-            <div class="d-flex mb-5">
-              <span>
-                <i class="mdi mdi-star mr-n1 text-warning"></i>
-                <i class="mdi mdi-star mr-n1 text-warning"></i>
-                <i class="mdi mdi-star mr-n1 text-warning"></i>
-                <i class="mdi mdi-star mr-n1 text-warning"></i>
-                <i class="mdi mdi-star-half-full text-warning"></i>
-                <span class="font-weight-medium">(140)</span>
-              </span>
-              <span class="ml-4 d-none d-md-block">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <rect x="3" y="8" width="2" height="6" rx="1" fill="#754FFE"></rect>
-                  <rect x="7" y="5" width="2" height="9" rx="1" fill="#754FFE"></rect>
-                  <rect x="11" y="2" width="2" height="12" rx="1" fill="#DBD8E9"></rect>
-                </svg>
+            <h5 class="text-center" style="font-weight: bold;">プラン内容</h5>
+            <div class="card-body rounded-lg mb-4 border">
+              <div class="d-flex justify-content-between align-items-center">
+                <h3 class="font-weight-semi-bold mb-2"><%= @post.title %></h3>
+              </div>
+              <div class="d-flex align-items-center justify-content-between mb-5">
                 <span>
-                  Intermediate
+                  <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= @post.experience %></li>
                 </span>
-              </span>
-              <span class="ml-4 d-none d-md-block">
-                <i class="mdi mdi-account-multiple-outline"></i>
-                <span>Enrolled</span>
-              </span>
-            </div>
-            <div class="d-flex justify-content-between">
-              <div class="d-flex align-items-center">
-                <img src="../assets/images/avatar/avatar-1.jpg" class="rounded-circle avatar-md" alt="" />
-                <div class="ml-2 lh-1">
-                  <h4 class="mb-1">Kathryn Jones</h4>
-                  <p class="font-size-xs mb-0">@kathrynjones</p>
+              </div>
+              <div class="d-flex mb-5">
+                <div class="d-flex flex-column">
+                  <li class="list-inline-item"><span class="mr-1">料金:</span><span><%= @post.display_price %></span></li>
+                  <li class="list-inline-item mr-3"><span class="mr-1">形式:</span><span>ビデオ通話・チャットどちらも可</span></li>
                 </div>
               </div>
-              <div>
-                <a href="#!" class="btn btn-outline-white btn-sm">Follow</a>
+              <div class="d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                  <% if @user.profile_image.present? %>
+                  <%= image_tag @puser.profile_image.url, class: "rounded-circle avatar-md" %>
+                  <% else %>
+                  <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-md" %>
+                  <% end %>
+                  <div class="ml-2 lh-1">
+                    <h4 class="mb-1"><%= @user.name %></h4>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <!-- Nav tabs -->
-          <ul class="nav nav-lt-tab" id="tab" role="tablist">
-             <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link active" id="description-tab" data-toggle="pill" href="#description" role="tab"
-                aria-controls="description" aria-selected="false">Description</a>
-            </li>
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link" id="review-tab" data-toggle="pill" href="#review" role="tab" aria-controls="review"
-                aria-selected="false">Reviews</a>
-            </li>
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link" id="transcript-tab" data-toggle="pill" href="#transcript" role="tab"
-                aria-controls="transcript" aria-selected="false">Transcript</a>
-            </li>
-            <!-- Nav item -->
-            <li class="nav-item">
-              <a class="nav-link" id="faq-tab" data-toggle="pill" href="#faq" role="tab" aria-controls="faq"
-                aria-selected="false">FAQ</a>
-            </li>
-          </ul>
         </div>
-
+        <div class="card rounded-lg mt-4">
+          <div class="card-body">
+            <div class="mb-4">
+              <div class="mb-4 text-center">
+                <h5 class="mb-2" style="font-weight: bold;">購入前のご確認および注意事項</h5>
+                <span class="font-size-xs">以下事項の確認の上、申し込みをお願いいたします。</span>
+              </div>
+              <div class="card-body rounded-lg mb-4" style="background-color: #EBF5F9;">
+                <h5 class="mb-2 text-center" style="font-weight: bold;">注意事項</h5>
+                <ul class="list-unstyled">
+                  <li class="d-flex align-item-center mb-2">
+                    <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                    <span>テスト/テスト/テスト/</span>
+                  </li>
+                  <li class="d-flex align-item-center mb-2">
+                    <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                    <span>テスト/テスト/テスト/</span>
+                  </li>
+                  <li class="d-flex align-item-center mb-2">
+                    <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                    <span>テスト/テスト/テスト/</span>
+                  </li>
+                  <li class="d-flex align-item-center mb-2">
+                    <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                    <span>テスト/テスト/テスト/</span>
+                  </li>
+                  <li class="d-flex align-item-center mb-2">
+                    <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                    <span>テスト/テスト/テスト/</span>
+                  </li>
+                  <li class="d-flex align-item-center mb-2">
+                    <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                    <span>テスト/テスト/テスト/</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="text-center">
+                <% if not @post.user_id == current_user.id %>
+                  <%= form_with(model: [@post, @purchase], local: true) do |f| %>
+                    <%= f.submit "上記を確認のうえ購入する", class: "btn btn-success text-nowrap btn-lg", style: "font-weight: bold;" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <%= render partial: 'posts/post_sidebar', locals: { user: @user } %>
     </div>
