@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   resources :rooms
   resources :messages, only: [:index, :create]
   post 'rooms/:id' => 'rooms#show'
+
+  resources :categories
 end

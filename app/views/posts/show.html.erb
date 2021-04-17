@@ -41,11 +41,15 @@
               <div class="d-flex align-items-center justify-content-between mb-5">
                 <span>
                   <li class="list-inline-item mr-3"><a data-toggle="tooltip" data-original-title="お気に入りされた数"><i class="mdi mdi-star text-warning mr-1"></i><%= @favorite_count %></a></li>
-                  <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= @post.experience %></li>
+                  <% if @post.category_ids.present? %>
+                    <% @post.categories.each do |category|%>
+                      <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= category.name %></li>
+                    <% end %>
+                  <% end %>
                 </span>
                 <div style="margin-left: auto;">
                   <% if user_signed_in? && @post.user_id != current_user.id %>
-                   <%= link_to "購入する", new_post_purchase_path(@post.id), class: "btn btn-success btn-sm text-nowrap", style: "font-weight: bold;" %>
+                    <%= link_to "購入する", new_post_purchase_path(@post.id), class: "btn btn-success btn-sm text-nowrap", style: "font-weight: bold;" %>
                   <% end %>
                 </div>
               </div>

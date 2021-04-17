@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :purchases
   has_many :comments
   has_many :favorites, dependent: :destroy
+  has_many :post_category_relations
+  has_many :categories, through: :post_category_relations
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 30 }

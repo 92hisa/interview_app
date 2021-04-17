@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_16_102937) do
+ActiveRecord::Schema.define(version: 2021_04_17_162212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "comment", null: false
@@ -44,6 +50,15 @@ ActiveRecord::Schema.define(version: 2021_04_16_102937) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
+  create_table "post_category_relations", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_post_category_relations_on_category_id"
+    t.index ["post_id"], name: "index_post_category_relations_on_post_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.text "title", null: false
     t.integer "price", null: false
@@ -54,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_04_16_102937) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "plan_image"
     t.text "subtitle"
+    t.integer "way", default: 0, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -99,6 +115,8 @@ ActiveRecord::Schema.define(version: 2021_04_16_102937) do
   add_foreign_key "favorites", "users"
   add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
+  add_foreign_key "post_category_relations", "categories"
+  add_foreign_key "post_category_relations", "posts"
   add_foreign_key "posts", "users"
   add_foreign_key "purchases", "posts"
   add_foreign_key "purchases", "users"
