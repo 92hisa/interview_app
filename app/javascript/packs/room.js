@@ -1,9 +1,6 @@
-// $(document).on('turbolinks:load', function() {
-  
   import Vue from 'vue/dist/vue.esm'
   import Room from '../room.vue'
   
-  // document.addEventListener('DOMContentLoaded', () => {
     function loading(){
   
   
@@ -14,5 +11,5 @@
       components: { Room }
     })
   }
-  // })
   setTimeout(loading,   500)
+

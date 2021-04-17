@@ -1,37 +1,32 @@
 .user-edit-page {
   max-width: 414px;
   margin: 0 auto;
-
   .profile {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin: 24px 0 12px;
-
+    marigin: 24px 0 12px;
     &-default-img {
       height: 128px;
       width: 128px;
       border-radius: 50%;
+      background-image: url("~profile_default_img_128.png");
       background-size: contain;
-
       &>input {
         display: none;
       }
     }
-
     &-img {
       height: 128px;
       width: 128px;
       border-radius: 50%;
       object-fit: cover;
     }
-
     &-name {
       font-size: 24px;
     }
-
     &-img-upload {
       margin-top: 12px;
       padding: 8px 12px;
@@ -40,7 +35,6 @@
       background-color: #FD3378;
       border-radius: 8px;
       cursor: pointer;
-
       &>input {
         display: none;
       }

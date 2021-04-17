@@ -1,43 +1,706 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="/">InterviewApp</a>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-      <li class="nav-item disabled">
-        <span class="nav-link"><%= "ID:#{current_user.id}" %></span>
-      </li>
-      <li class="nav-item disabled">
-        <span class="nav-link"><%= current_user.name + "さん" %></span>
-      </li>
-      <% end %>
-      <li class="nav-item dropdown disabled">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">アカウント</a>
-        <div class="dropdown-menu">
-        　<% if not user_signed_in? %>
-        　<%= link_to "新規登録",new_user_registration_path,class: "dropdown-item" %>
-        　<%= link_to "ログイン",new_user_session_path,class: "dropdown-item" %>
-        　<% end %>
-          <% if user_signed_in? %>
-          <%= link_to "登録情報", user_path(id: current_user), class: "dropdown-item" %><br>
-        　<%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-        　<% end %>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-default">
+  <div class="container-fluid px-0">
+    <%= link_to "/",class: "navbar-brand" do%>
+    <img src="/geeks-1.0.1/dist/assets/images/brand/logo/logo.svg">
+    <% end %>
+    <!-- Mobile view nav wrap -->
+    <ul class="navbar-nav navbar-right-wrap ml-auto d-lg-none d-flex nav-top-wrap ">
+      <li class="dropdown stopevent">
+        <a class="btn btn-light btn-icon rounded-circle text-muted indicator indicator-primary" href="#!" role="button" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fe fe-bell"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownNotification">
+          <div>
+            <div class="border-bottom px-3 pt-1 pb-3 d-flex justify-content-between align-items-center">
+              <span class="h5 mb-0">Notifications</span>
+              <a href="# " class="text-muted">
+                <span class="align-middle">
+                  <i class="fe fe-settings mr-1"></i></span></a>
+            </div>
+            <ul class="list-group list-group-flush notification-list-scroll">
+              <li class="list-group-item bg-light">
+                <div class="row">
+                  <div class="col">
+                    <div class="d-flex">
+                      <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-1.jpg" alt="" class="avatar-md rounded-circle"/>
+                      <div class="ml-3">
+                        <h5 class="font-weight-bold mb-1">Kristin Watson:</h5>
+                        <p class="mb-3">
+                          Krisitn Watsan like your comment on course Javascript Introduction!
+                        </p>
+                        <span class="font-size-xs text-muted">
+                          <span >
+                            <span class="fe fe-thumbs-up text-success mr-1"></span >2 hours ago,</span >
+                          <span class="ml-1">2:19 PM</span>
+                        </span>
+                      </div>
+                    </div>
+                    <a class="stretched-link" href="#!"></a>
+                  </div>
+                  <div class="col-auto text-center">
+                    <a href="#!" class="badge-dot badge-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as read"></a>
+                    <div>
+                      <a href="#!" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove">
+                        <i class="fe fe-x text-muted"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">
+                    <div class="d-flex">
+                      <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-2.jpg" alt="" class="avatar-md rounded-circle"/>
+                      <div class="ml-3">
+                        <h5 class="font-weight-bold mb-1">Brooklyn Simmons</h5>
+                        <p class="mb-3">
+                          Just launched a new Courses React for Beginner.
+                        </p>
+                        <span class="font-size-xs text-muted">
+                          <span >
+                            <span class="fe fe-thumbs-up text-success mr-1"></span >Oct 9,</span >
+                          <span class="ml-1">1:20 PM</span>
+                        </span>
+                      </div>
+                    </div>
+                    <a class="stretched-link" href="#!"></a>
+                  </div>
+                  <div class="col-auto text-center">
+                    <a href="#!" class="badge-dot badge-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as unread"></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">
+                    <div class="d-flex">
+                      <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-3.jpg" alt="" class="avatar-md rounded-circle"/>
+                      <div class="ml-3">
+                        <h5 class="font-weight-bold mb-1">Jenny Wilson</h5>
+                        <p class="mb-3">
+                          Krisitn Watsan like your comment on course Javascript Introduction!
+                        </p>
+                        <span class="font-size-xs text-muted">
+                          <span >
+                            <span class="fe fe-thumbs-up text-info mr-1"></span >Oct 9,</span >
+                          <span class="ml-1">1:56 PM</span>
+                        </span>
+                      </div>
+                    </div>
+                    <a class="stretched-link" href="#!"></a>
+                  </div>
+                  <div class="col-auto text-center">
+                    <a href="#!" class="badge-dot badge-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as unread"></a>
+                  </div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col">
+                    <div class="d-flex">
+                      <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-4.jpg" alt="" class="avatar-md rounded-circle"/>
+                      <div class="ml-3">
+                        <h5 class="font-weight-bold mb-1">Sina Ray</h5>
+                        <p class="mb-3">
+                          You earn new certificate for complete the Javascript Beginner course.
+                        </p>
+                        <span class="font-size-xs text-muted">
+                          <span >
+                            <span class="fe fe-award text-warning mr-1"></span >Oct 9,</span >
+                          <span class="ml-1">1:56 PM</span>
+                        </span>
+                      </div>
+                    </div>
+                    <a class="stretched-link" href="#!"></a>
+                  </div>
+                  <div class="col-auto text-center">
+                    <a href="#!" class="badge-dot badge-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as unread"></a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="border-top px-3 pt-3 pb-0">
+              <a href="./pages/notification-history.html" class="text-muted">See all Notifications</a >
+            </div>
+          </div>
         </div>
-      <% if user_signed_in? %>
-      <li class="nav-item dropdown disabled">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">メニュー</a>
-        <div class="dropdown-menu">
-          <%= link_to "お気に入り一覧", favorite_list_user_path(current_user), class: "dropdown-item" %><br>
-          <%= link_to "購入履歴", purchase_logs_user_path(current_user), class: "dropdown-item" %><br>
-          <%= link_to "掲載中の案件", post_list_user_path(current_user), class: "dropdown-item" %><br>
-          <%= link_to "案件を登録する", new_post_path, class: "dropdown-item" %><br>
+      </li>
+      <li class="dropdown ml-2">
+        <a class="rounded-circle" href="#!" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="avatar avatar-md avatar-indicators avatar-online">
+            <img alt="avatar" src="/geeks-1.0.1/dist/assets/images/avatar/avatar-1.jpg" class="rounded-circle"/>
+          </div>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
+          <div class="dropdown-item">
+            <div class="d-flex">
+              <div class="avatar avatar-md avatar-indicators avatar-online">
+                <img alt="avatar" src="/geeks-1.0.1/dist/assets/images/avatar/avatar-1.jpg" class="rounded-circle"/>
+              </div>
+              <div class="ml-3 lh-1">
+                <h5 class="mb-1">Annette Black</h5>
+                <p class="mb-0 text-muted">annette@geeksui.com</p>
+              </div>
+            </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <ul class="list-unstyled">
+            <li class="dropdown-submenu dropleft-lg">
+              <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
+                <i class="fe fe-circle mr-2"></i>Status
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="#!">
+                    <span class="badge-dot bg-success mr-2"></span>Online
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#!">
+                    <span class="badge-dot bg-secondary mr-2"></span>Offline
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#!">
+                    <span class="badge-dot bg-warning mr-2"></span>Away
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#!">
+                    <span class="badge-dot bg-danger mr-2"></span>Busy
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/profile-edit.html">
+                <i class="fe fe-user mr-2"></i>Profile
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/student-subscriptions.html">
+                <i class="fe fe-star mr-2"></i>Subscription
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#!">
+                <i class="fe fe-settings mr-2"></i>Settings
+              </a>
+            </li>
+          </ul>
+          <div class="dropdown-divider"></div>
+          <ul class="list-unstyled">
+            <li>
+              <a class="dropdown-item" href="./index.html">
+                <i class="fe fe-power mr-2"></i>Sign Out
+              </a>
+            </li>
+          </ul>
         </div>
-      </li>  
-      <% end %>
+      </li>
     </ul>
-  </div>
+    <!-- Button -->
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="icon-bar top-bar mt-0"></span>
+      <span class="icon-bar middle-bar"></span>
+      <span class="icon-bar bottom-bar"></span>
+    </button>
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse" id="navbar-default">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" id="navbarBrowse" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
+            Browse
+          </a>
+          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarBrowse">
+            <li class="dropdown-submenu dropright">
+              <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
+                Web Development
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Bootstrap</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    React
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    GraphQl</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Gatsby</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Grunt</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Svelte</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Meteor</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    HTML5</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Angular</a >
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown-submenu dropright">
+              <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
+                Design
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Graphic Design</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Illustrator
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    UX / UI Design</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Figma Design</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Adobe XD</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Sketch</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Icon Design</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/course-category.html">
+                    Photoshop</a >
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                Mobile App
+              </a>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                IT Software
+              </a>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                Marketing
+              </a>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                Music
+              </a>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                Life Style
+              </a>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                Business
+              </a>
+            </li>
+            <li>
+              <a href="./pages/course-category.html" class="dropdown-item">
+                Photography
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" id="navbarLanding" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Landings
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarLanding">
+            <li>
+              <h4 class="dropdown-header">Landings</h4>
+            </li>
+            <li>
+              <a href="./pages/landings/landing-courses.html" class="dropdown-item">
+                Courses
+              </a>
+            </li>
+            <li>
+              <a href="./pages/landings/course-lead.html" class="dropdown-item">
+                Lead Course
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" id="navbarPages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Pages
+          </a>
+          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarPages">
+            <li>
+              <a class="dropdown-item" href="./pages/course-single.html">
+                Course Single
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/course-single-v2.html">
+                Course Single v2
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/course-resume.html">
+                Course Resume
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/course-category.html">
+                Course Category
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/course-checkout.html">
+                Course Checkout
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/course-filter-list.html">
+                Course List/Grid
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/add-course.html">
+                Add New Course
+              </a>
+            </li>
+            <li class="dropdown-submenu dropright">
+              <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
+                Paths
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="./pages/course-path.html" class="dropdown-item">
+                    Browse Path
+                  </a>
+                </li>
+                <li>
+                  <a href="./pages/course-path-single.html" class="dropdown-item">
+                    Path Single
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <hr class="mx-3"/>
+            </li>
+            <li class="dropdown-submenu dropright">
+              <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
+                Blog
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item" href="./pages/blog.html">
+                    Listing</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/blog-single.html">
+                    Article
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/blog-category.html">
+                    Category</a >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="./pages/blog-sidebar.html">
+                    Sidebar</a >
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <a class="dropdown-item" href="./pages/about.html">
+                About
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#!">
+                Help Center
+                <span class="badge badge-success ml-1">Pro</span>
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/404-error.html">
+                Error Page
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="./pages/pricing.html">
+                Pricing
+              </a>
+            </li>
+          </ul>
+        </li>
+        <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#!" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
+            <li>
+              <h4 class="dropdown-header">アカウント</h4>
+            </li>
+            <li class="dropdown-submenu">
+              <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
+              <%= link_to "購入したチケット", purchase_logs_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
+              <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
+              <%= link_to "チケットを掲載する", new_post_path, class: "dropdown-item dropdown-list-group-item" %>
+            </li>
+          </ul>
+        </li>
+        <% end %>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fe fe-more-horizontal font-size-lg"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
+            <div class="list-group">
+              <a class="list-group-item list-group-item-action border-0" href="./docs/index.html">
+                <div class="d-flex align-items-center">
+                  <i class="fe fe-file-text font-size-lg text-primary"></i>
+                  <div class="ml-3">
+                    <h5 class="mb-0">Documentations</h5>
+                    <p class="mb-0 font-size-xs">
+                      Browse the all documentation
+                    </p>
+                  </div>
+                </div>
+              </a>
+              <a class="list-group-item list-group-item-action border-0" href="./docs/changelog.html">
+                <div class="d-flex align-items-center">
+                  <i class="fe fe-layers font-size-lg text-primary"></i>
+                  <div class="ml-3">
+                    <h5 class="mb-0">Changelog
+                      <span class="text-primary ml-1">v1.0.1</span></h5>
+                    <p class="mb-0 font-size-xs">See what's new</p>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <form class="mt-3 mt-lg-0 ml-lg-3 d-flex align-items-center">
+        <span class="position-absolute pl-3 search-icon">
+          <i class="fe fe-search"></i>
+        </span>
+        <input type="search" class="form-control pl-6" placeholder="Search Courses"/>
+      </form>
+      <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
+        <li class="dropdown d-inline-block stopevent">
+          <a class="btn btn-light btn-icon rounded-circle mr-2 text-muted indicator indicator-primary" href="#!" role="button" id="dropdownNotificationSecond" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fe fe-bell"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-xl dropdown-menu-right" aria-labelledby="dropdownNotificationSecond">
+            <div>
+              <div class="border-bottom px-3 pt-1 pb-3 d-flex justify-content-between align-items-center">
+                <span class="h5 mb-0">Notifications</span>
+                <a href="# " class="text-muted">
+                  <span class="align-middle">
+                    <i class="fe fe-settings mr-1"></i></span ></a>
+              </div>
+              <ul class="list-group list-group-flush notification-list-scroll">
+                <li class="list-group-item bg-light">
+                  <div class="row">
+                    <div class="col">
+                      <div class="d-flex">
+                        <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-1.jpg" alt="" class="avatar-md rounded-circle"/>
+                        <div class="ml-3">
+                          <h5 class="font-weight-bold mb-1">Kristin Watson:</h5>
+                          <p class="mb-3">
+                            Krisitn Watsan like your comment on course Javascript Introduction!
+                          </p>
+                          <span class="font-size-xs text-muted">
+                            <span >
+                              <span class="fe fe-thumbs-up text-success mr-1"></span >2 hours ago,</span >
+                            <span class="ml-1">2:19 PM</span>
+                          </span>
+                        </div>
+                      </div>
+                      <a class="stretched-link" href="#!"></a>
+                    </div>
+                    <div class="col-auto text-center">
+                      <a href="#!" class="badge-dot badge-info" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as read"></a>
+                      <div>
+                        <a href="#!" class="bg-transparent" data-toggle="tooltip" data-placement="top" title="" data-original-title="Remove">
+                          <i class="fe fe-x text-muted"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="d-flex">
+                        <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-2.jpg" alt="" class="avatar-md rounded-circle"/>
+                        <div class="ml-3">
+                          <h5 class="font-weight-bold mb-1">
+                            Brooklyn Simmons
+                          </h5>
+                          <p class="mb-3">
+                            Just launched a new Courses React for Beginner.
+                          </p>
+                          <span class="font-size-xs text-muted">
+                            <span >
+                              <span class="fe fe-thumbs-up text-success mr-1"></span >Oct 9,</span >
+                            <span class="ml-1">1:20 PM</span>
+                          </span>
+                        </div>
+                      </div>
+                      <a class="stretched-link" href="#!"></a>
+                    </div>
+                    <div class="col-auto text-center">
+                      <a href="#!" class="badge-dot badge-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as unread"></a>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="d-flex">
+                        <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-3.jpg" alt="" class="avatar-md rounded-circle"/>
+                        <div class="ml-3">
+                          <h5 class="font-weight-bold mb-1">Jenny Wilson</h5>
+                          <p class="mb-3">
+                            Krisitn Watsan like your comment on course Javascript Introduction!
+                          </p>
+                          <span class="font-size-xs text-muted">
+                            <span >
+                              <span class="fe fe-thumbs-up text-info mr-1"></span >Oct 9,</span >
+                            <span class="ml-1">1:56 PM</span>
+                          </span>
+                        </div>
+                      </div>
+                      <a class="stretched-link" href="#!"></a>
+                    </div>
+                    <div class="col-auto text-center">
+                      <a href="#!" class="badge-dot badge-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as unread"></a>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col">
+                      <div class="d-flex">
+                        <img src="/geeks-1.0.1/dist/assets/images/avatar/avatar-4.jpg" alt="" class="avatar-md rounded-circle"/>
+                        <div class="ml-3">
+                          <h5 class="font-weight-bold mb-1">Sina Ray</h5>
+                          <p class="mb-3">
+                            You earn new certificate for complete the Javascript Beginner course.
+                          </p>
+                          <span class="font-size-xs text-muted">
+                            <span >
+                              <span class="fe fe-award text-warning mr-1"></span >Oct 9,</span >
+                            <span class="ml-1">1:56 PM</span>
+                          </span>
+                        </div>
+                      </div>
+                      <a class="stretched-link" href="#!"></a>
+                    </div>
+                    <div class="col-auto text-center">
+                      <a href="#!" class="badge-dot badge-secondary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mark as unread"></a>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <div class="border-top px-3 pt-3 pb-0">
+                <a href="./pages/notification-history.html" class="text-muted">See all Notifications</a >
+              </div>
+            </div>
+          </div>
+        </li>
+        <% if user_signed_in? %>
+          <li class="dropdown ml-2 d-inline-block">
+            <a class="rounded-circle" href="/" role="button" id="dropdownUserProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-md">
+                <% if current_user.profile_image.url.nil? %>
+                  <%= image_tag "profile_default_img_128.png", class: "rounded-circle" %>
+                <% else %>
+                  <%= image_tag current_user.profile_image.url, class: "rounded-circle" %>
+                <% end %>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownUserProfile">
+              <div class="dropdown-item">
+                <div class="d-flex">
+                  <div class="avatar avatar-md">
+                    <% if current_user.profile_image.url.nil? %>
+                      <%= image_tag "profile_default_img_128.png", class: "rounded-circle" %>
+                    <% else %>
+                      <%= image_tag current_user.profile_image.url, class: "rounded-circle" %>
+                    <% end %>
+                  </div>
+                  <div class="ml-3 lh-1">
+                    <h5 class="mb-1"><%= current_user.name %></h5>
+                    <p class="mb-0 text-muted"><%= current_user.email %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-divider"></div>
+              <ul class="list-unstyled">
+                <li class="dropdown-submenu dropleft-lg">
+                  <%= link_to user_path(id: current_user), class: "dropdown-item" do %>
+                  <i class="fe fe-user mr-2"></i>プロフィール
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to favorite_list_user_path(id: current_user), class: "dropdown-item" do %>
+                    <i class="fe fe-star mr-2"></i>お気に入り
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
+                    <i class="fe fe-settings mr-2"></i>設定
+                  <% end %>
+                </li>
+              </ul>
+              <div class="dropdown-divider"></div>
+              <ul class="list-unstyled">
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+                  <i class="fas fa-sign-out-alt mr-2"></i>ログアウト
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <% else%>
+          <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-success mr-2" %>
+          <%= link_to "無料登録", new_user_registration_path, class: "btn btn-success mr-2" %>
+        <% end %>
+      </div>
+    </div>
 </nav>

@@ -1,33 +1,81 @@
-<div class="container">
-  <h1 class="text-center">案件を登録する</h1>
-    <%= form_with(model: @post, local: true) do |f| %>  
-      <div class="row">
-        <div class="col-md-6 col-sm-6 offset-md-3">
-          <div class="form-group">              
-              <div class="field">
-              <%= f.label "案件名" %>
-              <%= f.text_field :title,  autofocus: true, autocomplete: "name", class: "form-control" %>
-              </div><br>
-              <div class="field">
-              <%= f.label "販売価格" %>
-              <%= f.text_field :price,  autofocus: true, autocomplete: "price", class: "form-control" %>
-              </div><br>
-              <div class="field">
-              <%= f.label "経験" %>
-              <%= f.text_field :experience,  autofocus: true, autocomplete: "experience", class: "form-control" %>
-              </div><br>
-              <div class="field">
-              <%= f.label "詳細" %>
-              <%= f.text_field :detail,  autofocus: true, autocomplete: "detail", class: "form-control" %>
-              </div><br>            
-              <div class="actions text-right">
-                <%= f.submit "投稿する", class: "btn btn-primary" %>
-              </div><br>
-              <div class="text-right">
-                <%= link_to "戻る", :back %>
+<!-- Page Content -->
+<div class="pt-5 pb-5">
+	<div class="container">
+    <!-- Content -->
+		<div class="row mt-4">
+      <%= render partial: 'shared/account_menue' %>
+			<div class="col-lg-9 col-md-8 col-12">
+				<!-- Card -->
+				<div class="card">
+					<!-- Card header -->
+					<div class="card-header">
+						<h4 class="mb-0" style="color:#45bbc2;">プラン作成</h4>
+						<p class="mb-0">
+						</p>
+					</div>
+					<!-- Card body -->
+          <%= form_with(model: @post, local: true) do |f| %>
+					<div class="card-body">
+            <div class="card-body pb-1">
+							<div class="d-flex align-items-center mb-4 mb-lg-0">
+                <div class="profile ml-1 mt-2">
+                  <img id="plan-img-prev" src="#" class='hidden'/>
+                </div>
               </div>
-            </div>  
-          </div>
-      </div>
-    <% end %>
+              </div>
+              <div class="card-body pt-1">
+                <div class="d-flex flex-column ml-3">
+                  <span class="font-size-xs mb-0">アップロード画像</span>
+                  <span class="font-size-xs mb-0">※縦横200px×200px以上推奨</span>
+                </div>
+              </div>
+              <div class="col-12 text-center">
+                <label class="plan-img-upload">
+                  <a class="btn btn-outline-success btn-sm text-nowrap">
+                    ファイルを選択
+                     <%= f.file_field :plan_image, id: "plan_image_upload", style: "display:none"%>
+                  </a>
+                </label>
+              </div>
+						<hr class="my-5" />
+						<div>
+							<!-- Form -->
+							<form class="form-row">
+								<!-- タイトル -->
+								<div class="form-group col-12 col-md-12">
+                  <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "タイトル", class: "form-label"%>
+                  <%= f.text_field :title, id: "fname", class: "form-control", placeholder: "50文字以内" %>
+								</div>
+                <!-- サブタイトル -->
+                <div class="form-group col-12 col-md-12">
+                  <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "サブタイトル", class: "form-label"%>
+                  <%= f.text_field :subtitle, id: "fname", class: "form-control", placeholder: "50文字以内" %>
+                </div>
+								<!-- 料金 -->
+								<div class="form-group col-12 col-md-4">
+                  <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "料金", class: "form-label"%>
+                  <%= f.text_field :price, autofocus: true, autocomplete: "price", class: "form-control", placeholder: "料金" %>
+								</div>
+                <!-- タグ -->
+                <div class="form-group col-12 col-md-4">
+                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "タグ", class: "form-label"%>
+                  <%= f.text_field :experience, autofocus: true, autocomplete: "experience", class: "form-control", placeholder: "タグ" %>
+                </div>
+                <!-- 詳細 -->
+                <div class="form-group col-12 col-md-12">
+                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "詳細", class: "form-label"%>
+                  <%= f.text_area :detail, autofocus: true, autocomplete: "detail", rows: "5", class: "form-control", placeholder: "詳細" %>
+                </div>
+                <!-- Button -->
+								<div class="col-12 text-center">
+                  <%= f.submit "保存する", class: "btn btn-success btn-lg" %>
+								</div>
+							</form>
+						</div>
+					</div>
+          <% end %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -25,4 +25,8 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  def post_order_recent
+    Post.where(user_id: id)
+  end
 end

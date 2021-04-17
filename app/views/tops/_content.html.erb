@@ -1,0 +1,115 @@
+  <!-- Content -->
+  <div class="py-6">
+    <div class="container">
+      <div class="row mb-6">
+        <div class="col-md-12">
+          <!-- Nav -->
+          <ul class="nav nav-lb-tab mb-6" id="tab" role="tablist">
+            <li class="nav-item ml-0" role="presentation">
+              <a class="nav-link active" id="most-popular-tab" data-toggle="pill" href="#most-popular" role="tab"
+                aria-controls="most-popular" aria-selected="true">人気のチケット</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="trending-tab" data-toggle="pill" href="#trending" role="tab"
+                aria-controls="trending" aria-selected="false">最新のチケット</a>
+            </li>
+          </ul>
+          <!-- Tab Content -->
+          <div class="tab-content" id="tabContent">
+            <!-- Tab Pane -->
+            <div class="tab-pane fade show active" id="most-popular" role="tabpanel" aria-labelledby="most-popular-tab">
+              <div class="row">
+                <%# popular-card-4 %>
+                <% @popular_post.each do |popular_post| %>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <!-- Card -->
+                    <div class="card  mb-4 card-hover">
+                    <%= link_to post_path(id: popular_post.id) do %>
+                      <img src="geeks-1.0.1/dist/assets/images/course/course-javascript.jpg" alt="" class="card-img-top rounded-top">
+                    <% end %>
+                      <!-- Card body -->
+                      <div class="card-body">
+                        <h3 class="h4 mb-2 text-truncate-line-2 "><%= link_to popular_post.title, post_path(id: popular_post.id), class: "text-inherit" %></h3>
+                        <ul class="mb-3  list-inline">
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning mr-1"></i><%= popular_post.favorites.count %></li>
+                          <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= popular_post.experience %></li>
+                        </ul>
+                        <div class="lh-1">
+                          <span class="font-size-xs">価格</span>
+                          <span class="font-size-xs"><%= popular_post.display_price %></span>
+                        </div>
+                      </div>
+                      <!-- Card Footer -->
+                      <div class="card-footer">
+                        <div class="row align-items-center no-gutters">
+                          <div class="col-auto">
+                            <% if popular_post.user.profile_image.url.nil? %>
+                              <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xs" %>
+                            <% else %>
+                              <%= image_tag popular_post.user.profile_image.url, class: "rounded-circle avatar-xs" %>
+                            <% end %>
+                          </div>
+                          <div class="col ml-2">
+                            <span><%= link_to popular_post.user.name, user_path(id: popular_post.user_id), class: "text-inherit" %></span>
+                          </div>
+                          <div class="col-auto">
+                          <i class="far fa-clock mr-1"></i><%= time_ago_in_words(popular_post.created_at) + "前" %></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="trending" role="tabpanel" aria-labelledby="trending-tab">
+              <!-- Tab pane -->
+              <div class="row">
+              <%# recent-card-4 %>
+              <% @recent_post.each do |recent_post| %>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <!-- Card -->
+                  <div class="card  mb-4 card-hover">
+                    <%= link_to post_path(id: recent_post.id) do %>
+                      <img src="geeks-1.0.1/dist/assets/images/course/course-react.jpg" alt="" class="card-img-top rounded-top"></a>
+                    <% end %>
+                    <!-- Card body -->
+                    <div class="card-body">
+                      <h3 class="h4 mb-2 text-truncate-line-2"><%= link_to recent_post.title, post_path(id: recent_post.id), class: "text-inherit" %></h3>
+                      <ul class="mb-3 list-inline">
+                        <li class="list-inline-item"><i class="mdi mdi-star text-warning mr-1"></i><%= recent_post.favorites.count %></li>
+                        <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= recent_post.experience %></li>
+                      </ul>
+                      <div class="lh-1">
+                        <span class="font-size-xs">価格</span>
+                        <span class="font-size-xs"><%= recent_post.display_price %></span>
+                      </div>
+                    </div>
+                    <!-- Card Footer -->
+                    <div class="card-footer">
+                      <div class="row align-items-center no-gutters">
+                        <div class="col-auto">
+                          <% if recent_post.user.profile_image.url.nil? %>
+                            <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xs" %>
+                          <% else %>
+                            <%= image_tag recent_post.user.profile_image.url, class: "rounded-circle avatar-xs" %>
+                          <% end %>
+                        </div>
+                        <div class="col ml-2">
+                          <span><%= link_to recent_post.user.name, user_path(id: recent_post.user_id), class: "text-inherit" %></span>
+                        </div>
+                        <div class="col-auto">
+                          <i class="far fa-clock mr-1"></i><%= time_ago_in_words(recent_post.created_at) + "前" %></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

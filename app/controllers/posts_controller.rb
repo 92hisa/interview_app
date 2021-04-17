@@ -19,9 +19,11 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comments = @post.comments.includes(:user)
+    @comments = @post.comments.includes(:user).order(id: "desc")
     @post_favorite = @post.favorites.where(user_id: current_user)
     @favorite_count = @post.favorites.count
+    @user = @post.user
+    @user_posts = @user.posts.order(id: "desc")
   end
 
   def edit
@@ -53,7 +55,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :email, :price, :experience, :detail).merge(user_id: current_user.id)
+    params.require(:post).permit(:title, :subtitle, :plan_image, :price, :experience, :detail).merge(user_id: current_user.id)
   end
 
   def correct_post_user

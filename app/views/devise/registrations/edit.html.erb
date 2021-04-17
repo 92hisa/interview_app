@@ -1,41 +1,159 @@
-<div class="user-edit-page">
-  <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), class: "px-3", local: true, method: :patch do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <div class="profile">
-      <img id="profile-img-prev" src="#" class='hidden' />
-      <% if @user.profile_image.url.nil? %>
-        <%= image_tag 'profile_default_img_128.png' %>
-      <% else %>
-        <%= image_tag @user.profile_image.url, class: "profile-img", id: "profile-img" %>
-      <% end %>
-      <label class="profile-img-upload">
-        <%= f.file_field :profile_image, id: "profile_image_upload" %>ファイルを選択
-      </label>
-    </div>
-
-    <div class="form-group">
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.text_field :name, class: "form-control", placeholder: "名前" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.text_area :about_me, class: "form-control", placeholder: "紹介", rows: "4" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "パスワード" %>
-    </div>
-
-    <div class="form-group">
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "パスワードの確認" %>
-    </div>
-
-    <div class="user-edit__submit-btn">
-      <%= f.submit "保存", class: "btn btn-block text-white" %>
-    </div>
-  <% end %>
-
+<!-- Page Content -->
+<div class="pt-5 pb-5">
+	<div class="container">
+		<!-- User info -->
+		<div class="row align-items-center">
+			<div class="col-xl-12 col-lg-12 col-md-12 col-12">
+				<!-- Bg -->
+				<div class="pt-16 rounded-top" style="background-color: #d1eaf1; no-repeat; background-size: cover;"></div>
+				<div class="d-flex align-items-end justify-content-between bg-white px-4 pt-2 pb-4 rounded-none rounded-bottom shadow-sm">
+					<div class="d-flex align-items-center">
+						<div class="mr-2 position-relative d-flex justify-content-end align-items-end mt-n5">
+              <% if @user.profile_image.present? %>
+                <%= image_tag @user.profile_image.url, class: "avatar-xl rounded-circle border-width-4 border-white" %>
+              <% else %>
+                <%= image_tag "profile_default_img_128.png", class: "avatar-xl rounded-circle border-width-4 border-white" %>
+              <% end %>
+						</div>
+						<div class="lh-1">
+							<h2 class="mb-0"><%= @user.name %></h2>
+              <li class="list-unstyled mb-2"><i class="fa fa-envelope nav-icon mr-2"></i><%= @user.email %></li>
+              <% if @user.gender == "man" %>
+              <li class="list-unstyled mb-2"><i class="fa fa-user nav-icon mr-2"></i>男性</li>
+              <% else %>
+              <li class="list-unstyled mb-2"><i class="fa fa-user nav-icon mr-2"></i>女性</li>
+              <% end %>
+						</div>
+					</div>
+					<div>
+						<a href="dashboard-student.html" class="btn btn-outline-primary btn-sm d-none d-md-block">Go to Dashboard</a>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- Content -->
+		<div class="row mt-4">
+			<div class="col-lg-3 col-md-4 col-12">
+				<!-- Side navbar -->
+				<nav class="navbar navbar-expand-md navbar-light shadow-sm mb-4 mb-lg-0 sidenav">
+					<!-- Menu -->
+					<a class="d-xl-none d-lg-none d-md-none text-inherit font-weight-bold" href="#!">Menu</a>
+					<!-- Button -->
+					<button class="navbar-toggler d-md-none icon-shape icon-sm rounded bg-primary text-light" type="button"
+						data-toggle="collapse" data-target="#sidenav" aria-controls="sidenav" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="fe fe-menu"></span>
+					</button>
+					<!-- Collapse navbar -->
+					<div class="collapse navbar-collapse" id="sidenav">
+						<div class="navbar-nav flex-column">
+							<span class="navbar-header">アカウント</span>
+              <!-- List -->
+							<ul class="list-unstyled ml-n2 mb-0">
+								<!-- Nav item -->
+								<li class="nav-item">
+									<a class="nav-link" href="profile-edit.html"><i class="fa fa-home nav-icon"></i>HOME</a>
+								</li>
+								<!-- Nav item -->
+								<li class="nav-item">
+									<a class="nav-link" href="security.html"><i class="fe fe-user nav-icon"></i>Security</a>
+								</li>
+								<!-- Nav item -->
+								<li class="nav-item">
+									<a class="nav-link" href="social-profile.html"><i class="fe fe-refresh-cw nav-icon"></i>Social
+										Profiles</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="notifications.html"><i class="fe fe-bell nav-icon"></i>Notifications</a>
+								</li>
+								<!-- Nav item -->
+								<li class="nav-item">
+									<a class="nav-link" href="profile-privacy.html"><i class="fe fe-lock nav-icon"></i>Profile
+										Privacy</a>
+								</li>
+								<!-- Nav item -->
+								<li class="nav-item">
+									<a class="nav-link" href="delete-profile.html"><i class="fe fe-trash nav-icon"></i>退会する</a>
+								</li>
+								<!-- Nav item -->
+								<li class="nav-item">
+									<a class="nav-link" href="../index.html"><i class="fas fa-sign-out-alt nav-icon"></i>ログアウト</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+			<div class="col-lg-9 col-md-8 col-12">
+				<!-- Card -->
+				<div class="card">
+					<!-- Card header -->
+					<div class="card-header">
+						<h3 class="mb-0">プロフィール</h3>
+						<p class="mb-0">
+						</p>
+					</div>
+					<!-- Card body -->
+          <%= form_with scope: resource, as: resource_name, url: registration_path(resource_name), local: true, method: :patch do |f| %>
+					<div class="card-body">
+						<div class="d-lg-flex align-items-center justify-content-between">
+							<div class="d-flex align-items-center mb-4 mb-lg-0">
+                <div class="profile ml-1 mt-2">
+                  <img id="profile-img-prev" src="#" class='hidden'/>
+                  <% if @user.profile_image.url.nil? %>
+                    <div class="img"><%= image_tag 'profile_default_img_128.png', style:"height: 100px; width: 100px; border-radius: 50%; object-fit: cover;" %></div>
+                  <% else %>
+                    <%= image_tag @user.profile_image.url, class: "profile-img", id: "profile-img", style:"height: 100px; width: 100px; border-radius: 50%; object-fit: cover;" %>
+                  <% end %>
+                  <div class="mt-4">
+                  <label class="profile-img-upload">
+                    <a class="btn btn-outline-success btn-sm text-nowrap">
+                      ファイルを選択
+                       <%= f.file_field :profile_image, id: "profile_image_upload", style: "display:none"%>
+                    </a>
+                  </label>
+                  </div>
+                </div>
+								<div class="ml-4">
+                  <div class="ml-3">
+                    <h3 class="mb-0">アイコン</h3>
+                    <p class="mb-0">アップロード画像（縦横200px×200px以上推奨、5MB未満）</p>
+                  </div>
+								</div>
+              </div>
+						</div>
+						<hr class="my-5" />
+						<div>
+							<h4 class="mb-0 text-center">基本情報</h4>
+							<p class="mb-4">
+							</p>
+							<!-- Form -->
+							<form class="form-row">
+								<!-- ユーザー名 -->
+								<div class="form-group col-12 col-md-6">
+                  <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "ユーザー名", class: "form-label"%>
+                  <%= f.text_field :name, id: "fname", class: "form-control", placeholder: "50文字以内" %>
+								</div>
+								<!-- メールアドレス -->
+								<div class="form-group col-12 col-md-12">
+                  <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "メールアドレス", class: "form-label"%>
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
+								</div>
+								<!-- 自己紹介 -->
+								<div class="form-group col-12 col-md-12">
+                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "自己紹介", class: "form-label"%>
+                  <%= f.text_area :about_me, class: "form-control", placeholder: "自己紹介", rows: "10" %>
+								</div>
+                <!-- Button -->
+								<div class="col-12 text-center">
+                  <%= f.submit "保存する", class: "btn btn-success btn-lg" %>
+								</div>
+							</form>
+						</div>
+					</div>
+          <% end %>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
