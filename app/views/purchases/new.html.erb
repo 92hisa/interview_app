@@ -24,7 +24,7 @@
               <div class="d-flex justify-content-between">
                 <div class="d-flex align-items-center">
                   <% if @user.profile_image.present? %>
-                  <%= image_tag @puser.profile_image.url, class: "rounded-circle avatar-md" %>
+                  <%= image_tag @user.profile_image.url, class: "rounded-circle avatar-md" %>
                   <% else %>
                   <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-md" %>
                   <% end %>

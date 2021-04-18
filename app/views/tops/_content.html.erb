@@ -50,7 +50,7 @@
                             <% end %>
                           </div>
                           <div class="col ml-2">
-                            <span><%= link_to popular_post.user.name, user_path(id: popular_post.user_id), class: "text-inherit" %></span>
+                            <span><%= link_to popular_post.user.name, user_path(id: popular_post.user_id),data: {"turbolinks" => false}, class: "text-inherit" %></span>
                           </div>
                           <div class="col-auto">
                           <i class="far fa-clock mr-1"></i><%= time_ago_in_words(popular_post.created_at) + "前" %></a>
