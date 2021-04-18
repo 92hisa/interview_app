@@ -8,6 +8,23 @@
          <%= f.label "レビュー内容" %>
          <%= f.text_field :content, class: "form-control" %>
         </div><br>
+        <!-- 評価 -->
+        <div class="form-group row" id="star">
+         <%= f.label :score,'評価 ', class:'col-md-3 col-form-label' %>
+         <%= f.hidden_field :score, id: :review_star %>
+        </div>
+
+        <!-- 評価javascript -->
+        <script>
+          $('#star').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            scoreName: 'review[score]',
+            half: false,
+          });
+        </script>
+
         <div class="actions text-right">
           <%= f.submit "登録する", class: "btn btn-success" %>
         </div><br>

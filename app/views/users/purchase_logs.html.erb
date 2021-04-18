@@ -31,7 +31,7 @@
                         <td><%= purchase_logs.post.experience %></td>
                         <td><%= purchase_logs.post.detail %></td>
                         <td><%= link_to "MSG", room_path(id: purchase_logs.id), class: "btn btn-primary" %></td>
-                        <td><%= link_to "レビュー投稿", new_post_purchase_review_path(post_id: purchase_logs.post_id, purchase_id: purchase_logs.id), class: "btn btn-primary" %></td>
+                        <td><%= link_to "レビュー投稿", new_post_purchase_review_path(post_id: purchase_logs.post_id, purchase_id: purchase_logs.id),　data: {"turbolinks" => false}, class: "btn btn-primary" %></td>
                       </tbody>
                     <% end %>
                   <% end %>

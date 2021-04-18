@@ -82,25 +82,28 @@
             </div>
             <div class="d-flex align-items-center justify-content-between">
               <div>
-                <h4 class="mb-0 font-weight-bold"><%= @user.favorites.count %></h4>
-                <p class="font-size-xs mb-0">お気に入りした数</p>
+                <h4 class="mb-0 font-weight-bold" id="average-review-rating" data-score=<%= @average_review %>></h4>
+                <p class="font-size-xs mb-0"><%= @average_review %></p>
+                <!-- 星評価 -->
+                <script>
+                $('#average-review-rating').raty({
+                  size     : 36,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf : '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  score: function() {
+                    return $(this).attr('data-score')
+                  }
+                });
+                </script>
+
               </div>
               <div>
                 <span><i class="fe fe-star font-size-lg"></i></span>
               </div>
             </div>
-            <% @reviews.each do |review| %>
-            <div class="d-flex align-items-center justify-content-between">
-              <div>
-                <h5 class="mb-0 font-weight-bold"><%= review.user_id %></h5>
-                <h5 class="mb-0 font-weight-bold"><%= review.content %></h5>
-                <p class="font-size-xs mb-0">レビューコメント</p>
-              </div>
-              <div>
-                <span><i class="fe fe-star font-size-lg"></i></span>
-              </div>
-            </div>
-            <% end %>
           </div>
         </div>
       </div>
