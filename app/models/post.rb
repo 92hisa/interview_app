@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   has_many :purchases
   has_many :comments
   has_many :favorites, dependent: :destroy
+  has_many :post_category_relations
+  has_many :categories, through: :post_category_relations
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 30 }
@@ -14,7 +16,7 @@ class Post < ApplicationRecord
     (price * 1.1).floor.to_s(:delimited)
   end
 
-    def display_price
+  def display_price
     price.floor.to_s(:delimited) + "円"
   end
 
@@ -25,5 +27,4 @@ class Post < ApplicationRecord
   def favorite_count
     Favorite.where(post_id: id).count
   end
-
 end

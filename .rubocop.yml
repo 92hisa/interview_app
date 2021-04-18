@@ -14,6 +14,7 @@ AllCops:
     - 'vendor/**/**/*'
     - 'spec/*'
     - 'node_modules/node-sass/src/libsass/contrib/libsass.spec'
+    - 'public/geeks-1.0.1/dist/**/*'
 
 Style/TrailingCommaInHashLiteral:
   Enabled: false

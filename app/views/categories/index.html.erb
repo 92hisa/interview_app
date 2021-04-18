@@ -1,0 +1,53 @@
+<div class="container">
+  <h1 class="text-center">カテゴリー管理</h1>
+  <%= form_with(model: @category, local: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 offset-md-3">
+      <div class="form-group">
+        <div class="field">
+         <%= f.label "カテゴリー名" %>
+         <%= f.text_field :name, class: "form-control" %>
+        </div><br>
+        <div class="actions text-right">
+          <%= f.submit "登録する", class: "btn btn-success" %>
+        </div><br>
+        <div class="text-right">
+          <%= link_to "戻る", :back %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+  <h1 class="text-center">カテゴリー一覧</h1>
+  <div class="row">
+    <div class="col-md-12 col-sm-12 offset-md-12">
+      <table class="table text-center">
+        <thread>
+        <tr>
+        <th>category_ID</th>
+        <th>作成日</th>
+        <th>カテゴリー名</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        </tr>
+        </thread>
+        <% @categories.each do |category| %>
+        <tbody>
+        <td><%= category.id %></td>
+        <td><%= category.created_at.to_s(:datetime_jp) %></td>
+        <td><%= category.name %></td>
+        <td><%= link_to "編集", edit_category_path(category.id), class: "btn btn-success" %></td>
+        <td><%= link_to "削除", category_path(category.id), method: :delete, class: "btn btn-success" %></td>
+        <% end %>
+        </tbody>
+      </table>
+      <div class="text-right">
+        <%= link_to "戻る", :back %>
+      </div>
+    </div>
+  </div>
+</div>

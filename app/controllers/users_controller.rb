@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @post_favorite = Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))
-    @favorite_count = @post_favorite.select{ |post| post.user_id == current_user.id }.count
+    @favorite_count = @post_favorite.select { |post| post.user_id == current_user.id }.count
     @user_posts = @user.posts.order(id: "desc")
   end
 
@@ -31,7 +31,6 @@ class UsersController < ApplicationController
   def favorite_list
     @favorite_posts = current_user.favorites.includes(:post)
   end
-
 
   private
 

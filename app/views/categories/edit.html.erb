@@ -1,0 +1,21 @@
+<div class="container">
+  <h1 class="text-center">カテゴリー編集</h1>
+  <%= form_with(model: @category, local: true) do |f| %>
+  <div class="row">
+    <div class="col-md-6 col-sm-6 offset-md-3">
+        <div class="form-group">
+          <div class="field">
+           <%= f.label "カテゴリー名" %>
+           <%= f.text_field :name, class: "form-control" %>
+          </div><br>
+          <div class="actions text-right">
+            <%= f.submit "保存する", class: "btn btn-primary" %>
+          </div><br>
+          <div class="text-right">
+            <%= link_to "戻る", :back %>
+          </div>
+         </div>
+    </div>
+    <% end %>
+  </div>
+</div>

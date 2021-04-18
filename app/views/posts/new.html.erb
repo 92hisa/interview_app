@@ -56,6 +56,21 @@
                   <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "料金", class: "form-label"%>
                   <%= f.text_field :price, autofocus: true, autocomplete: "price", class: "form-control", placeholder: "料金" %>
 								</div>
+								<!-- インタビュー方法 -->
+								<div class="form-group col-12 col-md-4">
+									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "インタビュー方法", class: "form-label"%>
+									<%= f.select :way, [['ビデオ通話', 1], ['チャット', 2], ['ビデオ通話・チャットのどちらでも可', 3]], {include_blank: true, selected: 1}, class: "form-control" %>
+								</div>
+								<!-- カテゴリー -->
+								<div class="form-group col-12 col-md-4">
+									<span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "カテゴリー", class: "form-label"%><br>
+									<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+									  <%= category.label do %>
+									    <span class="ml-2"><%= category.check_box %></span>
+											<span><%= category.text %></span>
+										<% end%>
+									<% end%>
+								</div>
                 <!-- タグ -->
                 <div class="form-group col-12 col-md-4">
                   <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "タグ", class: "form-label"%>
