@@ -89,6 +89,18 @@
                 <span><i class="fe fe-star font-size-lg"></i></span>
               </div>
             </div>
+            <% @reviews.each do |review| %>
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h5 class="mb-0 font-weight-bold"><%= review.user_id %></h5>
+                <h5 class="mb-0 font-weight-bold"><%= review.content %></h5>
+                <p class="font-size-xs mb-0">レビューコメント</p>
+              </div>
+              <div>
+                <span><i class="fe fe-star font-size-lg"></i></span>
+              </div>
+            </div>
+            <% end %>
           </div>
         </div>
       </div>
