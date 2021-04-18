@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @post_favorite = Post.find(Favorite.group(:post_id).order('count(post_id) desc').pluck(:post_id))
     @favorite_count = @post_favorite.select { |post| post.user_id == current_user.id }.count
     @user_posts = @user.posts.order(id: "desc")
-    @reviews = Review.where(saler_id: @user.id).all
+    @reviews = Review.includes(:user).where(saler_id: @user.id).order(id: "desc").all
 
     if @reviews.blank?
       @average_review = 0
