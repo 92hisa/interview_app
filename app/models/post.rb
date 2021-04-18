@@ -16,7 +16,7 @@ class Post < ApplicationRecord
     (price * 1.1).floor.to_s(:delimited)
   end
 
-    def display_price
+  def display_price
     price.floor.to_s(:delimited) + "円"
   end
 
@@ -27,5 +27,4 @@ class Post < ApplicationRecord
   def favorite_count
     Favorite.where(post_id: id).count
   end
-
 end
