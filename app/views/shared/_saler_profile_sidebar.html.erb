@@ -1,7 +1,7 @@
 <div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-md-4">
   <div class="position-relative text-center">
-    <div class="font-size-md d-flex justify-content-end flex-column">
-      <%= link_to "フォローする", "/", class: "btn btn-success mb-3", style: "font-weight: bold;" %>
+    <div class="font-size-md d-grid gap-2">
+      <%= render partial: 'relationships/follow_button', locals: { user: @user } %>
       <%= link_to "相談する", "/", class: "btn btn-success mb-3", style: "font-weight: bold;" %>
     </div>
   </div>
@@ -40,10 +40,10 @@
       </div>
       <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
         <div style="color: #45bbc2; font-size: 14px;">
-          <span><i class="fe fe-users font-size-md mr-2"></i>フォロワー</span>
+          <span><i class="fe fe-users font-size-md mr-2"></i>フォロワー数</span>
         </div>
         <div class="d-flex flex-column text-right">
-          <p class="font-size-s mb-0 font-weight-bold">xxx</p>
+          <p class="font-size-s mb-0 font-weight-bold"><%= user.num_followers %></p>
         </div>
       </div>
       <div class="d-flex align-items-center justify-content-between">

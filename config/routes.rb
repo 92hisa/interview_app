@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   post 'rooms/:id' => 'rooms#show'
 
   resources :categories
+  resources :relationships, only: [:create, :destroy]
 end

@@ -77,8 +77,8 @@
               </li>
               <!-- Nav item -->
               <li class="nav-item">
-                <a class="nav-link" id="faq-tab" data-toggle="pill" href="#faq" role="tab" aria-controls="faq"
-                  aria-selected="false">FAQ</a>
+                <a class="nav-link" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile"
+                  aria-selected="false">Profile</a>
               </li>
             </ul>
           </div>
@@ -272,17 +272,13 @@
                     </div>
 
                 </div>
-                <div class="tab-pane fade" id="faq" role="tabpanel" aria-labelledby="faq-tab">
-                  <!-- FAQ -->
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  <!-- profile -->
                   <div>
-                    <h3 class="mb-3">Course - Frequently Asked Questions</h3>
+                    <h3 class="mb-3">自己紹介</h3>
                     <div class="mb-4">
-                      <h4>How this course help me to design layout?</h4>
-                      <p>
-                        My name is Jason Woo and I work as human duct tape at Gatsby, that means that I do a lot of
-                        different things. Everything from dev roll to writing content to writing code. And I used to
-                        work as an architect at IBM. I live in Portland, Oregon.
-                      </p>
+                      <h4>xxx</h4>
+                      <p><%= @post.user.about_me %></p>
                     </div>
                     <div class="mb-4">
                       <h4>
