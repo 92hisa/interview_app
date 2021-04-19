@@ -38,6 +38,14 @@ class UsersController < ApplicationController
     @favorite_posts = current_user.favorites.includes(:post)
   end
 
+  def follows
+    follower = Relationship.where(follow_id: current_user.id).pluck(:follow_id)
+    @followers = User.where(id: follower)
+
+    follow = Relationship.where(user_id: current_user.id).pluck(:follow_id)
+    @follows = User.where(id: follow)
+  end
+
   private
 
   def user_params

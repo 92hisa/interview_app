@@ -1,0 +1,82 @@
+<div class="py-3">
+  <div class="container">
+    <div class="row mt-4">
+    	<div class="col-lg-9 col-md-8 col-12">
+  			<div class="d-flex justify-content-between align-items-center">
+          <h5 class="mb-2" style="font-weight: bold; color: #45bbc2;">フォローリスト</h5>
+        </div>
+          <ul class="nav nav-lb-tab mb-4" id="tab" role="tablist">
+            <li class="nav-item ml-0" role="presentation">
+              <a class="nav-link active font-size-s" style="font-weight: bold;" id="follow-tab" data-toggle="pill" href="#follow" role="tab"
+                aria-controls="follow" aria-selected="true">フォロー</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" style="font-weight: bold;" id="follower-tab" data-toggle="pill" href="#follower" role="tab"
+                aria-controls="follower" aria-selected="false">フォロワー<span class="text-muted font-size-xs"></span></a>
+            </li>
+          </ul>
+      		<div class="tab-content" id="tabContent">
+      			<div class="tab-pane fade show active" id="follow" role="tabpanel" aria-labelledby="follow-tab">
+      				<div class="row">
+                <% if @follows.present? %>
+                  <% @follows.each do |follow| %>
+          					<div class="col-lg-4 col-md-6 col-12">
+                      <%= link_to user_path(follow),data: {"turbolinks" => false} do %>
+            						<div class="card mb-4">
+            							<div class="card-body">
+            								<div class="text-center">
+                              <% if follow.profile_image.present? %>
+                                <%= image_tag follow.profile_image.url, class: "rounded-circle avatar-xl mb-3" %>
+                              <% else %>
+                                <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xl mb-3" %>
+                              <% end %>
+            									<h4 class="mb-1"><%= follow.name %></h4>
+            									<a href="#!" class="btn btn-sm btn-outline-white mt-3">Message</a>
+            								</div>
+            							</div>
+            						</div>
+                      <% end %>
+          					</div>
+                  <% end %>
+                <% else %>
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <span>フォローしているユーザーはいません</span>
+                  </div>
+                <% end %>
+      				</div>
+      			</div>
+            <div class="tab-pane fade" id="follower" role="tabpanel" aria-labelledby="follower-tab">
+              <div class="row">
+                <% if @followers.present? %>
+                  <% @followers.each do |follower| %>
+                    <div class="col-lg-4 col-md-6 col-12">
+                      <%= link_to user_path(follow),data: {"turbolinks" => false} do %>
+                        <div class="card mb-4">
+                          <div class="card-body">
+                            <div class="text-center">
+                              <% if follower.profile_image.present? %>
+                                <%= image_tag follower.profile_image.url, class: "rounded-circle avatar-xl mb-3" %>
+                              <% else %>
+                                <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xl mb-3" %>
+                              <% end %>
+                              <h4 class="mb-1"><%= follower.name %></h4>
+                              <a href="#!" class="btn btn-sm btn-outline-white mt-3">Message</a>
+                            </div>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="col-lg-4 col-md-6 col-12 mb-3">
+                    <span>フォロワーはいません</span>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+    	</div>
+      <%= render 'mypage/account_menue' %>
+    </div>
+  </div>
+</div>
