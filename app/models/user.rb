@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :messages
   has_many :comments
   has_many :favorites, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -28,5 +29,18 @@ class User < ApplicationRecord
 
   def post_order_recent
     Post.where(user_id: id)
+  end
+
+  def num_purchases
+    Purchase.includes(:user).where(saler_id: id).count
+  end
+
+  def average_review
+    reviews = Review.includes(:user).where(saler_id: id).all
+    if reviews.blank?
+      0
+    else
+      reviews.average(:score).round(1)
+    end
   end
 end

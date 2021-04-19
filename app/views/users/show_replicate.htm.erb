@@ -1,0 +1,167 @@
+<!-- Bg -->
+<div class="py-20" style="background-color: #d1eaf1; no-repeat;background-position: center;"></div>
+<!-- User info -->
+<div class="card p-lg-2 pt-2 pt-lg-0 rounded-0 border-0">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-8 col-md-8 col-12">
+        <div class="d-flex align-items-center">
+          <div class="position-relative mt-n9">
+            <% if @user.profile_image.present? %>
+            <%= image_tag @user.profile_image.url, class: "rounded-circle avatar-xxl border-white border-width-4 position-relative" %>
+            <% else %>
+            <%= image_tag "profile_default_img_128.png", class: "rounded-circle avatar-xxl border-white border-width-4 position-relative" %>
+            <% end %>
+          </div>
+          <div class="ml-3">
+            <div class="d-flex align-items-center">
+              <h3 class="mb-0 font-weight-bold mr-2"><%= @user.name %></h3>
+              <% if @user.id == current_user.id %>
+              <span class="badge badge-light-primary text-primary"><%= "ID: #{@user.id}" %></span>
+              <% end %>
+            </div>
+            <% if @user.id == current_user.id %>
+            <li class="list-unstyled"><i class="fa fa-envelope nav-icon mr-2"></i><%= @user.email %></li>
+            <% end %>
+            <% if @user.gender == "man" %>
+              <li class="list-unstyled mb-2"><i class="fa fa-user nav-icon mr-2"></i>男性</li>
+            <% else %>
+              <li class="list-unstyled mb-2"><i class="fa fa-user nav-icon mr-2"></i>女性</li>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-4 col-12">
+        <div class="font-size-md mt-4 mt-lg-0 pb-2 pb-lg-0 d-lg-flex justify-content-end">
+          <% if @user.id == current_user.id %>
+            <%= link_to "チケット購入履歴", purchase_logs_user_path(current_user), class: "btn btn-outline-success mr-2" %>
+            <%= link_to "登録情報を変更", edit_user_registration_path, class: "btn btn-success mr-2" %>
+          <% else %>
+            <%= link_to "フォローする", "/", class: "btn btn-outline-success mr-2" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Content -->
+<div class="py-5 py-md-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 col-12">
+        <!-- Card -->
+        <div class="card border-0 mb-4">
+          <!-- Card body -->
+          <div class="card-body">
+            <h4>自己紹介</h4>
+            <p><%= @user.about_me %></p>
+          </div>
+        </div>
+        <!-- Card -->
+        <div class="card border-0 mb-4 mb-lg-0">
+          <!-- Card body -->
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+              <div>
+                <h4 class="mb-0 font-weight-bold"><%= @user.posts.count %></h4>
+                <p class="font-size-xs mb-0">掲載中のチケット</p>
+              </div>
+              <div>
+                <span><i class="fe fe-file-text font-size-lg"></i></span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+              <div>
+                <h4 class="mb-0 font-weight-bold"><%= @favorite_count %></h4>
+                <p class="font-size-xs mb-0">お気に入りされた数</p>
+              </div>
+              <div>
+                <span><i class="fe fe-users font-size-lg"></i></span>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <h4 class="mb-0 font-weight-bold" id="average-review-rating" data-score=<%= @average_review %>></h4>
+                <p class="font-size-xs mb-0"><%= @average_review %></p>
+                <!-- 星評価 -->
+                <script>
+                $('#average-review-rating').raty({
+                  size     : 36,
+                  starOff:  '<%= asset_path('star-off.png') %>',
+                  starOn : '<%= asset_path('star-on.png') %>',
+                  starHalf : '<%= asset_path('star-half.png') %>',
+                  half: true,
+                  readOnly: true,
+                  score: function() {
+                    return $(this).attr('data-score')
+                  }
+                });
+                </script>
+
+              </div>
+              <div>
+                <span><i class="fe fe-star font-size-lg"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-8 col-12">
+        <!-- Card -->
+        <div class="card border-0">
+          <!-- Card header -->
+          <div class="card-header">
+            <h4 class="mb-0">
+              掲載中のチケット <span class="text-muted font-size-xs"><%= "( #{@user.posts.count} )" %></span>
+            </h4>
+          </div>
+          <!-- Card body -->
+          <div class="card-body">
+            <!-- List group -->
+            <ul class="list-group list-group-flush">
+              <!-- List group item -->
+              <% @user_posts.each do |user_posts| %>
+              <li class="list-group-item px-0 pb-3 pt-0">
+                <div class="d-flex align-items-center justify-content-between">
+                  <%= link_to post_path(id: user_posts) do %>
+                    <div class="d-lg-flex align-items-center">
+                      <div>
+                        <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
+                      </div>
+                      <div class="ml-lg-3 mt-2 mt-lg-0">
+                        <h4 class="text-inherit">
+                          <%= user_posts.title %>
+                        </h4>
+                        <ul class="list-inline font-size-xs mb-0 text-inherit">
+                          <li class="list-inline-item">
+                            <i class="mdi mdi-star text-warning mr-1"></i><%= user_posts.favorites.count %>
+                          </li>
+                          <li class="list-inline-item">
+                            <i class="fa fa-comments mr-1"></i>
+                            <span class="text-muted"><%= user_posts.comments.count %></span>
+                          </li>
+                          <li class="list-inline-item">
+                            <i class="fa fa-tags mr-1"></i>
+                            <%= user_posts.experience %>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  <% end %>
+                  <div>
+                    <!-- Dropdown -->
+                    <span class="dropdown dropleft">
+                      <i class="far fa-clock mr-1"></i><%= time_ago_in_words(user_posts.created_at) + "前" %>
+                    </span>
+                  </div>
+                </div>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
