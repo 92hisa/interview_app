@@ -8,12 +8,11 @@ class UsersController < ApplicationController
     @favorite_count = @post_favorite.select { |post| post.user_id == current_user.id }.count
     @user_posts = @user.posts.order(id: "desc")
     @reviews = Review.includes(:user).where(saler_id: @user.id).order(id: "desc").all
-
-    if @reviews.blank?
-      @average_review = 0
-    else
-      @average_review = @reviews.average(:score).round(1)
-    end
+    # if @reviews.blank?
+    #   @average_review = 0
+    # else
+    #   @average_review = @reviews.average(:score).round(1)
+    # end
   end
 
   def update

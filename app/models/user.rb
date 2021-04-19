@@ -30,4 +30,17 @@ class User < ApplicationRecord
   def post_order_recent
     Post.where(user_id: id)
   end
+
+  def num_purchases
+    Purchase.includes(:user).where(saler_id: id).count
+  end
+
+  def average_review
+    reviews = Review.includes(:user).where(saler_id: id).all
+    if reviews.blank?
+      average_review = 0
+    else
+      average_review = reviews.average(:score).round(1)
+    end
+  end
 end
