@@ -677,9 +677,15 @@
                 </li>
                 <li>
                   <%= link_to favorite_list_user_path(id: current_user), class: "dropdown-item" do %>
-                    <i class="fe fe-star mr-2"></i>お気に入り
+                    <i class="fe fe-star mr-2"></i>お気に入りリスト
                   <% end %>
                 </li>
+                <li>
+                  <%= link_to follows_user_path(id: current_user), class: "dropdown-item" do %>
+                    <i class="fe fe-star mr-2"></i>フォローリスト
+                  <% end %>
+                </li>
+
                 <li>
                   <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
                     <i class="fe fe-settings mr-2"></i>設定

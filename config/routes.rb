@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get :post_list, on: :member
     get :purchase_logs, on: :member
     get :favorite_list, on: :member
+    get :follows, on: :member
   end
 
   resources :posts do
@@ -23,4 +24,5 @@ Rails.application.routes.draw do
   post 'rooms/:id' => 'rooms#show'
 
   resources :categories
+  resources :relationships, only: [:create, :destroy]
 end

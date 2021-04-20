@@ -1,4 +1,4 @@
-<div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-4">
+<div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-md-16">
   <!-- Card -->
   <div class="card border-0 mb-4">
     <!-- Card body -->
@@ -14,42 +14,61 @@
       </div>
     </div>
   </div>
-
+  <div class="position-relative text-center">
+    <div class="font-size-md d-grid gap-2">
+      <%= render partial: 'relationships/follow_button', locals: { user: @user } %>
+      <%= link_to "相談する", "/", class: "btn btn-success mb-3", style: "font-weight: bold;" %>
+    </div>
+  </div>
   <!-- Card -->
   <div class="card border-0 mb-4 ">
     <!-- Card body -->
     <div class="card-body">
       <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-        <div style="color: #45bbc2;">
-          <span><i class="fe fe-file-text font-size-lg mr-2"></i>掲載プラン数</span>
+        <div style="color: #45bbc2; font-size: 14px">
+          <span><i class="fe fe-star font-size-md mr-2"></i>評価</span>
+        </div>
+        <div class="d-flex text-right">
+          <p class="mb-0" id="average-review-rating-side" data-score=<%= user.average_review %>></p>
+          <script>
+          $('#average-review-rating-side').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf : '<%= asset_path('star-half.png') %>',
+            half: true,
+            readOnly: true,
+            score: function() {
+              return $(this).attr('data-score')
+            }
+          });
+          </script>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+        <div style="color: #45bbc2; font-size: 14px;">
+          <span><i class="fe fe-users font-size-md mr-2"></i>契約数</span>
+        </div>
+        <div class="d-flex flex-column text-right">
+          <p class="font-size-s mb-0 font-weight-bold"><%= user.num_purchases %></p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
+        <div style="color: #45bbc2; font-size: 14px;">
+          <span><i class="fe fe-users font-size-md mr-2"></i>フォロワー数</span>
+        </div>
+        <div class="d-flex flex-column text-right">
+          <p class="font-size-s mb-0 font-weight-bold"><%= user.num_followers %></p>
+        </div>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <div style="color: #45bbc2; font-size: 14px;">
+          <span><i class="fe fe-file-text font-size-md mr-2"></i>掲載プラン数</span>
         </div>
         <div class="d-flex flex-column text-right">
           <p class="font-size-s mb-0 font-weight-bold"><%= user.post_order_recent.count %></p>
         </div>
       </div>
-      <div class="d-flex align-items-center justify-content-between border-bottom pb-3 mb-3">
-        <div style="color: #45bbc2;">
-          <span><i class="fe fe-users font-size-lg mr-2"></i>フォロー</span>
-        </div>
-        <div class="d-flex flex-column text-right">
-          <p class="font-size-s mb-0 font-weight-bold">xxx</p>
-        </div>
-      </div>
-      <div class="d-flex align-items-center justify-content-between">
-        <div style="color: #45bbc2;">
-          <span><i class="fe fe-star font-size-lg mr-2"></i>フォロワー</span>
-        </div>
-        <div class="d-flex flex-column text-right">
-          <p class="font-size-s mb-0 font-weight-bold">xxx</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card border-0 mb-4">
-    <!-- Card body -->
-    <div class="card-body">
-      <h4 style="color: #45bbc2;">自己紹介</h4>
-      <p><%= user.about_me %></p>
     </div>
   </div>
 </div>
