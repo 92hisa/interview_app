@@ -24,7 +24,8 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:content, :score).merge(purchase_id: @purchase.id, saler_id: @purchase.saler_id, buyer_id: @purchase.buyer_id, user_id: current_user.id)
+    params.require(:review).permit(:content, :score).
+      merge(purchase_id: @purchase.id, saler_id: @purchase.saler_id, buyer_id: @purchase.buyer_id, user_id: current_user.id)
   end
 
   def correct_user

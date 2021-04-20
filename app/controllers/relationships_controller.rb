@@ -23,7 +23,8 @@ class RelationshipsController < ApplicationController
     end
   end
 
-    private
+  private
+
     def set_user
       @user = User.find(params[:follow_id])
     end

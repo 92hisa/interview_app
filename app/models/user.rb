@@ -51,17 +51,17 @@ class User < ApplicationRecord
   # follow function metohod
   def follow(other_user)
     unless self == other_user
-      self.relationships.find_or_create_by(follow_id: other_user.id)
+      relationships.find_or_create_by(follow_id: other_user.id)
     end
   end
 
   def unfollow(other_user)
-    relationship = self.relationships.find_by(follow_id: other_user.id)
+    relationship = relationships.find_by(follow_id: other_user.id)
     relationship.destroy if relationship
   end
 
   def following?(other_user)
-    self.followings.include?(other_user)
+    followings.include?(other_user)
   end
 
   def num_followers
@@ -71,5 +71,4 @@ class User < ApplicationRecord
   def num_follows
     Relationship.where(user_id: id).count
   end
-
 end
