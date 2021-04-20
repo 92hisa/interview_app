@@ -1,5 +1,13 @@
-<% if @notifications.exists? %>
-<%= render partial: 'notification', collection: @notifications %>
-<% else %>
-<p>通知はありません。</p>
-<% end %>
+<div class="border-bottom px-3 pt-1 pb-3 d-flex justify-content-between align-items-center">
+  <span class="h5 mb-0">Notifications</span>
+  <a href="# " class="text-muted">
+    <span class="align-middle">
+    <i class="fe fe-settings mr-1"></i></span ></a>
+</div>
+<ul class="list-group list-group-flush notification-list-scroll">
+  <% if @notifications.exists? %>
+    <%= render partial: 'notification', collection: @notifications %>
+  <% else %>
+    <p>通知はありません。</p>
+  <% end %>
+</ul>
