@@ -685,7 +685,11 @@
                     <i class="fe fe-star mr-2"></i>フォローリスト
                   <% end %>
                 </li>
-
+                <li>
+                  <%= link_to notifications_path, class: "dropdown-item" do %>
+                    <i class="fe fe-star mr-2"></i>通知
+                  <% end %>
+                </li>
                 <li>
                   <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
                     <i class="fe fe-settings mr-2"></i>設定

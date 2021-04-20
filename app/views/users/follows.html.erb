@@ -40,7 +40,7 @@
                   <% end %>
                 <% else %>
                   <div class="col-lg-4 col-md-6 col-12">
-                    <span>フォローしているユーザーはいません</span>
+                    <span>フォロー中のユーザーはいません</span>
                   </div>
                 <% end %>
       				</div>
@@ -50,7 +50,7 @@
                 <% if @followers.present? %>
                   <% @followers.each do |follower| %>
                     <div class="col-lg-4 col-md-6 col-12">
-                      <%= link_to user_path(follow),data: {"turbolinks" => false} do %>
+                      <%= link_to user_path(follower),data: {"turbolinks" => false} do %>
                         <div class="card mb-4">
                           <div class="card-body">
                             <div class="text-center">
