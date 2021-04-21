@@ -17,7 +17,17 @@
             <% if @notifications.exists? %>
               <%= render partial: 'notification', collection: @notifications %>
             <% else %>
-              <p>通知はありません。</p>
+            <li class="list-group-item bg-transparent py-4">
+              <div class="row align-items-center">
+                <div class="col">
+                  <div class="d-flex align-items-center">
+                    <div class="ml-3">
+                      <p class="mb-0">通知はありません</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
             <% end %>
           </ul>
         </div>
