@@ -1,7 +1,7 @@
 module NotificationsHelper
   def notification_form(notification)
   visitor = link_to notification.visitor.name, notification.visitor, style: "color: #696969; font-weight: bold;"
-  your_post = link_to 'あなたの投稿', post_path(notification.post_id), style: "color: #696969; font-weight: bold;",data: {"turbolinks" => false}
+  your_post = link_to 'あなたの投稿', post_path(notification), style: "color: #696969; font-weight: bold;",data: {"turbolinks" => false}
 
   case notification.action
     when "follow" then
