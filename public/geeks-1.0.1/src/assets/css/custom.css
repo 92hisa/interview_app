@@ -87,3 +87,7 @@ body {
     color: #45bbc2;
     font-weight: bold;
 }
+
+.indicator-primary.indicator:before {
+    background-color: #ff4500;
+}

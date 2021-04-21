@@ -6,9 +6,11 @@ class FavoritesController < ApplicationController
     @post = Post.find(params[:post_id])
     @favorite = Favorite.new(favorite_params)
     if params[:type] == 'tops' && @favorite.save # topページからのリクエスト＆保存できた場合
+      @post.create_notification_favorite!(current_user)
       flash[:notice] = "お気に入りされました"
       redirect_to root_path
     elsif @favorite.save # showページからリクエスト＆保存できた場合
+      @post.create_notification_favorite!(current_user)
       flash[:notice] = "お気に入りされました"
       redirect_to post_path(@post)
     elsif params[:type] # topページからリクエスト＆保存できなかった場合

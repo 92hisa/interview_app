@@ -25,4 +25,10 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :relationships, only: [:create, :destroy]
+
+  resources :notifications, only: :index do
+    collection do
+      delete 'destroy_all'
+    end
+  end
 end
