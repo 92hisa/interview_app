@@ -108,11 +108,8 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#!" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
-          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
-            <li>
-              <h4 class="dropdown-header">アカウント</h4>
-            </li>
+          <a class="nav-link dropdown-toggle" href="#!" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarDropdown">
             <li class="dropdown-submenu">
               <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
               <%= link_to "購入したチケット", purchase_logs_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
@@ -123,7 +120,7 @@
         </li>
         <% end %>
         <li class="nav-item dropdown">
-          <a class="nav-link" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle dropdown-menu-arrow" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fe fe-more-horizontal font-size-lg"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">

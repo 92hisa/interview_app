@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/geeks-1.0.1/dist/assets/css/theme.min.css">
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <link rel="stylesheet" href="/geeks-1.0.1/src/assets/css/custom.css">
     <title>InterviewApp</title>
   </head>
@@ -45,6 +45,13 @@
     <!-- Scripts -->
     <!-- Libs JS -->
     <script src="/geeks-1.0.1/dist/assets/libs/jquery/dist/jquery.min.js"></script>
+      <script>
+              $('.navbar-nav>li>a , .dropdown-menu>a').on('click', function(){
+                  if(this.id != 'navbarDropdown'){
+                    $('.navbar-collapse').collapse('hide');
+                  }
+              });
+      </script>
     <script src="/geeks-1.0.1/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/geeks-1.0.1/dist/assets/libs/odometer/odometer.min.js"></script>
     <script src="/geeks-1.0.1/dist/assets/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
