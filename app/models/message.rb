@@ -6,5 +6,4 @@ class Message < ApplicationRecord
   validates :message, presence: true
 
   after_create_commit { MessageBroadcastJob.perform_later self }
-
 end
