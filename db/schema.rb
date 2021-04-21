@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_20_030235) do
+ActiveRecord::Schema.define(version: 2021_04_21_073749) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,32 @@ ActiveRecord::Schema.define(version: 2021_04_20_030235) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "dm_rooms", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_dm_rooms_on_user_id"
+  end
+
+  create_table "dms", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dm_room_id"
+    t.text "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dm_room_id"], name: "index_dms_on_dm_room_id"
+    t.index ["user_id"], name: "index_dms_on_user_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "dm_room_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["dm_room_id"], name: "index_entries_on_dm_room_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -153,6 +179,11 @@ ActiveRecord::Schema.define(version: 2021_04_20_030235) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "dm_rooms", "users"
+  add_foreign_key "dms", "dm_rooms"
+  add_foreign_key "dms", "users"
+  add_foreign_key "entries", "dm_rooms"
+  add_foreign_key "entries", "users"
   add_foreign_key "favorites", "posts"
   add_foreign_key "favorites", "users"
   add_foreign_key "messages", "rooms"

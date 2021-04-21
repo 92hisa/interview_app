@@ -8,11 +8,24 @@ class UsersController < ApplicationController
     @favorite_count = @post_favorite.select { |post| post.user_id == current_user.id }.count
     @user_posts = @user.posts.order(id: "desc")
     @reviews = Review.includes(:user).where(saler_id: @user.id).order(id: "desc").all
-    # if @reviews.blank?
-    #   @average_review = 0
-    # else
-    #   @average_review = @reviews.average(:score).round(1)
-    # end
+
+    # dm
+    @current_user_entry = Entry.where(user_id: current_user.id)
+    @user_entry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_user_entry.each do |current_user_entry|
+        @user_entry.each do |user_entry|
+          if current_user_entry.dm_room_id == user_entry.dm_room_id
+            @is_dm_room = true
+            @dm_room_id = current_user_entry
+          end
+        end
+      end
+      unless @is_dm_room
+        @dm_room = DmRoom.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def update
