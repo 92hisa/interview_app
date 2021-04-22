@@ -15,6 +15,13 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def show
+    @category = Category.find(params[:id])
+    @postIds = PostCategoryRelation.where(category_id: @category).pluck(:post_id)
+    @post_categories = Post.where(id: @postIds).all
+
+  end
+
   def destroy
     @category = Category.find(params[:id])
     @category.destroy
