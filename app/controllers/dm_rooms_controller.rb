@@ -9,9 +9,9 @@ class DmRoomsController < ApplicationController
   def show
     @dm_room = DmRoom.find(params[:id])
     if Entry.where(user_id: current_user.id, dm_room_id: @dm_room.id).present?
-      @dms = @dm_room.dms
+      @dms = @dm_room.dms.order(created_at: 'desc')
       @dm = Dm.new
-      @entries = @dm_room.entries
+      @entries = @dm_room.entries.where.not(user_id: current_user.id)
     else
       redirect_back(fallback_location: root_path)
     end
