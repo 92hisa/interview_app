@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get :purchase_logs, on: :member
     get :favorite_list, on: :member
     get :follows, on: :member
+    get :dm_list, on: :member
   end
 
   resources :posts do

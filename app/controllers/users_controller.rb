@@ -59,6 +59,19 @@ class UsersController < ApplicationController
     @follows = User.where(id: follow)
   end
 
+  def dm_list
+    # @entries = Entry.where(user_id: current_user.id).pluck(:dm_room_id)
+    # # @opened_dm_rooms = Entry.includes(:user).where(dm_room_id: @entries).select(:user_id).distinct.pluck(:user_id)
+    # @opened_dm_rooms = Entry.group(:dm_room_id, :user_id).where(dm_room_id: @entries)
+    # @opended_dm_rooms = Entry.find(Dm.group(:dm_room_id).order('count(dm_room_id) desc').all.pluck(:dm_room_id))
+    @currentEntries = current_user.entries
+    myDmRoomIds = []
+    @currentEntries.each do |entry|
+      myDmRoomIds << entry.dm_room_id
+    end
+    @anotherEntries = Entry.where(dm_room_id: myDmRoomIds).where('user_id != ?', current_user.id)
+  end
+
   private
 
   def user_params
