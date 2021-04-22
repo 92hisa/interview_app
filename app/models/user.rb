@@ -87,8 +87,4 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-
-  # def recent_dm
-  #   Dm.where(dm_room_id: dm_room_id, user_id: id).last
-  # end
 end
