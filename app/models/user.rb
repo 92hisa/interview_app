@@ -46,7 +46,7 @@ class User < ApplicationRecord
   def average_review
     reviews = Review.includes(:user).where(saler_id: id).all
     if reviews.blank?
-      0
+      "-"
     else
       reviews.average(:score).round(1)
     end
