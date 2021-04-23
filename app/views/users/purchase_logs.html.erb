@@ -1,45 +1,54 @@
-<div class="container">
-    <h1 class="text-center">購入履歴</h1>
-      <div class="row">
-        <div class="col-md-12 col-sm-12 offset-md-12">
-            <table class="table text-center">
-                <thread>
-                <tr>
-                <th>Purchase_ID</th>
-                <th>投稿者ID</th>
-                <th>Post_ID</th>
-                <th>購入日</th>
-                <th>案件名</th>
-                <th>価格</th>
-                <th>価格(税込)</th>
-                <th>経験</th>
-                <th>詳細</th>
-                <th></th>
-                <th></th>
-                </tr>
-                </thread>
-                  <% if @purchase_logs.present? %><br>
-                    <% @purchase_logs.each do |purchase_logs| %>
-                      <tbody>
-                        <td><%= purchase_logs.id %></td>
-                        <td><%= purchase_logs.post.user_id %></td>
-                        <td><%= purchase_logs.post.id %></td>
-                        <td><%= purchase_logs.created_at.to_s(:datetime_jp) %></td>
-                        <td><%= purchase_logs.post.title %></td>
-                        <td><%= purchase_logs.post.price.to_s(:delimited) + "円" %></td>
-                        <td><%= purchase_logs.post.tax + "円" %></td>
-                        <td><%= purchase_logs.post.experience %></td>
-                        <td><%= purchase_logs.post.detail %></td>
-                        <td><%= link_to "MSG", room_path(id: purchase_logs.id), class: "btn btn-primary" %></td>
-                        <td><%= link_to "レビュー投稿", new_post_purchase_review_path(post_id: purchase_logs.post_id, purchase_id: purchase_logs.id),data: {"turbolinks" => false}, class: "btn btn-primary" %></td>
-                      </tbody>
-                    <% end %>
-                  <% end %>
-            </table>
-            <div class="text-right">
-              <%= link_to "戻る", :back %><br>
-              <%= link_to "トップ", root_path %><br>
-            </div>
+<div class="pt-5 pb-5">
+  <div class="container">
+    <div class="row mt-4">
+      <%= render partial: "mypage/account_menue_mt-0" %>
+      <div class="col-lg-9 col-md-8 col-12">
+        <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="mb-0 h2">契約履歴</h1>
           </div>
+        </div>
+        <!-- Card -->
+        <div class="card mb-4">
+          <!-- Card header -->
+          <div class="card-header border-bottom-0">
+            <h3 class="mb-0"><%= "#{current_user.name}さんの履歴" %></h3>
+          </div>
+          <!-- Table -->
+          <div class="table-responsive border-0">
+            <table class="table mb-0 text-nowrap text-center">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0">契約ID</th>
+                  <th scope="col" class="border-0">ユーザー</th>
+                  <th scope="col" class="border-0">プラン</th>
+                  <th scope="col" class="border-0">金額</th>
+                  <th scope="col" class="border-0">契約日</th>
+                  <th scope="col" class="border-0">Room</th>
+                  <th scope="col" class="border-0">レビュー</th>
+                </tr>
+              </thead>
+              <% @purchase_logs.each do |purchase_log| %>
+              <tbody>
+                <tr>
+                  <td class="align-middle border-top-0"><%= purchase_log.id %></td>
+                  <td class="align-middle border-top-0"><%= link_to purchase_log.post.user.name, user_path(purchase_log.post.user.id),data: {"turbolinks" => false}, class: "text-inherit" %></td>
+                  <td class="align-middle border-top-0">
+                    <h5 class="mb-0">
+                      <%= link_to purchase_log.post.title, post_path(purchase_log.post_id),data: {"turbolinks" => false}, class: "text-inherit" %>
+                    </h5>
+                  </td>
+                  <td class="align-middle border-top-0"><%= purchase_log.post.display_price %></td>
+                  <td class="align-middle border-top-0"><%= purchase_log.created_at.to_s(:datetime_jp)%></td>
+                  <td><%= link_to "入室する", room_path(id: purchase_log.id), class: "btn btn-success btn-sm" %></td>
+                  <td><%= link_to "レビューを書く", new_post_purchase_review_path(post_id: purchase_log.post_id, purchase_id: purchase_log.id),data: {"turbolinks" => false}, class: "btn btn-success btn-sm font-size-xs" %></td>
+                </tr>
+              </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 </div>
