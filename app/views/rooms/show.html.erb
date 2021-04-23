@@ -36,12 +36,28 @@
         </div>
     </div>
 </div>
-<div id="room">
-  <room />
+<div class="p-lg-5 py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
+        <div class="card mb-5">
+          <div class="card-body border">
+            <!-- vue -->
+            <div id="room">
+              <room />
+            </div>
+            <div class="text-center mb-3">
+            <%= link_to('通話終了', 'javascript:void(0);', onclick: "window.location.reload();", class: "btn btn-primary btn-sm")  %>
+            </div>
+            <%= javascript_pack_tag 'room' %>
+            <%= stylesheet_pack_tag 'room' %>
+            <!-- vue -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<%= link_to('通話終了', 'javascript:void(0);', onclick: "window.location.reload();", class: "btn btn-primary")  %> 
-  <%= javascript_pack_tag 'room' %>
-  <%= stylesheet_pack_tag 'room' %>
 <div class="container">
   <h2 class="text-center">メッセージ</h2>
   <div class="row">

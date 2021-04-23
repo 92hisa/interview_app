@@ -1,15 +1,19 @@
 <template>
   <div id="app">
-    <video id="their-video" width="500" autoplay playsinline></video>
-    <video id="my-video" muted="true" width="200" autoplay playsinline></video>
-    <p>
+    <div class="card">
+      <div class="d-flex align-items-center justify-content-between">
+        <video id="their-video" width="781" autoplay playsinline></video>
+        <div class="card-body border p-1" style="width: auto;">
+          <video id="my-video" muted="true" width="202" autoplay playsinline></video>
+        </div>
+      </div>
+    </div>
+    <p class="mt-3" style="font-size: 20px;">
       Your Peer ID: <span id="my-id">{{ peerId }}</span>
     </p>
 
     <div class="lead-text">
-      <span
-        >① マイクとカメラを設定 (選択すると自動でwebカメラが起動します。)</span
-      >
+      <span>① マイクとカメラを設定 (選択すると自動でwebカメラが起動します。)</span>
     </div>
 
     <div class="option-area">
@@ -25,15 +29,10 @@
         </option>
       </select>
 
-      <span class="camera-option"
-        >カメラ:
+      <span class="camera-option">カメラ:
         <select v-model="selectedVideo" @change="onChange">
           <option disabled value="">Please select one</option>
-          <option
-            v-for="(video, key, index) in videos"
-            v-bind:key="index"
-            :value="video.value"
-          >
+          <option v-for="(video, key, index) in videos" v-bind:key="index" :value="video.value">
             {{ video.text }}
           </option>
         </select>
@@ -41,20 +40,14 @@
     </div>
 
     <div class="lead-text">
-      <span
-        >② 相手のPeer IDを入力して、callをクリック
-        (しばらくすると、ビデオ通話が開始します。)</span
-      >
+      <span>② 相手のPeer IDを入力して、callをクリック
+        (しばらくすると、ビデオ通話が開始します。)</span>
     </div>
 
     <div class="call-area">
-      <input
-        v-model="calltoid"
-        placeholder="相手のIDを入力してください"
-        class="video-chat-form"
-      />
+      <input v-model="calltoid" placeholder="相手のIDを入力してください" class="video-chat-form"/>
       <!-- <div class="search-btn"> -->
-      <button @click="makeCall" class="call-btn">Call</button>
+      <button @click="makeCall" class="btn btn-success btn-sm">Call</button>
     </div>
   </div>
 </template>
