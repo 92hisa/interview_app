@@ -1,24 +1,25 @@
-<div class="message">
-  <div class="container">
-      <div class="row">
-          <div class="col-md-12 col-sm-12 offset-md-12">
-              <table class="table text-center">
-                  <thread>
-                  <tr>
-                  <th>User_ID</th>
-                  <th>名前</th>
-                  <th>メッセージ</th>
-                  <th>投稿時間</th>
-                  </tr>
-                  </thread>
-                      <tbody>
-                        <td><%= message.user.id %></td>
-                        <td><%= message.user.name %></td>
-                        <td><%= message.message %></td>
-                        <td><%= message.created_at.to_s(:datetime_jp) %></td>
-                      </tbody>
-              </table>
+<div class="card rounded-lg mb-3">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item bg-transparent py-4">
+      <div class="row align-items-center">
+        <div class="col">
+          <div class="d-flex align-items-center">
+            <div class="d-flex flex-column">
+              <% if message.user.profile_image.present? %>
+                <%= image_tag message.user.profile_image.url, class: "avatar-md rounded-circle" %>
+                <p class="mb-0"><%= message.user.name %></p>
+              <% else %>
+                <%= image_tag 'profile_default_img_128', class: "avatar-md rounded-circle" %>
+                <p class="mb-0"><%= message.user.name %></p>
+              <% end %>
+            </div>
+            <div class="ml-3" style="width: auto;">
+              <p class="mb-0"><%= message.message %></p>
+              <i class="far fa-clock mr-1"></i><span><%= "(#{time_ago_in_words(message.created_at)}前)" %></span>
+            </div>
           </div>
+        </div>
       </div>
-  </div>
+    </li>
+  </ul>
 </div>
