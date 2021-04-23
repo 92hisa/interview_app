@@ -10,22 +10,31 @@
         <% if @post_categories.present? %>
           <% @post_categories.each do |post_category| %>
             <div class="card mb-5">
-              <div class="card-body">
+              <div class="card-body pt-2 pb-2">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="d-flex align-items-center justify-content-between flex-column">
+                    <% if not post_category.favorites.present? %>
+                      <%= link_to post_favorites_path(post_category.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
+                        <li class="list-inline-item"><i class="fe fe-bookmark font-size-lg text-inherit"></i></li>
+                      <% end %>
+                    <% else %>
+                      <%= link_to post_favorite_path(post_id: post_category, id: post_category.favorites.ids), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
+                        <li class="list-inline-item"><i class="fa fa-bookmark font-size-lg text-inherit"></i></li>
+                      <% end %>
+                    <% end %>
                     <% if post_category.user.profile_image.present? %>
-                      <%= image_tag post_category.user.profile_image.url, class: "avatar-xl rounded-circle border-width-5 border-white" %>
+                      <%= image_tag post_category.user.profile_image.url, class: "avatar-lg rounded-circle border-width-4 border-white" %>
                       <%= post_category.user.name %>
                     <% else %>
-                      <%= image_tag "profile_default_img_128.png", class: "avatar-xl rounded-circle border-width-5 border-white" %>
+                      <%= image_tag "profile_default_img_128.png", class: "avatar-lg rounded-circle border-width-4 border-white" %>
                       <%= post_category.user.name %>
                     <% end %>
                   </div>
                   <div class="ml-3 d-flex flex-column">
                     <h4 class="mb-1" style="font-weight: bold;"><%= post_category.title %></h4>
                     <h5 class="mb-1" style="font-weight: bold;"><%= post_category.subtitle %></h5>
-                    <span class="ml-1 mb-3 font-size-xs text-muted"><%= time_ago_in_words(post_category.created_at) + "前" %></span>
-                    <div class="d-flex align-items-center">
+
+                    <div class="d-sm-flex align-items-center flex-xs-sm-column">
                       <li class="list-inline-item"><%= "[評価] #{post_category.user.average_review}" %></li>
                       <li class="list-inline-item"><%= "[料金] #{post_category.display_price}" %></li>
                       <% if post_category.way == 1 %>
@@ -35,22 +44,13 @@
                       <% else %>
                         <li class="list-inline-item"><%= "[対話方法] ビデオ通話・チャットどちらでも可" %></li>
                       <% end %>
-                      <% if not post_category.favorites.present? %>
-                        <%= link_to post_favorites_path(post_category.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
-                          <li class="list-inline-item"><i class="fe fe-bookmark font-size-lg text-inherit ml-3"></i></li>
-                        <% end %>
-                      <% else %>
-                        <%= link_to post_favorite_path(post_id: post_category, id: post_category.favorites.ids), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
-                          <li class="list-inline-item"><i class="fa fa-bookmark font-size-lg text-inherit ml-3"></i></li>
-                        <% end %>
-                      <% end %>
                     </div>
                   </div>
                   <div style="margin-left: auto;">
                     <% if post_category.plan_image.present? %>
-                      <%= image_tag post_category.plan_image, style:"height: 100px; width: 100px; object-fit: cover;"%>
+                      <%= image_tag post_category.plan_image, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                     <% else %>
-                      <%= image_tag "interview_1", style:"height: 100px; width: 150px; object-fit: cover;"%>
+                      <%= image_tag "interview_1", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                     <% end %>
                   </div>
                 </div>
