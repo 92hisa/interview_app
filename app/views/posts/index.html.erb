@@ -1,65 +1,65 @@
 <div class="p-lg-5 py-5">
   <div class="container">
     <div class="row">
-      <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
-        <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
-          <div>
-            <h1 class="mb-0 h2">経験者を探す</h1>
+      <%= render partial: 'mypage/account_menue' %>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
+          <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
+            <div>
+              <h1 class="mb-0 h2">経験者を探す</h1>
+            </div>
           </div>
-        </div>
-        <% if @post.present? %>
-          <% @post.each do |post| %>
-            <div class="card mb-5">
-              <div class="card-body pt-2 pb-2">
-                <div class="d-flex align-items-center justify-content-between">
-                  <div class="d-flex align-items-center justify-content-between flex-column">
-                    <% if not post.favorites.present? %>
-                      <%= link_to post_favorites_path(post.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
-                        <li class="list-inline-item"><i class="fe fe-bookmark font-size-lg text-inherit"></i></li>
-                      <% end %>
-                    <% else %>
-                      <%= link_to post_favorite_path(post_id: post, id: post.favorites.ids), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
-                        <li class="list-inline-item"><i class="fa fa-bookmark font-size-lg text-inherit"></i></li>
-                      <% end %>
-                    <% end %>
-                    <% if post.user.profile_image.present? %>
-                      <%= image_tag post.user.profile_image.url, class: "avatar-lg rounded-circle border-width-4 border-white" %>
-                      <%= post.user.name %>
-                    <% else %>
-                      <%= image_tag "profile_default_img_128.png", class: "avatar-lg rounded-circle border-width-4 border-white" %>
-                      <%= post.user.name %>
-                    <% end %>
-                  </div>
-                  <div class="ml-3 d-flex flex-column">
-                    <h4 class="mb-1" style="font-weight: bold;"><%= post.title %></h4>
-                    <h5 class="mb-1" style="font-weight: bold;"><%= post.subtitle %></h5>
-
-                    <div class="d-sm-flex align-items-center flex-xs-sm-column">
-                      <li class="list-inline-item"><%= "[評価] #{post.user.average_review}" %></li>
-                      <li class="list-inline-item"><%= "[料金] #{post.display_price}" %></li>
-                      <% if post.way == 1 %>
-                        <li class="list-inline-item"><%= "[対話方法] ビデオ通話" %></li>
-                      <% elsif post.way == 2 %>
-                        <li class="list-inline-item"><%= "[対話方法] チャット" %></li>
+          <% if @post.present? %>
+            <% @post.each do |post| %>
+              <div class="card mb-5">
+                <div class="card-body pt-2 pb-2">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center justify-content-between flex-column">
+                      <% if not post.favorites.present? %>
+                        <%= link_to post_favorites_path(post.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
+                          <li class="list-inline-item"><i class="fe fe-bookmark font-size-lg text-inherit"></i></li>
+                        <% end %>
                       <% else %>
-                        <li class="list-inline-item"><%= "[対話方法] ビデオ通話・チャットどちらでも可" %></li>
+                        <%= link_to post_favorite_path(post_id: post, id: post.favorites.ids), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
+                          <li class="list-inline-item"><i class="fa fa-bookmark font-size-lg text-inherit"></i></li>
+                        <% end %>
+                      <% end %>
+                      <% if post.user.profile_image.present? %>
+                        <%= image_tag post.user.profile_image.url, class: "avatar-lg rounded-circle border-width-4 border-white" %>
+                        <%= post.user.name %>
+                      <% else %>
+                        <%= image_tag "profile_default_img_128.png", class: "avatar-lg rounded-circle border-width-4 border-white" %>
+                        <%= post.user.name %>
+                      <% end %>
+                    </div>
+                    <div class="ml-3 d-flex flex-column">
+                      <h4 class="mb-1" style="font-weight: bold;"><%= post.title %></h4>
+                      <h5 class="mb-1" style="font-weight: bold;"><%= post.subtitle %></h5>
+
+                      <div class="d-sm-flex align-items-center flex-xs-sm-column">
+                        <li class="list-inline-item"><%= "[評価] #{post.user.average_review}" %></li>
+                        <li class="list-inline-item"><%= "[料金] #{post.display_price}" %></li>
+                        <% if post.way == 1 %>
+                          <li class="list-inline-item"><%= "[対話方法] ビデオ通話" %></li>
+                        <% elsif post.way == 2 %>
+                          <li class="list-inline-item"><%= "[対話方法] チャット" %></li>
+                        <% else %>
+                          <li class="list-inline-item"><%= "[対話方法] ビデオ通話・チャットどちらでも可" %></li>
+                        <% end %>
+                      </div>
+                    </div>
+                    <div style="margin-left: auto;">
+                      <% if post.plan_image.present? %>
+                        <%= image_tag post.plan_image.url, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
+                      <% else %>
+                        <%= image_tag "interview_1", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                       <% end %>
                     </div>
                   </div>
-                  <div style="margin-left: auto;">
-                    <% if post.plan_image.present? %>
-                      <%= image_tag post.plan_image.url, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
-                    <% else %>
-                      <%= image_tag "interview_1", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
-                    <% end %>
-                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <%= render partial: 'mypage/account_menue' %>
+        </div>
     </div>
   </div>
 </div>
