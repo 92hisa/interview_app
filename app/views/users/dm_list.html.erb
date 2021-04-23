@@ -1,0 +1,64 @@
+<div class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
+        <div class="border-bottom pb-3 mb-4 d-lg-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="mb-0 h2">メッセージ</h1>
+          </div>
+        </div>
+        <div class="card rounded-lg">
+          <!-- Card list -->
+          <ul class="list-group list-group-flush">
+            <% if @anotherEntries.present? %>
+              <% if @anotherEntries.each do |anotherEntries| %>
+                <li class="list-group-item bg-transparent py-4">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <div class="d-flex align-items-center">
+                        <%= link_to dm_room_path(anotherEntries.dm_room_id) do %>
+                          <% if anotherEntries.user.profile_image.present? %>
+                            <%= image_tag anotherEntries.user.profile_image.url, class: "avatar-md rounded-circle" %>
+                            <p class="mb-0"><%= anotherEntries.user.name %></p>
+                            <p class="mb-0"><%= "room_id: #{anotherEntries.dm_room_id}" %></p>
+                          <% else %>
+                            <%= image_tag 'profile_default_img_128', class: "avatar-md rounded-circle" %>
+                            <p class="mb-0"><%= anotherEntries.user.name %></p>
+                            <p class="mb-0"><%= "room_id: #{anotherEntries.dm_room_id}" %></p>
+                          <% end %>
+                        <% end %>
+                        <div class="ml-3">
+                          <% @dm = Dm.find_by(id: anotherEntries.dm_room.dm_ids.last) %>
+                          <% if @dm.present? %>
+                            <p class="mb-0"><%= @dm.text %></p>
+                            <i class="far fa-clock mr-1"></i><span><%= "(#{time_ago_in_words(@dm.created_at)}前)" %></span>
+                          <% else %>
+                            <p class="mb-0">メッセージはありません。</p>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="list-group-item bg-transparent py-4">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <div class="d-flex align-items-center">
+                      <div class="ml-3">
+                        <p class="mb-0">メッセージはありません</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+        <%= render partial: 'mypage/account_menue' %>
+    </div>
+  </div>
+</div>
+<% end %>

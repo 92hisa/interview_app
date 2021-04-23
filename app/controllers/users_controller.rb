@@ -8,11 +8,24 @@ class UsersController < ApplicationController
     @favorite_count = @post_favorite.select { |post| post.user_id == current_user.id }.count
     @user_posts = @user.posts.order(id: "desc")
     @reviews = Review.includes(:user).where(saler_id: @user.id).order(id: "desc").all
-    # if @reviews.blank?
-    #   @average_review = 0
-    # else
-    #   @average_review = @reviews.average(:score).round(1)
-    # end
+
+    # dm
+    @current_user_entry = Entry.where(user_id: current_user.id)
+    @user_entry = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      @current_user_entry.each do |current_user_entry|
+        @user_entry.each do |user_entry|
+          if current_user_entry.dm_room_id == user_entry.dm_room_id
+            @is_dm_room = true
+            @dm_room_id = current_user_entry
+          end
+        end
+      end
+      unless @is_dm_room
+        @dm_room = DmRoom.new
+        @entry = Entry.new
+      end
+    end
   end
 
   def update
@@ -44,6 +57,19 @@ class UsersController < ApplicationController
 
     follow = Relationship.where(user_id: current_user.id).pluck(:follow_id)
     @follows = User.where(id: follow)
+  end
+
+  def dm_list
+    # @entries = Entry.where(user_id: current_user.id).pluck(:dm_room_id)
+    # # @opened_dm_rooms = Entry.includes(:user).where(dm_room_id: @entries).select(:user_id).distinct.pluck(:user_id)
+    # @opened_dm_rooms = Entry.group(:dm_room_id, :user_id).where(dm_room_id: @entries)
+    # @opended_dm_rooms = Entry.find(Dm.group(:dm_room_id).order('count(dm_room_id) desc').all.pluck(:dm_room_id))
+    @currentEntries = current_user.entries
+    myDmRoomIds = []
+    @currentEntries.each do |entry|
+      myDmRoomIds << entry.dm_room_id
+    end
+    @anotherEntries = Entry.where(dm_room_id: myDmRoomIds).where('user_id != ?', current_user.id).order(created_at: 'desc')
   end
 
   private

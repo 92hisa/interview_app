@@ -108,13 +108,14 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#!" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
-          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarDropdown">
+          <a class="nav-link dropdown-toggle" href="#!" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
             <li class="dropdown-submenu">
               <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
               <%= link_to "購入したチケット", purchase_logs_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
               <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
               <%= link_to "チケットを掲載する", new_post_path, class: "dropdown-item dropdown-list-group-item" %>
+              <%= link_to "DM", dm_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
             </li>
           </ul>
         </li>
@@ -146,6 +147,29 @@
                   </div>
                 </div>
               </a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験者を探す</a>
+          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
+            <div class="list-group">
+              <% @categories = Category.all%>
+              <% @categories.each do |category| %>
+                <%= link_to category.name, category_path(category), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+              <% end %>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
+            <div class="list-group">
+              <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+              <%= link_to "購入したチケット", purchase_logs_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+              <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+              <%= link_to "チケットを掲載する", new_post_path, class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+              <%= link_to "DM", dm_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
             </div>
           </div>
         </li>

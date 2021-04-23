@@ -1,0 +1,71 @@
+<div class="py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
+        <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="mb-0 h2">メッセージ</h1>
+            <% @entries.each do |entry| %>
+            <p class="mb-0"><%= "#{entry.user.name}さんにメッセージを送る" %></p>
+            <% end %>
+          </div>
+        </div>
+          <div class="card rounded-lg">
+          <%= form_for @dm do |f| %>
+            <form class="form-row">
+              <div class="form-group col-12 col-md-12 mt-3">
+                <span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "150文字以内", class: "form-label"%>
+                <%= f.text_area :text, autofocus: true, autocomplete: "メッセージ", rows: "5", class: "form-control", placeholder: "メッセージ" %>
+                <%= f.hidden_field :dm_room_id, value: @dm_room.id %>
+              </div>
+              <div class="col-12 text-center">
+                <%= f.submit "送信する", class: "btn btn-outline-success" %>
+              </div>
+            </form>
+          <% end %>
+          <!-- Card list -->
+          <ul class="list-group list-group-flush">
+            <% if @dms.present? %>
+              <% @dms.each do |dm| %>
+                <li class="list-group-item bg-transparent py-4">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <div class="d-flex align-items-center">
+                        <%= link_to dm_room_path(dm.dm_room_id) do %>
+                          <% if dm.user.profile_image.present? %>
+                            <%= image_tag dm.user.profile_image.url, class: "avatar-md rounded-circle" %>
+                            <p class="mb-0"><%= dm.user.name %></p>
+                          <% else %>
+                            <%= image_tag 'profile_default_img_128', class: "avatar-md rounded-circle" %>
+                            <p class="mb-0"><%= dm.user.name %></p>
+                          <% end %>
+                        <% end %>
+                        <div class="ml-3">
+                          <p class="mb-0"><%= dm.text %></p>
+                          <i class="far fa-clock mr-1"></i><span><%= "(#{time_ago_in_words(dm.created_at)}前)" %></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="list-group-item bg-transparent py-4">
+                <div class="row align-items-center">
+                  <div class="col">
+                    <div class="d-flex align-items-center">
+                      <div class="ml-3">
+                        <p class="mb-0"><%= "メッセージはありません" =%></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+        <%= render partial: 'mypage/account_menue' %>
+    </div>
+  </div>
+</div>

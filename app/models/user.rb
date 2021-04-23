@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :user
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  has_many :dms, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -44,7 +46,7 @@ class User < ApplicationRecord
   def average_review
     reviews = Review.includes(:user).where(saler_id: id).all
     if reviews.blank?
-      0
+      "-"
     else
       reviews.average(:score).round(1)
     end

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get :purchase_logs, on: :member
     get :favorite_list, on: :member
     get :follows, on: :member
+    get :dm_list, on: :member
   end
 
   resources :posts do
@@ -31,4 +32,6 @@ Rails.application.routes.draw do
       delete 'destroy_all'
     end
   end
+  resources :dms, only: [:create]
+  resources :dm_rooms, only: [:create,:show]
 end
