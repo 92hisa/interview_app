@@ -7,6 +7,9 @@
           <div>
             <h1 class="mb-0 h2">経験者プラン</h1>
           </div>
+          <div>
+            <%= link_to "新しくプランを作る", new_post_path, class: "text-inherit" %>
+          </div>
         </div>
         <% if @post_list.present? %>
           <div class="card mb-4">
