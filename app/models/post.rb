@@ -13,6 +13,8 @@ class Post < ApplicationRecord
   validates :experience, presence: true, length: { maximum: 20 }
   validates :detail, length: { maximum: 150 }
 
+  mount_uploader :plan_image, ProfileImageUploader
+
   def tax
     (price * 1.1).floor.to_s(:delimited)
   end

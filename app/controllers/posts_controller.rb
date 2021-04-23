@@ -52,6 +52,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def index
+    @post = Post.all.order(created_at: 'desc')
+  end
+
   private
 
   def post_params

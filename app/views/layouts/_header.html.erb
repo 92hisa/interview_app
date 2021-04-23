@@ -108,7 +108,7 @@
       <ul class="navbar-nav">
         <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#!" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+          <a class="nav-link dropdown-toggle" href="/" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
           <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
             <li class="dropdown-submenu">
               <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
@@ -151,7 +151,7 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験者を探す</a>
+          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験者を探す</a>
           <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
             <div class="list-group">
               <% @categories = Category.all%>
