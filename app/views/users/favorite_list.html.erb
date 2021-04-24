@@ -1,40 +1,61 @@
-<div class="container">
-    <h1 class="text-center">お気に入り一覧</h1>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 offset-md-12">
-            <table class="table text-center">
-                <thread>
-                <tr>
-                <th>favorite_ID</th>
-                <th>Post_ID</th>
-                <th>投稿者ID</th>
-                <th>投稿者名</th>
-                <th>登録日</th>
-                <th>案件名</th>
-                <th>販売価格</th>
-                <th>経験</th>
-                <th></th>
-                </tr>
-                </thread>
-                <% if @favorite_posts.present? %>
-                  <% @favorite_posts.each do |favorite_post| %>
-                    <tbody>
-                      <td><%= favorite_post.id %></td>
-                      <td><%= favorite_post.post_id %></td>
-                      <td><%= favorite_post.post.user_id %></td>
-                      <td><%= link_to favorite_post.post.user.name, user_path(id: favorite_post.post.user_id) %></td>
-                      <td><%= favorite_post.created_at.to_s(:datetime_jp)  %></td>
-                      <td><%= favorite_post.post.title %></td>
-                      <td><%= favorite_post.post.price.to_s(:delimited) + "円"%></td>
-                      <td><%= favorite_post.post.experience %></td>
-                      <td><%= link_to "詳細", post_path(favorite_post.post_id), class: "btn btn-primary" %></td>
-                    </tbody>
-                  <% end %>
-                <% end %>
-            </table>
-            <div class="text-right">
-              <%= link_to "トップ", root_path %><br>
-            </div>
+<div class="pt-5 pb-5">
+  <div class="container">
+    <div class="row mt-4">
+      <%= render partial: "mypage/account_menue_mt-0" %>
+      <div class="col-lg-9 col-md-8 col-12">
+        <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="mb-0 h2">お気に入りリスト</h1>
+          </div>
         </div>
+        <!-- Card -->
+        <div class="card mb-4">
+          <!-- Card header -->
+          <div class="card-header border-bottom-0">
+            <h3 class="mb-0"><%= "#{current_user.name}さんのリスト" %></h3>
+          </div>
+          <!-- Table -->
+          <div class="table-responsive border-0">
+            <table class="table mb-0 text-nowrap text-center">
+              <thead>
+                <tr>
+                  <th scope="col" class="border-0">ユーザー</th>
+                  <th scope="col" class="border-0">プラン</th>
+                  <th scope="col" class="border-0">カテゴリー</th>
+                  <th scope="col" class="border-0">登録日</th>
+                  <th scope="col" class="border-0">金額</th>
+                </tr>
+              </thead>
+              <% @favorite_posts.each do |favorite_post| %>
+              <tbody>
+                <tr>
+                  <td class="align-middle border-top-0"><%= link_to favorite_post.post.user.name, user_path(favorite_post.post.user.id),data: {"turbolinks" => false}, class: "text-inherit" %></td>
+                  <td class="align-middle border-top-0">
+                    <h5 class="mb-0">
+                      <%= link_to favorite_post.post.title, post_path(favorite_post.post_id),data: {"turbolinks" => false}, class: "text-inherit" %>
+                    </h5>
+                  </td>
+                  <% @postId = Post.where(id: favorite_post.post_id).pluck(:id) %>
+                  <% @post_category_relation = PostCategoryRelation.where(post_id: @postId).pluck(:category_id)%>
+                  <% if @post_category_relation.present? %>
+                    <% @category = Category.where(id: @post_category_relation)%>
+                    <td class="align-middle border-top-0">
+                      <% @category.each do |category|%>
+                      <%= "#{category.name}, " %>
+                      <% end %>
+                    </td>
+                  <% else %>
+                    <td class="align-middle border-top-0"><%= "-" %></td>
+                  <% end %>
+                  <td class="align-middle border-top-0"><%= favorite_post.created_at.to_s(:datetime_jp)%></td>
+                  <td class="align-middle border-top-0"><%= favorite_post.post.display_price %></td>
+                </tr>
+              </tbody>
+              <% end %>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

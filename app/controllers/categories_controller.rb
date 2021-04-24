@@ -19,7 +19,6 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @postIds = PostCategoryRelation.where(category_id: @category).pluck(:post_id)
     @post_categories = Post.where(id: @postIds).all
-
   end
 
   def destroy

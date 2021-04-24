@@ -51,6 +51,11 @@
                     $('.navbar-collapse').collapse('hide');
                   }
               });
+              $('.dropdown-toggle').click(function() {
+                var location = $(this).attr('href');
+                window.location.href = location;
+                return false;
+              });
       </script>
     <script src="/geeks-1.0.1/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/geeks-1.0.1/dist/assets/libs/odometer/odometer.min.js"></script>

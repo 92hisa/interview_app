@@ -1,9 +1,10 @@
   import Vue from 'vue/dist/vue.esm'
   import Room from '../room.vue'
-  
+  import BootstrapVue from 'bootstrap-vue';
+
     function loading(){
-  
-  
+
+
     const app = new Vue({
       el: '#room',
       data: {
@@ -12,4 +13,3 @@
     })
   }
   setTimeout(loading,   500)
-
