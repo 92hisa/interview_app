@@ -87,4 +87,10 @@ class User < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  def user_post_categories
+    postIds = Post.where(user_id: id).all.pluck(:id)
+    categoryIds = PostCategoryRelation.where(post_id: postIds).pluck(:category_id)
+    category = Category.where(id: categoryIds)
+  end
 end
