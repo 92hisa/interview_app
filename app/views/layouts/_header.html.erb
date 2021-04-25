@@ -151,12 +151,12 @@
           </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験を探す</a>
+          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験者を探す</a>
           <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
             <div class="list-group">
               <% @categories = Category.all%>
               <% @categories.each do |category| %>
-                <%= link_to category.name, category_path(category), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+                <%= link_to "##{category.name}", category_path(category), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
               <% end %>
             </div>
           </div>
