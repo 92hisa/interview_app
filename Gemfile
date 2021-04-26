@@ -33,6 +33,7 @@ gem 'pry-rails'
 gem 'carrierwave', '~> 2.0'
 gem "mini_magick"
 gem 'dotenv-rails'
+gem 'ransack'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

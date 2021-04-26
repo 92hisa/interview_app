@@ -1,0 +1,11 @@
+<div class="card border-0 mb-4 ">
+  <div class="card-body">
+    <p class="border-bottom" style="font-weight: bold;">フリーワードで絞り込む</p>
+      <%= search_form_for @search_word, url: search_path do |f| %>
+        <div class="form-group d-flex align-items-center">
+          <%= f.search_field :title_or_subtitle_or_detail_cont, class: "form-control mr-3", style: "height: 30px;", placeholder: "(例)転職" %>
+          <%= f.submit "検索", class: "btn btn-success btn-sm" %>
+        </div>
+      <% end %>
+  </div>
+</div>

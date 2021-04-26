@@ -55,6 +55,13 @@ class PostsController < ApplicationController
   def index
     @post = Post.all.order(created_at: 'desc')
     @categories = Category.all
+    @search_word = Post.ransack(params[:q])
+  end
+
+  def search
+    @search_word = Post.ransack(params[:q])
+    @search = @search_word.result(distinct: true)
+    @categories = Category.all
   end
 
   private

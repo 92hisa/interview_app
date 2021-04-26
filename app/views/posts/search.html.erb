@@ -4,6 +4,7 @@
       <div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-md-15">
         <%= render partial: 'search', locals: { search_word: @search_word } %>
         <%= render partial: 'category', locals: { category: @categories } %>
+        <%= render partial: 'price_search', locals: { search_word: @search_word } %>
       </div>
         <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
           <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
@@ -11,29 +12,29 @@
               <h1 class="mb-0 h2">経験者を探す</h1>
             </div>
           </div>
-          <% if @post.present? %>
-            <% @post.each do |post| %>
+          <% if @search.present? %>
+            <% @search.each do |search| %>
               <div class="card mb-5">
                 <div class="card-body pt-2 pb-2">
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="d-flex align-items-center justify-content-between flex-column">
-                      <% if post.user.profile_image.present? %>
-                        <%= image_tag post.user.profile_image.url, class: "avatar-lg rounded-circle border-width-4 border-white" %>
-                        <%= post.user.name %>
+                      <% if search.user.profile_image.present? %>
+                        <%= image_tag search.user.profile_image.url, class: "avatar-lg rounded-circle border-width-4 border-white" %>
+                        <%= search.user.name %>
                       <% else %>
                         <%= image_tag "profile_default_img_128.png", class: "avatar-lg rounded-circle border-width-4 border-white" %>
-                        <%= post.user.name %>
+                        <%= search.user.name %>
                       <% end %>
                     </div>
                     <div class="ml-3 d-flex flex-column">
-                      <h4 class="mb-1" style="font-weight: bold;"><%= post.title %></h4>
-                      <h5 class="mb-1" style="font-weight: bold;"><%= post.subtitle %></h5>
+                      <h4 class="mb-1" style="font-weight: bold;"><%= search.title %></h4>
+                      <h5 class="mb-1" style="font-weight: bold;"><%= search.subtitle %></h5>
                       <div class="d-sm-flex align-items-center flex-xs-sm-column">
-                        <li class="list-inline-item"><%= "[評価] #{post.user.average_review}" %></li>
-                        <li class="list-inline-item"><%= "[料金] #{post.display_price}" %></li>
-                        <% if post.way == 1 %>
+                        <li class="list-inline-item"><%= "[評価] #{search.user.average_review}" %></li>
+                        <li class="list-inline-item"><%= "[料金] #{search.display_price}" %></li>
+                        <% if search.way == 1 %>
                           <li class="list-inline-item"><%= "[対話方法] ビデオ通話" %></li>
-                        <% elsif post.way == 2 %>
+                        <% elsif search.way == 2 %>
                           <li class="list-inline-item"><%= "[対話方法] チャット" %></li>
                         <% else %>
                           <li class="list-inline-item"><%= "[対話方法] ビデオ通話・チャットどちらでも可" %></li>
@@ -41,8 +42,8 @@
                       </div>
                     </div>
                     <div style="margin-left: auto;">
-                      <% if post.plan_image.present? %>
-                        <%= image_tag post.plan_image.url, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
+                      <% if search.plan_image.present? %>
+                        <%= image_tag search.plan_image.url, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                       <% else %>
                         <%= image_tag "interview_1", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                       <% end %>

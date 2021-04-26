@@ -1,0 +1,11 @@
+<div class="card border-0 mb-4 ">
+  <div class="card-body">
+    <p class="border-bottom" style="font-weight: bold;">フリーワードで絞り込む</p>
+      <%= search_form_for @search_word, url: search_path do |f| %>
+        <div class="form-group d-flex align-items-cente justify-content-center">
+        <%= f.number_field :price_gteq, class: "form-control mr-3", style: "height: 30px;", placeholder: "¥ Min" %>〜
+          <%= f.number_field :price_lt, class: "form-control mr-3", style: "height: 30px;", placeholder: "¥ Max" %>
+        </div>
+      <% end %>
+  </div>
+</div>
