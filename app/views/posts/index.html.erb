@@ -13,6 +13,7 @@
           </div>
           <% if @post.present? %>
             <% @post.each do |post| %>
+            <%= link_to post_path(post), class: "text-inherit" do %>
               <div class="card mb-5">
                 <div class="card-body pt-2 pb-2">
                   <div class="d-flex align-items-center justify-content-between">
@@ -50,6 +51,7 @@
                   </div>
                 </div>
               </div>
+            <% end %>
             <% end %>
           <% end %>
         </div>

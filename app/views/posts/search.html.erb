@@ -4,7 +4,6 @@
       <div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-md-15">
         <%= render partial: 'search', locals: { search_word: @search_word } %>
         <%= render partial: 'category', locals: { category: @categories } %>
-        <%= render partial: 'price_search', locals: { search_word: @search_word } %>
       </div>
         <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
           <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
@@ -14,6 +13,7 @@
           </div>
           <% if @search.present? %>
             <% @search.each do |search| %>
+            <%= link_to post_path(search), class: "text-inherit" do %>
               <div class="card mb-5">
                 <div class="card-body pt-2 pb-2">
                   <div class="d-flex align-items-center justify-content-between">
@@ -51,6 +51,7 @@
                   </div>
                 </div>
               </div>
+            <% end %>
             <% end %>
           <% end %>
         </div>
