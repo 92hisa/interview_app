@@ -106,52 +106,8 @@
     <!-- Collapse -->
     <div class="collapse navbar-collapse" id="navbar-default">
       <ul class="navbar-nav">
-        <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
-          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
-            <li class="dropdown-submenu">
-              <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "購入したチケット", purchase_logs_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "チケットを掲載する", new_post_path, class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "DM", dm_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-            </li>
-          </ul>
-        </li>
-        <% end %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle dropdown-menu-arrow" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fe fe-more-horizontal font-size-lg"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-            <div class="list-group">
-              <a class="list-group-item list-group-item-action border-0" href="./docs/index.html">
-                <div class="d-flex align-items-center">
-                  <i class="fe fe-file-text font-size-lg text-primary"></i>
-                  <div class="ml-3">
-                    <h5 class="mb-0">Documentations</h5>
-                    <p class="mb-0 font-size-xs">
-                      Browse the all documentation
-                    </p>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action border-0" href="./docs/changelog.html">
-                <div class="d-flex align-items-center">
-                  <i class="fe fe-layers font-size-lg text-primary"></i>
-                  <div class="ml-3">
-                    <h5 class="mb-0">Changelog
-                      <span class="text-primary ml-1">v1.0.1</span></h5>
-                    <p class="mb-0 font-size-xs">See what's new</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験者を探す</a>
+          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link-menu">経験者を探す</span></a>
           <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
             <div class="list-group">
               <% @categories = Category.all%>
@@ -163,7 +119,7 @@
         </li>
         <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
+          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link-menu">アカウント</span></a>
           <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
             <div class="list-group">
               <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
