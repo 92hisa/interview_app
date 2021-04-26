@@ -176,11 +176,15 @@
         </li>
         <% end %>
       </ul>
+      <% @search_word = Post.ransack(params[:q]) %>
+      <% @search = @search_word.result(distinct: true) %>
       <form class="mt-3 mt-lg-0 ml-lg-3 d-flex align-items-center">
-        <span class="position-absolute pl-3 search-icon">
+        <%= search_form_for @search_word, url: search_path do |f| %>
+        <span class="position-absolute pl-1 search-icon">
           <i class="fe fe-search"></i>
         </span>
-        <input type="search" class="form-control pl-6" placeholder="Search Courses"/>
+        <%= f.search_field :title_or_subtitle_or_detail_cont, class: "form-control mr-3", placeholder: " 留学など経験名で検索" %>
+        <% end %>
       </form>
       <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
         <% if user_signed_in? %>

@@ -19,6 +19,9 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     @postIds = PostCategoryRelation.where(category_id: @category).pluck(:post_id)
     @post_categories = Post.where(id: @postIds).all
+    @search_word = Post.ransack(params[:q])
+    @search = @search_word.result(distinct: true)
+    @categories = Category.all
   end
 
   def destroy
