@@ -74,7 +74,12 @@
             </li>
             <li>
               <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
-                <i class="fe fe-settings mr-2"></i>設定
+                <i class="far fa-id-badge nav-icon mr-2"></i>プロフィール編集
+              <% end %>
+            </li>
+            <li>
+              <%= link_to post_list_user_path(current_user), class: "dropdown-item" do %>
+                <i class="far fa-edit nav-icon mr-2"></i>経験者プラン
               <% end %>
             </li>
           </ul>
