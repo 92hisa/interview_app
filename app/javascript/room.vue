@@ -4,26 +4,29 @@
     <span>① マイクとカメラを設定 (選択すると自動でwebカメラが起動します。)</span>
   </div>
 
-  <div class="mb-3 d-flex align-items-center justify-content-between">
+  <div class="d-sm-flex align-items-center justify-content-between flex-sm-xs-column">
+  <div class="m-1">
     <span class="camera-option mb-3 text-center">
-    マイク:
-      <select v-model="selectedAudio" @change="onChange">
+      <span class="mr-3">マイク:</span>
+      <select v-model="selectedAudio" @change="onChange" style="width: 200px;">
         <option disabled value="">Please select one</option>
         <option v-for="(audio, key, index) in audios" v-bind:key="index" :value="audio.value">
           {{ audio.text }}
         </option>
       </select>
     </span>
-
+  </div>
+  <div class="m-1">
     <span class="camera-option mb-3 text-center">
-    カメラ:
-      <select v-model="selectedVideo" @change="onChange">
+      <span class="mr-3">カメラ:</span>
+      <select v-model="selectedVideo" @change="onChange" style="width: 200px;">
         <option disabled value="">Please select one</option>
         <option v-for="(video, key, index) in videos" v-bind:key="index" :value="video.value">
           {{ video.text }}
         </option>
       </select>
     </span>
+  </div>
   </div>
 
 
@@ -43,10 +46,11 @@
     <span>② お相手のPeer IDを入力して、 通話開始をクリック(しばらくすると、ビデオ通話が開始します。)</span>
   </div>
 
-  <div class="call-area text-center">
-    <input v-model="calltoid" placeholder="相手のIDを入力してください" class="video-chat-form"/>
-    <!-- <div class="search-btn"> -->
-    <button @click="makeCall" class="btn btn-success btn-sm ml-3">通話開始</button>
+  <div class="call-area d-flex align-items-center justify-content-center">
+    <input v-model="calltoid" placeholder="相手のIDを入力してください" class="video-chat-form" style="width: 300px;"/>
+  </div>
+  <div class="mt-3 text-center">
+    <button @click="makeCall" class="btn btn-success btn-sm">通話開始</button>
     <input type="button" value="通話終了" class="btn btn-outline-danger btn-sm ml-2" onclick="window.location.reload();" />
   </div>
 </div>
