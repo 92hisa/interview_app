@@ -115,3 +115,11 @@ a:hover {
 a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover {
     background-color: #45bbc2!important;
 }
+
+a {
+    color: #45bbc2;
+}
+
+.dropdown-item:hover {
+  color: #45bbc2;
+}

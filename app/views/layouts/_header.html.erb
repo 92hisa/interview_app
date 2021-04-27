@@ -68,6 +68,11 @@
               <% end %>
             </li>
             <li>
+              <%= link_to purchase_logs_user_path(current_user), class: "dropdown-item" do %>
+                <i class="far fa-clipboard mr-2"></i>購入履歴
+              <% end %>
+            </li>
+            <li>
               <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
                 <i class="fe fe-settings mr-2"></i>設定
               <% end %>
@@ -118,20 +123,6 @@
             </div>
           </div>
         </li>
-        <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link-menu">アカウント</span></a>
-          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-            <div class="list-group">
-              <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "契約履歴", purchase_logs_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "チケットを掲載する", new_post_path, class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "DM", dm_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-            </div>
-          </div>
-        </li>
-        <% end %>
       </ul>
       <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
         <% if user_signed_in? %>
@@ -201,9 +192,27 @@
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
-                    <i class="fe fe-settings mr-2"></i>設定
+                  <%= link_to purchase_logs_user_path(current_user), class: "dropdown-item" do %>
+                    <i class="far fa-clipboard mr-2"></i>購入履歴
                   <% end %>
+                </li>
+                <li class="dropdown p-1">
+                  <a class="nav-item text-inherit" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <i class="fe fe-settings nav-icon pl-3 pr-2"></i>設定
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
+                  <ul class="list-unstyled">
+                  <li class="nav-item">
+                    <%= link_to edit_user_registration_path(id: current_user), class: "nav-link" do %>
+                      <i class="fas fa-user-edit nav-icon mr-2"></i>プロフィール編集
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to post_list_user_path(current_user), class: "nav-link" do %>
+                      <i class="far fa-edit nav-icon mr-2"></i>経験者プラン
+                    <% end %>
+                  </li>
+                  </ul>
                 </li>
               </ul>
               <div class="dropdown-divider"></div>
