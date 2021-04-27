@@ -29,15 +29,15 @@
   </div>
   </div>
 
-
   <div class="card">
-    <div class="d-flex align-items-center justify-content-between">
-      <video id="their-video" width="781" autoplay playsinline></video>
-      <div class="card-body border p-1" style="width: auto;">
-        <video id="my-video" muted="true" width="202" autoplay playsinline></video>
+      <div class="card-body p-0 mt-2 text-center">
+        <video id="their-video" class="border" style="width: 100%; max-width: 1000px;" autoplay playsinline></video>
       </div>
-    </div>
+      <div class="card-body p-0 mb-2 d-flex justify-content-center">
+        <video id="my-video" muted="true" class="border" style="width: 200px;" autoplay playsinline></video>
+      </div>
   </div>
+
   <p class="mt-3" style="font-size: 20px;">
     あなたのPeer ID: <span id="my-id">{{ peerId }}</span>
   </p>
