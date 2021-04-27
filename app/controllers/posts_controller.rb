@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :correct_post_user, only: [:edit, :update, :destroy]
 
   def new
@@ -54,6 +54,14 @@ class PostsController < ApplicationController
 
   def index
     @post = Post.all.order(created_at: 'desc')
+    @categories = Category.all
+    @search_word = Post.ransack(params[:q])
+  end
+
+  def search
+    @search_word = Post.ransack(params[:q])
+    @search = @search_word.result(distinct: true)
+    @categories = Category.all
   end
 
   private

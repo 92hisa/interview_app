@@ -73,11 +73,6 @@ body {
     color: #45bbc2;
 }
 
-.mb-5, .my-5 {
-    margin-top: 2rem !important;
-    margin-bottom: 2rem !important;
-}
-
 .nav-lt-tab .nav-item .nav-link.active, .nav-lt-tab .nav-item .nav-link:hover {
     background-color: transparent;
     border-top: 2px solid #45bbc2;
@@ -87,4 +82,44 @@ body {
 
 .indicator-primary.indicator:before {
     background-color: #ff4500;
+}
+
+.alert {
+    margin-bottom: 0rem;
+}
+
+.navbar .navbar-toggler {
+    border: 1px solid #45bbc2;
+}
+
+.navbar .navbar-toggler .bottom-bar {
+    background-color: #45bbc2;
+}
+
+.navbar .navbar-toggler .top-bar {
+    background-color: #45bbc2;
+}
+
+.navbar .navbar-toggler.collapsed .bottom-bar {
+    background-color: #45bbc2;
+}
+
+.navbar .navbar-toggler.collapsed .icon-bar {
+  background-color: #45bbc2;
+}
+
+a:hover {
+    color: #45bbc2;
+}
+
+a.bg-primary:focus, a.bg-primary:hover, button.bg-primary:focus, button.bg-primary:hover {
+    background-color: #45bbc2!important;
+}
+
+a {
+    color: #45bbc2;
+}
+
+.dropdown-item:hover {
+  color: #45bbc2;
 }

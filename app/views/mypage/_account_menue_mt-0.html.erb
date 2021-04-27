@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-4 col-12 mt-0">
+<div class="col-lg-3 col-md-4 col-12 mt-0 d-none d-md-block">
   <!-- Side navbar -->
   <nav class="navbar navbar-expand-md navbar-light shadow-sm mb-4 mb-lg-0 sidenav">
     <!-- Menu -->
@@ -13,34 +13,60 @@
     <div class="collapse navbar-collapse" id="sidenav">
       <div class="navbar-nav flex-column">
         <span class="navbar-header">アカウント</span>
-        <!-- List -->
         <ul class="list-unstyled ml-n2 mb-0">
-          <!-- Nav item -->
           <li class="nav-item">
-            <a class="nav-link" href="profile-edit.html"><i class="fa fa-home nav-icon"></i>HOME</a>
-          </li>
-          <!-- Nav item -->
-          <li class="nav-item">
-            <a class="nav-link" href="security.html"><i class="fe fe-user nav-icon"></i>Security</a>
-          </li>
-          <!-- Nav item -->
-          <li class="nav-item">
-            <a class="nav-link" href="social-profile.html"><i class="fe fe-refresh-cw nav-icon"></i>Social
-              Profiles</a>
+            <%= link_to "/", class: "nav-link" do %>
+            <i class="fa fa-home nav-icon"></i>HOME
+            <% end %>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="notifications.html"><i class="fe fe-bell nav-icon"></i>Notifications</a>
+            <%= link_to dm_list_user_path(current_user), class: "nav-link" do %>
+            <i class="far fa-envelope nav-icon"></i>メッセージ
+            <% end %>
           </li>
-          <!-- Nav item -->
           <li class="nav-item">
-            <a class="nav-link" href="profile-privacy.html"><i class="fe fe-lock nav-icon"></i>Profile
-              Privacy</a>
+            <%= link_to notifications_path, class: "nav-link" do %>
+            <i class="fe fe-bell nav-icon"></i>通知
+            <% end %>
           </li>
-          <!-- Nav item -->
           <li class="nav-item">
-            <a class="nav-link" href="delete-profile.html"><i class="fe fe-trash nav-icon"></i>退会する</a>
+            <%= link_to follows_user_path(id: current_user), class: "nav-link" do %>
+            <i class="far fa-heart nav-icon"></i>フォローリスト
+            <% end %>
           </li>
-          <!-- Nav item -->
+          <li class="nav-item">
+            <%= link_to favorite_list_user_path(id: current_user), class: "nav-link" do %>
+            <i class="fe fe-star nav-icon"></i>お気に入りリスト
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to purchase_logs_user_path(current_user), class: "nav-link" do %>
+            <i class="far fa-clipboard nav-icon"></i>購入履歴
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to user_path(id: current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
+            <i class="fe fe-user nav-icon"></i>プロフィール
+            <% end %>
+          </li>
+          <li class="dropdown p-1 pl-2">
+            <a class="nav-item text-inherit" href="#!" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             <i class="fe fe-settings nav-icon pl-1 mr-2"></i>設定
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
+            <ul class="list-unstyled">
+            <li class="nav-item">
+              <%= link_to edit_user_registration_path(id: current_user), class: "nav-link" do %>
+                <i class="fas fa-user-edit nav-icon"></i>プロフィール編集
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to post_list_user_path(current_user), class: "nav-link" do %>
+                <i class="far fa-edit nav-icon"></i>経験者プラン
+              <% end %>
+            </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="../index.html"><i class="fas fa-sign-out-alt nav-icon"></i>ログアウト</a>
           </li>

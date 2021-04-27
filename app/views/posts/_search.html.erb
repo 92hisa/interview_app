@@ -1,0 +1,20 @@
+<div class="card border-0 mb-4 ">
+  <%= search_form_for @search_word, url: search_path do |f| %>
+  <div class="card-body mt-2 p-2">
+    <p class="border-bottom" style="font-weight: bold;">フリーワードで絞り込む</p>
+    <div class="form-group d-flex align-items-center">
+      <%= f.search_field :title_or_subtitle_or_detail_cont, class: "form-control mr-3", style: "height: 30px;", placeholder: "(例)転職" %>
+    </div>
+  </div>
+  <div class="card-body p-2">
+    <p class="border-bottom" style="font-weight: bold;">料金で絞り込む</p>
+    <div class="d-flex align-items-center">
+      <%= f.number_field :price_gteq, class: "form-control mr-1",  min: "1", style: "height: 30px;", placeholder: "¥ Min" %>〜
+      <%= f.number_field :price_lteq, class: "form-control ml-1", min: "1", style: "height: 30px;", placeholder: "¥ Max" %>
+    </div>
+  </div>
+    <div class="card-body p-4 text-center">
+    <%= f.submit "検索", class: "btn btn-success btn-block" %>
+    </div>
+  <% end %>
+</div>

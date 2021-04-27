@@ -1,0 +1,11 @@
+
+  <div class="card border-0 mb-4 ">
+    <div class="card-body">
+      <p class="border-bottom" style="font-weight: bold;">カテゴリーから選ぶ</p>
+      <div class="d-flex align-items-center pb-3 mb-3">
+        <% @categories.each do |category| %>
+          <%= link_to "##{category.name}", category_path(category), class: "mr-2 text-inherit" %>
+        <% end %>
+      </div>
+    </div>
+  </div>

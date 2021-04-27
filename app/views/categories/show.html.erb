@@ -1,6 +1,10 @@
 <div class="p-lg-5 py-5">
   <div class="container">
     <div class="row">
+      <div class="col-xl-3 col-lg-3 col-md-12 col-12 mt-md-15">
+        <%= render partial: 'posts/search', locals: { search_word: @search_word } %>
+        <%= render partial: 'posts/category', locals: { category: @categories } %>
+      </div>
       <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
         <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
           <div>
@@ -13,15 +17,6 @@
               <div class="card-body pt-2 pb-2">
                 <div class="d-flex align-items-center justify-content-between">
                   <div class="d-flex align-items-center justify-content-between flex-column">
-                    <% if not post_category.favorites.present? %>
-                      <%= link_to post_favorites_path(post_category.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
-                        <li class="list-inline-item"><i class="fe fe-bookmark font-size-lg text-inherit"></i></li>
-                      <% end %>
-                    <% else %>
-                      <%= link_to post_favorite_path(post_id: post_category, id: post_category.favorites.ids), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
-                        <li class="list-inline-item"><i class="fa fa-bookmark font-size-lg text-inherit"></i></li>
-                      <% end %>
-                    <% end %>
                     <% if post_category.user.profile_image.present? %>
                       <%= image_tag post_category.user.profile_image.url, class: "avatar-lg rounded-circle border-width-4 border-white" %>
                       <%= post_category.user.name %>
@@ -59,7 +54,6 @@
           <% end %>
         <% end %>
       </div>
-      <%= render partial: 'mypage/account_menue' %>
     </div>
   </div>
 </div>

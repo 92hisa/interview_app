@@ -51,10 +51,13 @@
                     $('.navbar-collapse').collapse('hide');
                   }
               });
-              $('.dropdown-toggle').click(function() {
-                var location = $(this).attr('href');
-                window.location.href = location;
-                return false;
+              $('.dropdown-toggle').click(function(e) {
+                if ($(e.target).hasClass('link-menu')) {
+                  var location = $(this).attr('href');
+                  window.location.href = location;
+                  return false;
+                }
+                return true;
               });
       </script>
     <script src="/geeks-1.0.1/dist/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

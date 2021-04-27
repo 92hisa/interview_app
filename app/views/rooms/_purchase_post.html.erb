@@ -1,0 +1,149 @@
+<div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
+  <h1 class="mb-0 h2"><%= "#{@post.user.name}さんの経験"%></h1>
+</div>
+<div class="card mb-5">
+  <!-- Card body -->
+  <div class="card-body">
+    <h3><%= @post.title%></h3>
+    <h4><%= @post.subtitle%></h4>
+    <div class="d-flex flex-column">
+      <% if @post.category_ids.present? %>
+        <% @post.categories.each do |category|%>
+          <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= category.name %></li>
+        <% end %>
+      <% end %>
+      <li class="list-inline-item"><span class="mr-1">料金:</span><span><%= @post.display_price %></span></li>
+      <li class="list-inline-item mr-3"><span class="mr-1">形式:</span><span>ビデオ通話・チャットどちらも可</span></li>
+    </div>
+  </div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-lt-tab" id="tab" role="tablist">
+     <!-- Nav item -->
+    <li class="nav-item">
+      <a class="nav-link active" id="description-tab" data-toggle="pill" href="#description" role="tab"
+        aria-controls="description" aria-selected="false">経験の詳細</a>
+    </li>
+    <!-- Nav item -->
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile"
+        aria-selected="false">Profile</a>
+    </li>
+  </ul>
+</div>
+<!-- Card -->
+<div class="card rounded-lg">
+  <!-- Card body -->
+  <div class="card-body">
+    <div class="tab-content" id="tabContent">
+      <!-- Tab pane -->
+      <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+        <div class="mb-4">
+          <h3 class="mb-2">経験の詳細</h3>
+          <p><%= @post.detail %></p>
+        </div>
+        <h4 class="mb-3">What you’ll learn</h4>
+        <div class="row mb-3">
+          <div class="col-12 col-md-6">
+            <!-- List group -->
+            <ul class="list-unstyled">
+              <li class="d-flex align-item-center mb-2">
+                <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                <span>
+                  Recognize the importance of understanding your objectives when addressing an audience.
+                </span>
+              </li>
+              <li class="d-flex align-item-center mb-2">
+                <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                <span>
+                  Identify the fundaments of composing a successful close.
+                </span>
+              </li>
+              <li class="d-flex align-item-center mb-2">
+                <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                <span>
+                  Explore how to connect with your audience through crafting compelling stories.
+                </span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6">
+            <!-- List group -->
+            <ul class="list-unstyled">
+              <li class="d-flex align-item-center mb-2">
+                <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                <span>
+                  Examine ways to connect with your audience by personalizing your content.
+                </span>
+              </li>
+              <li class="d-flex align-item-center mb-2">
+                <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                <span>
+                  Break down the best ways to exude executive presence.
+                </span>
+              </li>
+              <li class="d-flex align-item-center mb-2">
+                <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
+                <span>
+                  Explore how to communicate the unknown in an impromptu communication.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <p>Maecenas viverra condimentum nulla molestie condimentum. Nunc ex libero, feugiat quis lectus vel,
+          ornare euismod ligula. Aenean sit amet arcu nulla.</p>
+        <p>
+          Duis facilisis ex a urna blandit ultricies. Nullam sagittis ligula non eros semper, nec mattis odio
+          ullamcorper. Phasellus feugiat sit amet leo eget consectetur.
+        </p>
+      </div>
+      <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+        <!-- profile -->
+        <div>
+          <h3 class="mb-3">自己紹介</h3>
+          <div class="mb-4">
+            <h4>xxx</h4>
+            <p><%= @post.user.about_me %></p>
+          </div>
+          <div class="mb-4">
+            <h4>
+              What is important of this course?
+            </h4>
+            <p>
+              We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+              we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+              the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+              your markdown.
+            </p>
+          </div>
+          <div class="mb-4">
+            <h4>Why Take This Course?</h4>
+            <p>
+              We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+              we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+              the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+              your markdown.
+            </p>
+          </div>
+          <div class="mb-4">
+            <h4>
+              Is able to create application after this course?
+            </h4>
+            <p>
+              We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+              we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+              the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+              your markdown.
+            </p>
+            <p>
+              We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
+              we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
+              the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
+              your markdown.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

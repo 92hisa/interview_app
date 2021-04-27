@@ -64,12 +64,12 @@ class UsersController < ApplicationController
     # # @opened_dm_rooms = Entry.includes(:user).where(dm_room_id: @entries).select(:user_id).distinct.pluck(:user_id)
     # @opened_dm_rooms = Entry.group(:dm_room_id, :user_id).where(dm_room_id: @entries)
     # @opended_dm_rooms = Entry.find(Dm.group(:dm_room_id).order('count(dm_room_id) desc').all.pluck(:dm_room_id))
-    @currentEntries = current_user.entries
-    myDmRoomIds = []
-    @currentEntries.each do |entry|
-      myDmRoomIds << entry.dm_room_id
+    @current_entries = current_user.entries
+    my_dm_room_ids = []
+    @current_entries.each do |entry|
+      my_dm_room_ids << entry.dm_room_id
     end
-    @anotherEntries = Entry.where(dm_room_id: myDmRoomIds).where('user_id != ?', current_user.id).order(created_at: 'desc')
+    @another_entries = Entry.where(dm_room_id: myDmRoomIds).where('user_id != ?', current_user.id).order(created_at: 'desc')
   end
 
   private

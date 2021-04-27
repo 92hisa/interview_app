@@ -23,79 +23,80 @@
           <% end %>
         </li>
       <% end %>
+      <% if user_signed_in? %>
       <li class="dropdown ml-2">
         <a class="rounded-circle" href="#!" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <div class="avatar avatar-md avatar-indicators avatar-online">
-            <img alt="avatar" src="/geeks-1.0.1/dist/assets/images/avatar/avatar-1.jpg" class="rounded-circle"/>
+          <div class="avatar avatar-md">
+            <% if current_user.profile_image.url.nil? %>
+              <%= image_tag "profile_default_img_128.png", class: "rounded-circle" %>
+            <% else %>
+              <%= image_tag current_user.profile_image.url, class: "rounded-circle" %>
+            <% end %>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
           <div class="dropdown-item">
             <div class="d-flex">
-              <div class="avatar avatar-md avatar-indicators avatar-online">
-                <img alt="avatar" src="/geeks-1.0.1/dist/assets/images/avatar/avatar-1.jpg" class="rounded-circle"/>
+              <div class="avatar avatar-md">
+                <% if current_user.profile_image.url.nil? %>
+                  <%= image_tag "profile_default_img_128.png", class: "rounded-circle" %>
+                <% else %>
+                  <%= image_tag current_user.profile_image.url, class: "rounded-circle" %>
+                <% end %>
               </div>
               <div class="ml-3 lh-1">
-                <h5 class="mb-1">Annette Black</h5>
-                <p class="mb-0 text-muted">annette@geeksui.com</p>
+                <h5 class="mb-1"><%= current_user.name %></h5>
+                <p class="mb-0 text-muted"><%= current_user.email %></p>
               </div>
             </div>
           </div>
           <div class="dropdown-divider"></div>
           <ul class="list-unstyled">
-            <li class="dropdown-submenu dropleft-lg">
-              <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#!">
-                <i class="fe fe-circle mr-2"></i>Status
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <a class="dropdown-item" href="#!">
-                    <span class="badge-dot bg-success mr-2"></span>Online
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#!">
-                    <span class="badge-dot bg-secondary mr-2"></span>Offline
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#!">
-                    <span class="badge-dot bg-warning mr-2"></span>Away
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#!">
-                    <span class="badge-dot bg-danger mr-2"></span>Busy
-                  </a>
-                </li>
-              </ul>
+            <li>
+              <%= link_to user_path(id: current_user),data: {"turbolinks" => false}, class: "dropdown-item" do %>
+                <i class="fe fe-user mr-2"></i>プロフィール
+              <% end %>
             </li>
             <li>
-              <a class="dropdown-item" href="./pages/profile-edit.html">
-                <i class="fe fe-user mr-2"></i>Profile
-              </a>
+              <%= link_to follows_user_path(id: current_user), class: "dropdown-item" do %>
+                <i class="far fa-heart mr-2"></i>フォローリスト
+              <% end %>
             </li>
             <li>
-              <a class="dropdown-item" href="./pages/student-subscriptions.html">
-                <i class="fe fe-star mr-2"></i>Subscription
-              </a>
+              <%= link_to favorite_list_user_path(id: current_user), class: "dropdown-item" do %>
+                <i class="fe fe-star mr-2"></i>お気に入りリスト
+              <% end %>
             </li>
             <li>
-              <a class="dropdown-item" href="#!">
-                <i class="fe fe-settings mr-2"></i>Settings
-              </a>
+              <%= link_to purchase_logs_user_path(current_user), class: "dropdown-item" do %>
+                <i class="far fa-clipboard mr-2"></i>購入履歴
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
+                <i class="far fa-id-badge nav-icon mr-2"></i>プロフィール編集
+              <% end %>
+            </li>
+            <li>
+              <%= link_to post_list_user_path(current_user), class: "dropdown-item" do %>
+                <i class="far fa-edit nav-icon mr-2"></i>経験者プラン
+              <% end %>
             </li>
           </ul>
           <div class="dropdown-divider"></div>
           <ul class="list-unstyled">
             <li>
-              <a class="dropdown-item" href="./index.html">
-                <i class="fe fe-power mr-2"></i>Sign Out
-              </a>
+              <%= link_to destroy_user_session_path, method: :delete, class: "dropdown-item" do %>
+              <i class="fas fa-sign-out-alt mr-2"></i>ログアウト
+              <% end %>
             </li>
           </ul>
         </div>
       </li>
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-success btn-xs mr-1" %>
+        <%= link_to "無料登録", new_user_registration_path, class: "btn btn-success btn-xs mr-1" %>
+      <% end %>
     </ul>
     <!-- Button -->
     <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,83 +106,29 @@
     </button>
     <!-- Collapse -->
     <div class="collapse navbar-collapse" id="navbar-default">
-      <ul class="navbar-nav">
-        <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/" id="navbarAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
-          <ul class="dropdown-menu dropdown-menu-arrow" aria-labelledby="navbarAccount">
-            <li class="dropdown-submenu">
-              <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "購入したチケット", purchase_logs_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "チケットを掲載する", new_post_path, class: "dropdown-item dropdown-list-group-item" %>
-              <%= link_to "DM", dm_list_user_path(current_user), class: "dropdown-item dropdown-list-group-item" %>
-            </li>
-          </ul>
-        </li>
+      <% @search_word = Post.ransack(params[:q]) %>
+      <% @search = @search_word.result(distinct: true) %>
+      <form class="mt-3 mt-lg-0 ml-lg-3 d-flex align-items-center">
+        <%= search_form_for @search_word, url: search_path do |f| %>
+        <span class="position-absolute pl-1 search-icon">
+          <i class="fe fe-search"></i>
+        </span>
+        <%= f.search_field :title_or_subtitle_or_detail_cont, class: "form-control mr-sm-3", placeholder: " 留学など経験名で検索" %>
         <% end %>
+      </form>
+      <ul class="navbar-nav">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle dropdown-menu-arrow" href="#!" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fe fe-more-horizontal font-size-lg"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-            <div class="list-group">
-              <a class="list-group-item list-group-item-action border-0" href="./docs/index.html">
-                <div class="d-flex align-items-center">
-                  <i class="fe fe-file-text font-size-lg text-primary"></i>
-                  <div class="ml-3">
-                    <h5 class="mb-0">Documentations</h5>
-                    <p class="mb-0 font-size-xs">
-                      Browse the all documentation
-                    </p>
-                  </div>
-                </div>
-              </a>
-              <a class="list-group-item list-group-item-action border-0" href="./docs/changelog.html">
-                <div class="d-flex align-items-center">
-                  <i class="fe fe-layers font-size-lg text-primary"></i>
-                  <div class="ml-3">
-                    <h5 class="mb-0">Changelog
-                      <span class="text-primary ml-1">v1.0.1</span></h5>
-                    <p class="mb-0 font-size-xs">See what's new</p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">経験を探す</a>
+          <a class="nav-link dropdown-toggle" href="/posts" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="link-menu">経験者を探す</span></a>
           <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
             <div class="list-group">
               <% @categories = Category.all%>
               <% @categories.each do |category| %>
-                <%= link_to category.name, category_path(category), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
+                <%= link_to "##{category.name}", category_path(category), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
               <% end %>
             </div>
           </div>
         </li>
-        <% if user_signed_in? %>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">アカウント</a>
-          <div class="dropdown-menu dropdown-menu-md" aria-labelledby="navbarDropdown">
-            <div class="list-group">
-              <%= link_to "お気に入り", favorite_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "契約履歴", purchase_logs_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "掲載中のチケット", post_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "チケットを掲載する", new_post_path, class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-              <%= link_to "DM", dm_list_user_path(current_user), class: "list-group-item list-group-item-action border-0 pt-1 pb-1" %>
-            </div>
-          </div>
-        </li>
-        <% end %>
       </ul>
-      <form class="mt-3 mt-lg-0 ml-lg-3 d-flex align-items-center">
-        <span class="position-absolute pl-3 search-icon">
-          <i class="fe fe-search"></i>
-        </span>
-        <input type="search" class="form-control pl-6" placeholder="Search Courses"/>
-      </form>
       <ul class="navbar-nav navbar-right-wrap ml-auto d-none d-lg-block">
         <% if user_signed_in? %>
           <li class="dropdown d-inline-block stopevent">
@@ -235,24 +182,42 @@
                   <% end %>
                 </li>
                 <li>
+                  <%= link_to dm_list_user_path(current_user), class: "dropdown-item" do %>
+                    <i class="far fa-envelope mr-2"></i>メッセージ
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to follows_user_path(id: current_user), class: "dropdown-item" do %>
+                    <i class="far fa-heart mr-2"></i>フォローリスト
+                  <% end %>
+                </li>
+                <li>
                   <%= link_to favorite_list_user_path(id: current_user), class: "dropdown-item" do %>
                     <i class="fe fe-star mr-2"></i>お気に入りリスト
                   <% end %>
                 </li>
                 <li>
-                  <%= link_to follows_user_path(id: current_user), class: "dropdown-item" do %>
-                    <i class="fe fe-star mr-2"></i>フォローリスト
+                  <%= link_to purchase_logs_user_path(current_user), class: "dropdown-item" do %>
+                    <i class="far fa-clipboard mr-2"></i>購入履歴
                   <% end %>
                 </li>
-                <li>
-                  <%= link_to notifications_path, class: "dropdown-item" do %>
-                    <i class="fe fe-star mr-2"></i>通知
-                  <% end %>
-                </li>
-                <li>
-                  <%= link_to edit_user_registration_path(id: current_user), class: "dropdown-item" do %>
-                    <i class="fe fe-settings mr-2"></i>設定
-                  <% end %>
+                <li class="dropdown p-1">
+                  <a class="nav-item text-inherit" role="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <i class="fe fe-settings nav-icon pl-3 pr-2"></i>設定
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
+                  <ul class="list-unstyled">
+                  <li class="nav-item">
+                    <%= link_to edit_user_registration_path(id: current_user), class: "nav-link" do %>
+                      <i class="fas fa-user-edit nav-icon mr-2"></i>プロフィール編集
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to post_list_user_path(current_user), class: "nav-link" do %>
+                      <i class="far fa-edit nav-icon mr-2"></i>経験者プラン
+                    <% end %>
+                  </li>
+                  </ul>
                 </li>
               </ul>
               <div class="dropdown-divider"></div>
