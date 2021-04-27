@@ -186,6 +186,11 @@
                   <% end %>
                 </li>
                 <li>
+                  <%= link_to dm_list_user_path(current_user), class: "dropdown-item" do %>
+                    <i class="far fa-envelope mr-2"></i>メッセージ
+                  <% end %>
+                </li>
+                <li>
                   <%= link_to follows_user_path(id: current_user), class: "dropdown-item" do %>
                     <i class="far fa-heart mr-2"></i>フォローリスト
                   <% end %>
