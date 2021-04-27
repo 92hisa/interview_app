@@ -56,4 +56,42 @@ RSpec.describe Review, type: :model do
       end
     end
   end
+
+  describe "関連付けテスト" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "userとの関連" do
+      let(:target) { :user }
+
+      it "userとの関連はbelongs_toであること" do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+
+    context "purchaseとの関連" do
+      let(:target) { :purchase }
+
+      it "purchaseとの関連はbelongs_toであること" do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+
+    context "salerとの関連" do
+      let(:target) { :saler }
+
+      it "salerとの関連はbelongs_toであること" do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+
+    context "buyerとの関連" do
+      let(:target) { :buyer }
+
+      it "buyerとの関連はbelongs_toであること" do
+        expect(association.macro).to eq :belongs_to
+      end
+    end
+  end
 end

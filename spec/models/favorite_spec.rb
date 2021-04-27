@@ -6,21 +6,21 @@ RSpec.describe Favorite, type: :model do
   let!(:favorite) { create(:favorite, user_id: user.id, post_id: new_post.id) }
 
   describe "バリデーションテスト" do
-    context "コメントが成功する場合" do
-      it "有効な情報であればコメントできること" do
+    context "お気に入りが保存できる場合" do
+      it "有効な情報であればお気に入りできること" do
         expect(favorite).to be_valid
       end
     end
 
-    context "コメントが失敗する場合" do
-      it "user_idがなければコメントできないこと" do
+    context "お気に入りが保存できない場合" do
+      it "user_idがなければお気に入りできないこと" do
         favorite.user_id = nil
         favorite.valid?
         expect(favorite).to be_invalid
       end
     end
 
-    it "post_idがなければコメントできないこと" do
+    it "post_idがなければお気に入りできないこと" do
       favorite.post_id = nil
       favorite.valid?
       expect(favorite).to be_invalid
