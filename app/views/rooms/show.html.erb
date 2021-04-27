@@ -1,63 +1,29 @@
 <% if current_user.id == @purchase.saler_id || @purchase.buyer_id %>
-<div class="container">
-    <h2 class="text-center">取引内容</h2>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 offset-md-12">
-            <table class="table text-center">
-                <thread>
-                <tr>
-                <th>Room_ID</th>
-                <th>Purchase_ID</th>
-                <th>販売者ID</th>
-                <th>購入者ID</th>
-                <th>Post_ID</th>
-                <th>掲載日</th>
-                <th>案件名</th>
-                <th>価格</th>
-                <th>経験</th>
-                </tr>
-                </thread>
-                  <tbody>
-                    <td><%= @room.id %></td>
-                    <td><%= @purchase.id %></td>
-                    <td><%= "ID:#{@saler.id} #{@saler.name}" %></td>
-                    <td><%= "ID:#{@buyer.id} #{@buyer.name}" %></td>
-                    <td><%= @post.id %></td>
-                    <td><%= @post.created_at.to_s(:datetime_jp) %></td>
-                    <td><%= @post.title %></td>
-                    <td><%= @post.price.to_s(:delimited) + "円" %></td>
-                    <td><%= @post.experience %></td>
-                  </tbody>
-            </table>
-            <div class="text-right">
-              <%= link_to "戻る", :back %><br>
-              <%= link_to "トップページ", root_path %><br>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="p-lg-5 py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-xl-8 col-lg-8 col-md-12 col-12 mb-5 mt-4">
-        <div class="card mb-5">
-          <div class="card-body border">
-            <!-- vue -->
-            <div id="room">
-              <room />
-            </div>
-            <%= javascript_pack_tag 'room' %>
-            <%= stylesheet_pack_tag 'room' %>
-            <!-- vue -->
+  <div class="p-lg-5 py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-12 mb-5 mt-4">
+          <div class="border-bottom pb-2 mb-4 d-lg-flex justify-content-between align-items-center">
+            <h1 class="mb-0 h2">専用ルーム</h1>
           </div>
+          <div class="card mb-5">
+            <div class="card-body border">
+              <!-- vue -->
+              <div id="room">
+                <room />
+              </div>
+              <%= javascript_pack_tag 'room' %>
+              <%= stylesheet_pack_tag 'room' %>
+              <!-- vue -->
+            </div>
+          </div>
+          <%= render 'purchase_post' %>
         </div>
-      </div>
-      <div id='messages' class="col-xl-4 col-lg-4 col-md-12 col-12 mt-md-4">
-        <%= render partial: 'messages/form', locals: { room: @room } %>
-        <%= render partial: 'messages/message', collection: @messages %>
+        <div id='messages' class="col-xl-4 col-lg-4 col-md-12 col-12 mt-md-4">
+          <%= render partial: 'messages/form', locals: { room: @room } %>
+          <%= render partial: 'messages/message', collection: @messages %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 <% end%>
