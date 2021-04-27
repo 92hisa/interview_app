@@ -89,8 +89,8 @@ class User < ApplicationRecord
   end
 
   def user_post_categories
-    postIds = Post.where(user_id: id).all.pluck(:id)
-    categoryIds = PostCategoryRelation.where(post_id: postIds).pluck(:category_id)
-    category = Category.where(id: categoryIds)
+    post_ids = Post.where(user_id: id).all.pluck(:id)
+    category_ids = PostCategoryRelation.where(post_id: post_ids).pluck(:category_id)
+    Category.where(id: category_ids)
   end
 end
