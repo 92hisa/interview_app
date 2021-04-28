@@ -24,7 +24,7 @@ RSpec.describe Category, type: :model do
       described_class.reflect_on_association(target)
     end
 
-    context "post_category_relationsとの関連" do
+    context "post_category_relationとの関連" do
       let(:target) { :post_category_relations }
 
       it "post_category_relationsとの関連はhas_manyであること" do
