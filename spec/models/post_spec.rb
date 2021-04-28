@@ -11,6 +11,12 @@ RSpec.describe Post, type: :model do
         expect(post).to be_valid
       end
 
+      it "画像がなくても登録できること" do
+        post.plan_image = nil
+        post.valid?
+        expect(post).to be_valid
+      end
+
       it "詳細がなくても登録できること" do
         post.detail = nil
         post.valid?
@@ -31,6 +37,12 @@ RSpec.describe Post, type: :model do
         expect(post).to be_invalid
       end
 
+      it "サブタイトルがなければ登録できないこと" do
+        post.subtitle = nil
+        post.valid?
+        expect(post).to be_invalid
+      end
+
       it "価格がなければ登録できないこと" do
         post.price = nil
         post.valid?
@@ -45,6 +57,12 @@ RSpec.describe Post, type: :model do
 
       it "タイトルが30文字以下でなければ登録できないこと" do
         post = build(:post, title: "a" * 31)
+        post.valid?
+        expect(post).to be_invalid
+      end
+
+      it "サブタイトルが50文字以下でなければ登録できないこと" do
+        post = build(:post, subtitle: "a" * 51)
         post.valid?
         expect(post).to be_invalid
       end
@@ -92,6 +110,46 @@ RSpec.describe Post, type: :model do
       let(:target) { :purchases }
 
       it "purchaseとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "commentとの関連" do
+      let(:target) { :comments }
+
+      it "commentとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "favoriteとの関連" do
+      let(:target) { :favorites }
+
+      it "favoriteとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "post_category_relationとの関連" do
+      let(:target) { :post_category_relations }
+
+      it "post_category_relationとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "categoryとの関連" do
+      let(:target) { :categories }
+
+      it "categoryとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "notificationとの関連" do
+      let(:target) { :notifications }
+
+      it "notificationとの関連はhas_manyであること" do
         expect(association.macro).to eq :has_many
       end
     end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "Posts", type: :request do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
-  let!(:new_post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
+  let!(:new_post) { create(:post, user: user, title: "sample", subtitle: "foobar_sample", price: 100, experience: "rails") }
 
   describe "ログインしている場合" do
     before do
@@ -17,13 +17,13 @@ RSpec.describe "Posts", type: :request do
 
     it "有効なデータで登録できること" do
       expect {
-        post posts_path, params: { post: { title: "sample", price: 100, experience: "rails" } }
+        post posts_path, params: { post: { title: "sample", subtitle: "foobar_sample", price: 100, experience: "rails" } }
       }.to change(Post, :count).by(1)
     end
 
     it "無効なデータでは登録できないこと" do
       expect {
-        post posts_path, params: { post: { title: "", price: 100, experience: "rails" } }
+        post posts_path, params: { post: { title: "", subtitle: "foobar_sample", price: 100, experience: "rails" } }
       }.not_to change(Post, :count)
     end
   end
