@@ -17,7 +17,7 @@
                   <div class="row align-items-center">
                     <div class="col">
                       <div class="d-flex align-items-center">
-                        <%= link_to dm_room_path(anotherEntries.dm_room_id)data: {"turbolinks" => false} do %>
+                        <%= link_to dm_room_path(anotherEntries.dm_room_id),data: {"turbolinks" => false} do %>
                           <% if anotherEntries.user.profile_image.present? %>
                             <%= image_tag anotherEntries.user.profile_image.url, class: "avatar-md rounded-circle" %>
                             <p class="mb-0"><%= anotherEntries.user.name %></p>
