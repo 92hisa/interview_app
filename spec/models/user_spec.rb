@@ -59,34 +59,122 @@ RSpec.describe User, type: :model do
         expect(user.errors.full_messages).to include("パスワードは6文字以上で入力してください")
       end
     end
+  end
 
-    describe "関連付けテスト" do
-      let(:association) do
-        described_class.reflect_on_association(target)
+  describe "関連付けテスト" do
+    let(:association) do
+      described_class.reflect_on_association(target)
+    end
+
+    context "postとの関連" do
+      let(:target) { :posts }
+
+      it "postとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
       end
+    end
 
-      context "postとの関連" do
-        let(:target) { :posts }
+    context "purchaseとの関連" do
+      let(:target) { :purchases }
 
-        it "postとの関連はhas_manyであること" do
-          expect(association.macro).to eq :has_many
-        end
+      it "purchaseとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
       end
+    end
 
-      context "purchaseとの関連" do
-        let(:target) { :purchases }
+    context "messageとの関連" do
+      let(:target) { :messages }
 
-        it "purchaseとの関連はhas_manyであること" do
-          expect(association.macro).to eq :has_many
-        end
+      it "messageとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
       end
+    end
 
-      context "messageとの関連" do
-        let(:target) { :messages }
+    context "commentとの関連" do
+      let(:target) { :comments }
 
-        it "messageとの関連はhas_manyであること" do
-          expect(association.macro).to eq :has_many
-        end
+      it "commentとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "favoriteとの関連" do
+      let(:target) { :favorites }
+
+      it "favoriteとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "reviewとの関連" do
+      let(:target) { :reviews }
+
+      it "reviewとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "relationshipとの関連" do
+      let(:target) { :relationships }
+
+      it "relationshipとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "followingとの関連" do
+      let(:target) { :followings }
+
+      it "followingとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "reverse_of_relationshipとの関連" do
+      let(:target) { :reverse_of_relationships }
+
+      it "reverse_of_relationshipとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "followerとの関連" do
+      let(:target) { :followers }
+
+      it "followerとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "active_notificationとの関連" do
+      let(:target) { :active_notifications }
+
+      it "active_notificationとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "passive_notificationとの関連" do
+      let(:target) { :passive_notifications }
+
+      it "passive_notificationとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "dmとの関連" do
+      let(:target) { :dms }
+
+      it "dmとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
+      end
+    end
+
+    context "entryとの関連" do
+      let(:target) { :entries }
+
+      it "entryとの関連はhas_manyであること" do
+        expect(association.macro).to eq :has_many
       end
     end
   end

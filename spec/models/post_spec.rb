@@ -37,11 +37,11 @@ RSpec.describe Post, type: :model do
         expect(post).to be_invalid
       end
 
-      # it "サブタイトルがなければ登録できないこと" do
-      #   post.subtitle = nil
-      #   post.valid?
-      #   expect(post).to be_invalid
-      # end
+      it "サブタイトルがなければ登録できないこと" do
+        post.subtitle = nil
+        post.valid?
+        expect(post).to be_invalid
+      end
 
       it "価格がなければ登録できないこと" do
         post.price = nil
@@ -61,11 +61,11 @@ RSpec.describe Post, type: :model do
         expect(post).to be_invalid
       end
 
-      # it "サブタイトルが50文字以下でなければ登録できないこと" do
-      #   post = build(:post, subtitle: "a" * 51)
-      #   post.valid?
-      #   expect(post).to be_invalid
-      # end
+      it "サブタイトルが50文字以下でなければ登録できないこと" do
+        post = build(:post, subtitle: "a" * 51)
+        post.valid?
+        expect(post).to be_invalid
+      end
 
       it "価格は1円以上でなければ登録できないこと" do
         post = build(:post, price: 0)
