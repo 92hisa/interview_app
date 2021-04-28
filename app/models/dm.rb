@@ -3,6 +3,10 @@ class Dm < ApplicationRecord
   belongs_to :dm_room
   has_many :notifications, dependent: :destroy
 
+  validates :text, presence: true
+  validates :user_id, presence: true
+  validates :dm_room_id, presence: true
+
   def create_notification_dm!(current_user, dm_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
     temp_ids = Dm.select(:user_id).where(dm_room_id: dm_room_id).where.not(user_id: current_user.id).distinct
