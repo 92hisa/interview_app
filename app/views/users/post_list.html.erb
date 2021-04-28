@@ -8,7 +8,7 @@
             <h1 class="mb-0 h2">経験者プラン</h1>
           </div>
           <div>
-            <%= link_to "新しくプランを作る", new_post_path, class: "text-inherit" %>
+            <%= link_to "新しくプランを作る", new_post_path,data: {"turbolinks" => false}, class: "text-inherit" %>
           </div>
         </div>
         <% if @post_list.present? %>
@@ -55,12 +55,12 @@
                       <td class="align-middle border-top-0"><%= post_list.updated_at.to_s(:datetime_jp)%></td>
                       <td class="align-middle border-top-0"><%= post_list.display_price %></td>
                       <% if post_list.purchases.ids.present?%>
-                        <td><%= link_to "取引", post_purchases_path(post_id: post_list.id), class: "btn btn-success btn-sm" %></td>
+                        <td><%= link_to "取引", post_purchases_path(post_id: post_list.id),data: {"turbolinks" => false}, class: "btn btn-success btn-sm" %></td>
                       <% else %>
                         <td><%= link_to "取引", '', class: "btn btn-secondary disabled btn-sm" %></td>
                       <% end %>
-                      <td><%= link_to "編集", edit_post_path(id: post_list.id), class: "btn btn-outline-success btn-sm"%></td>
-                      <td><%= link_to "削除", post_path(id: post_list.id), method: :delete, class: "btn btn-outline-danger btn-sm"%></td>
+                      <td><%= link_to "編集", edit_post_path(id: post_list.id),data: {"turbolinks" => false}, class: "btn btn-outline-success btn-sm"%></td>
+                      <td><%= link_to "削除", post_path(id: post_list.id),data: {"turbolinks" => false}, method: :delete, class: "btn btn-outline-danger btn-sm"%></td>
                     </tr>
                   </tbody>
                 <% end %>

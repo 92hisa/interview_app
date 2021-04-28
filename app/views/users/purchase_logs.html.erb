@@ -40,7 +40,7 @@
                   </td>
                   <td class="align-middle border-top-0"><%= purchase_log.post.display_price %></td>
                   <td class="align-middle border-top-0"><%= purchase_log.created_at.to_s(:datetime_jp)%></td>
-                  <td><%= link_to "入室する", room_path(id: purchase_log.id), class: "btn btn-success btn-sm" %></td>
+                  <td><%= link_to "入室する", room_path(id: purchase_log.id),data: {"turbolinks" => false}, class: "btn btn-success btn-sm" %></td>
                   <td><%= link_to "レビューを書く", new_post_purchase_review_path(post_id: purchase_log.post_id, purchase_id: purchase_log.id),data: {"turbolinks" => false}, class: "btn btn-success btn-sm font-size-xs" %></td>
                 </tr>
               </tbody>

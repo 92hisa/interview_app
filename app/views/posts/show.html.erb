@@ -27,11 +27,11 @@
                 </div>
                 <div style="margin-left: auto;">
                   <% if not @post_favorite.present? %>
-                    <%= link_to post_favorites_path(@post.id), "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
+                    <%= link_to post_favorites_path(@post.id),data: {"turbolinks" => false}, "data-toggle": :"tooltip", "data-original-title": :"お気に入りする", method: :post do %>
                       <i class="fe fe-bookmark font-size-lg text-inherit"></i>
                     <% end %>
                   <% else %>
-                    <%= link_to post_favorite_path(post_id: @post, id: @post_favorite), "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
+                    <%= link_to post_favorite_path(post_id: @post, id: @post_favorite),data: {"turbolinks" => false}, "data-toggle": :"tooltip", "data-original-title": :"お気に入りを解除", method: :delete do %>
                       <i class="fa fa-bookmark font-size-lg text-inherit"></i>
                     <% end %>
                   <% end %>
@@ -49,7 +49,7 @@
                 </span>
                 <div style="margin-left: auto;">
                   <% if user_signed_in? && @post.user_id != current_user.id %>
-                    <%= link_to "購入する", new_post_purchase_path(@post.id), class: "btn btn-success btn-sm text-nowrap", style: "font-weight: bold;" %>
+                    <%= link_to "購入する", new_post_purchase_path(@post.id),data: {"turbolinks" => false}, class: "btn btn-success btn-sm text-nowrap", style: "font-weight: bold;" %>
                   <% end %>
                 </div>
               </div>
@@ -187,7 +187,7 @@
                         </div>
                         <div style="margin-left: auto;">
                           <% if user_signed_in? && current_user.id == comment.user.id %>
-                            <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id), "data-toggle": :"tooltip", "data-original-title": :"コメントを削除する", method: :delete do %>
+                            <%= link_to post_comment_path(post_id: comment.post_id, id: comment.id),data: {"turbolinks" => false}, "data-toggle": :"tooltip", "data-original-title": :"コメントを削除する", method: :delete do %>
                               <i class="far fa-trash-alt font-size-lg text-inherit"></i>
                             <% end %>
                           <% end %>
@@ -230,7 +230,7 @@
                         <% @user_posts.each do |user_posts| %>
                         <li class="list-group-item px-0 pb-3 pt-0">
                           <div class="d-flex align-items-center justify-content-between">
-                            <%= link_to post_path(id: user_posts) do %>
+                            <%= link_to post_path(id: user_posts)data: {"turbolinks" => false} do %>
                               <div class="d-lg-flex align-items-center">
                                 <div>
                                   <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />

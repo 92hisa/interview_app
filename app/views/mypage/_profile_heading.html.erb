@@ -33,8 +33,8 @@
       </div>
       <div class="col-lg-4 col-md-4 col-12">
         <div class="font-size-md mt-4 mt-lg-0 pb-2 pb-lg-0 d-flex justify-content-center text-nowrap">
-          <%= link_to "チケット購入履歴", purchase_logs_user_path(current_user), class: "btn btn-outline-success mr-2" %>
-          <%= link_to "登録情報を変更", edit_user_registration_path, class: "btn btn-success mr-2" %>
+          <%= link_to "チケット購入履歴", purchase_logs_user_path(current_user),data: {"turbolinks" => false}, class: "btn btn-outline-success mr-2" %>
+          <%= link_to "登録情報を変更", edit_user_registration_path,data: {"turbolinks" => false}, class: "btn btn-success mr-2" %>
         </div>
       </div>
     </div>

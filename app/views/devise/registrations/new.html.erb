@@ -50,7 +50,7 @@
               <%= f.submit "上記同意のうえ無料会員登録する", class: "btn btn-success btn-block", style: "font-weight: bold;" %>
             </div>
             <div class="mt-3 text-center">
-              <span>アカウントをお持ちの方はこちら「<%= link_to "ログイン", new_user_session_path, style: "color: #2DAADB;"%> 」</span>
+              <span>アカウントをお持ちの方はこちら「<%= link_to "ログイン", new_user_session_path,data: {"turbolinks" => false}, style: "color: #2DAADB;"%> 」</span>
             </div>
           </form>
           <% end %>

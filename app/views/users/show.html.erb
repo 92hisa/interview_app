@@ -102,7 +102,7 @@
                   <!-- List group item -->
                   <li class="list-group-item px-0 pb-3 pt-0">
                     <div class="d-flex align-items-center justify-content-between">
-                      <%= link_to post_path(id: user_posts) do %>
+                      <%= link_to post_path(id: user_posts)data: {"turbolinks" => false} do %>
                         <div class="d-lg-flex align-items-center">
                           <div>
                             <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
@@ -203,7 +203,7 @@
 <% unless @user.id == current_user.id %>
 
   <% if @is_dm_room == true %>
-    <%= link_to "チャットへ", dm_room_path(@dm_room_id.dm_room_id)%>
+    <%= link_to "チャットへ", dm_room_path(@dm_room_id.dm_room_id)data: {"turbolinks" => false} %>
   <% else %>
     <%= form_for @dm_room do |f| %>
     <%= f.hidden_field :user_id, value: @user.id %>
