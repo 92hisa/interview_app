@@ -1,8 +1,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-default">
   <div class="container-fluid px-0">
-    <%= link_to "/",class: "navbar-brand mr-0",data: {"turbolinks" => false} do%>
-    <%= image_tag 'keiken_skyblue.png', style: "height: 38px;"%>
+    <%= link_to "/",class: "navbar-brand",data: {"turbolinks" => false} do%>
+    <%= image_tag 'keiken_logo.png', style: "height: 38px;"%>
     <% end %>
     <!-- Mobile view nav wrap -->
     <ul class="navbar-nav navbar-right-wrap ml-auto d-lg-none d-flex nav-top-wrap ">
@@ -94,8 +94,8 @@
         </div>
       </li>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path,data: {"turbolinks" => false}, class: "btn btn-outline-success btn-xs mr-1" %>
-        <%= link_to "無料登録", new_user_registration_path,data: {"turbolinks" => false}, class: "btn btn-success btn-xs mr-1" %>
+        <%= link_to "ログイン", new_user_session_path,data: {"turbolinks" => false}, class: "btn btn-outline-success btn-xs mr-1", style: "width:70px; font-size: 10px;" %>
+        <%= link_to "無料登録", new_user_registration_path,data: {"turbolinks" => false}, class: "btn btn-success btn-xs mr-1", style: "width:70px; font-size: 10px;" %>
       <% end %>
     </ul>
     <!-- Button -->
