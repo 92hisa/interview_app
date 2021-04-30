@@ -9,7 +9,7 @@
 				<div class="card">
 					<!-- Card header -->
 					<div class="card-header">
-						<h4 class="mb-0" style="color:#2DAADB;">プラン作成</h4>
+						<h3 class="mb-0">プラン作成</h3>
 						<p class="mb-0">
 						</p>
 					</div>
@@ -58,7 +58,7 @@
 								</div>
 								<!-- インタビュー方法 -->
 								<div class="form-group col-12 col-md-4">
-									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "インタビュー方法", class: "form-label"%>
+									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "対話方法", class: "form-label"%>
 									<%= f.select :way, [['ビデオ通話', 1], ['チャット', 2], ['ビデオ通話・チャットのどちらでも可', 3]], {include_blank: true, selected: 1}, class: "form-control" %>
 								</div>
 								<!-- タグ -->
@@ -78,7 +78,7 @@
 								</div>
                 <!-- 詳細 -->
                 <div class="form-group col-12 col-md-12">
-                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "詳細(契約後の流れなど)", class: "form-label"%>
+                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "詳細（契約後の流れなど）", class: "form-label"%>
                   <%= f.text_area :detail, autofocus: true, autocomplete: "detail", rows: "5", class: "form-control", placeholder: "詳細" %>
                 </div>
                 <!-- Button -->

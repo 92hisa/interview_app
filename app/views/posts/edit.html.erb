@@ -8,7 +8,7 @@
 				<div class="card">
 					<!-- Card header -->
 					<div class="card-header">
-						<h4 class="mb-0" style="color:#2DAADB;">プラン編集</h4>
+						<h4 class="mb-0">プラン編集</h4>
 						<p class="mb-0">
 						</p>
 					</div>
@@ -57,27 +57,27 @@
 								</div>
 								<!-- インタビュー方法 -->
 								<div class="form-group col-12 col-md-4">
-									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "インタビュー方法", class: "form-label"%>
+									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "対話方法（複数選択可）", class: "form-label"%>
 									<%= f.select :way, [['ビデオ通話', 1], ['チャット', 2], ['ビデオ通話・チャットのどちらでも可', 3]], {include_blank: true, selected: 1}, class: "form-control" %>
+								</div>
+								<!-- タグ -->
+								<div class="form-group col-12 col-md-12">
+									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "お話できる内容", class: "form-label"%>
+									<%= f.text_area :experience, autofocus: true, autocomplete: "experience", rows: "5", class: "form-control", placeholder: "内容" %>
 								</div>
 								<!-- カテゴリー -->
 								<div class="form-group col-12 col-md-4">
-									<span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "カテゴリー", class: "form-label"%><br>
+									<span class="badge badge-light-danger text-danger mr-2">必須</span><%= f.label "カテゴリー", class: "form-label"%><br>
 									<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
-									  <%= category.label do %>
-									    <span class="ml-2"><%= category.check_box %></span>
+										<%= category.label do %>
+											<span class="ml-2"><%= category.check_box %></span>
 											<span><%= category.text %></span>
 										<% end%>
 									<% end%>
 								</div>
-                <!-- タグ -->
-                <div class="form-group col-12 col-md-4">
-                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "タグ", class: "form-label"%>
-                  <%= f.text_field :experience, autofocus: true, autocomplete: "experience", class: "form-control", placeholder: "タグ" %>
-                </div>
                 <!-- 詳細 -->
                 <div class="form-group col-12 col-md-12">
-                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "詳細", class: "form-label"%>
+                  <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "詳細（契約後の流れなど）", class: "form-label"%>
                   <%= f.text_area :detail, autofocus: true, autocomplete: "detail", rows: "5", class: "form-control", placeholder: "詳細" %>
                 </div>
                 <!-- Button -->
