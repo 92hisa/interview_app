@@ -29,64 +29,15 @@
             <div class="card">
               <div class="card-body">
                 <div class="mb-4">
-                  <h3 class="mb-2">経験の詳細</h3>
+                  <h3 class="mb-3 border-bottom">自己紹介</h3>
                   <p><%= @user.about_me %></p>
                 </div>
-                <h4 class="mb-3">What you’ll learn</h4>
+                <h3 class="mb-3 border-bottom">これまでの経験や実績</h3>
                 <div class="row mb-3">
                   <div class="col-12 col-md-6">
-                    <!-- List group -->
-                    <ul class="list-unstyled">
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Recognize the importance of understanding your objectives when addressing an audience.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Identify the fundaments of composing a successful close.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Explore how to connect with your audience through crafting compelling stories.
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <!-- List group -->
-                    <ul class="list-unstyled">
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Examine ways to connect with your audience by personalizing your content.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Break down the best ways to exude executive presence.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Explore how to communicate the unknown in an impromptu communication.
-                        </span>
-                      </li>
-                    </ul>
+                    <p><%= safe_join(@user.my_experience.split("\n"),tag(:br)) %></p>
                   </div>
                 </div>
-                <p>Maecenas viverra condimentum nulla molestie condimentum. Nunc ex libero, feugiat quis lectus vel,
-                  ornare euismod ligula. Aenean sit amet arcu nulla.</p>
-                <p>
-                  Duis facilisis ex a urna blandit ultricies. Nullam sagittis ligula non eros semper, nec mattis odio
-                  ullamcorper. Phasellus feugiat sit amet leo eget consectetur.
-                </p>
               </div>
             </div>
           </div>

@@ -91,6 +91,11 @@
                   <span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "自己紹介", class: "form-label"%>
                   <%= f.text_area :about_me, class: "form-control", placeholder: "自己紹介", rows: "10" %>
 								</div>
+								<!-- これまでの経験・実績 -->
+								<div class="form-group col-12 col-md-12">
+									<span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "これまでの経験・実績", class: "form-label"%>
+									<%= f.text_area :my_experience, class: "form-control", placeholder: "経験・実績", rows: "5" %>
+								</div>
                 <!-- Button -->
 								<div class="col-12 text-center">
                   <%= f.submit "保存する", class: "btn btn-success btn-lg" %>

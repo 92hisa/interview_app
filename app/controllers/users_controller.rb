@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
+    if current_user.update!(user_params)
       flash[:notice] = "ユーザー情報が更新されました"
       redirect_to user_path(current_user.id)
     else
@@ -75,7 +75,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:gender, :about_me)
+    params.require(:user).permit(:gender, :about_me, :my_experience)
   end
 
   def correct_user
