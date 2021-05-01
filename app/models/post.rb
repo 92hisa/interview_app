@@ -9,10 +9,10 @@ class Post < ApplicationRecord
 
   validates :user_id, presence: true
   validates :title, presence: true, length: { maximum: 30 }
-  validates :subtitle, presence: true, length: { maximum: 50 }
+  validates :subtitle, presence: true, length: { maximum: 200 }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 500, less_than_or_equal_to: 1000000 }
-  validates :experience, presence: true, length: { maximum: 20 }
-  validates :detail, length: { maximum: 150 }
+  validates :experience, presence: true, length: { maximum: 500 }
+  validates :detail, length: { maximum: 1000 }
 
   mount_uploader :plan_image, ProfileImageUploader
 

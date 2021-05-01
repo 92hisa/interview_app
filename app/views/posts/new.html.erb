@@ -69,7 +69,7 @@
 								<!-- カテゴリー -->
 								<div class="form-group col-12 col-md-4">
 									<span class="badge badge-light-secondary text-secondary mr-2">任意</span><%= f.label "カテゴリー（複数選択可）", class: "form-label" %><br>
-									<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) do |category| %>
+									<%= f.collection_check_boxes(:category_ids, Category.all, :id, :name, include_hidden: false) do |category| %>
 									  <%= category.label do %>
 									    <span class="ml-2"><%= category.check_box %></span>
 											<span><%= category.text %></span>

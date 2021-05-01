@@ -24,7 +24,16 @@
                   <h3 class="h4 mb-2 mt-2 text-truncate-line-2 "><%= link_to popular_post.title, post_path(id: popular_post.id),data: {"turbolinks" => false}, class: "text-inherit" %></h3>
                   <ul class="mb-3  list-inline">
                     <li class="list-inline-item"><i class="mdi mdi-star text-warning mr-1"></i><%= popular_post.favorites.count %></li>
-                    <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= popular_post.experience %></li>
+                    <% @post_category_relation = PostCategoryRelation.where(post_id: popular_post.id).pluck(:category_id)%>
+                    <% if @post_category_relation.present? %>
+                    <% @category = Category.where(id: @post_category_relation)%>
+                      <% @category.each do |category|%>
+                        <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= "#{category.name}, " %></li>
+                      <% end %>
+                    <% else %>
+                      <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= "未登録" %></li>
+                    <% end %>
+                    <li class="list-inline-item"><%= popular_post.subtitle %></li>
                   </ul>
                   <div class="lh-1">
                     <span class="font-size-xs">価格</span>

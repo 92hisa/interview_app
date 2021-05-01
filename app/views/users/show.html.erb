@@ -25,22 +25,33 @@
         <!-- Tab Content -->
         <div class="tab-content" id="tabContent">
           <!-- Tab Pane -->
+          <% if @user.about_me != nil || @user.my_experience != nil %>
           <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="card">
               <div class="card-body">
+                <% if @user.about_me != nil %>
                 <div class="mb-4">
                   <h3 class="mb-3 border-bottom">自己紹介</h3>
-                  <p><%= @user.about_me %></p>
+                  <p><%= safe_join(@user.about_me.split("\n"),tag(:br)) %></p>
                 </div>
+                <% end %>
+                <% if @user.my_experience != nil %>
                 <h3 class="mb-3 border-bottom">これまでの経験や実績</h3>
                 <div class="row mb-3">
-                  <div class="col-12 col-md-6">
+                  <div class="col-12 col-md-12">
                     <p><%= safe_join(@user.my_experience.split("\n"),tag(:br)) %></p>
                   </div>
                 </div>
+                <% end %>
               </div>
             </div>
           </div>
+          <% else %>
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <p>登録されていません</p>
+          </div>
+          <% end %>
+          <% if @user_posts.present? %>
           <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
             <div class="mb-2" style="font-weight: bold;">
               <h5 class="mb-0">掲載中のプラン</h5>
@@ -95,6 +106,13 @@
             </div>
             <% end %>
           </div>
+          <% else %>
+          <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+            <div class="mb-2" style="font-weight: bold;">
+              <h5 class="mb-0">掲載中のプランはありません</h5>
+            </div>
+          </div>
+          <% end %>
           <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
             <div class=" mb-2 d-sm-flex flex-xs-sm-column align-items-center">
               <h6 class="mr-5 mb-0"><%= "#{@user.name}さんのレビュー" %></h6>
