@@ -1,24 +1,35 @@
-# README
+### 【アプリケーション名】
+[Keiken](https://morning-peak-39361.herokuapp.com/) (ver.1)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 【アプリケーションの概要】
+経験者を探して知りたいこと、相談したいことをインタビューできるマッチングサイト
 
-Things you may want to cover:
+### 【技術仕様】
 
-* Ruby version
+- フロントエンド
+  - HTML, CSS
+  - JavaScript, Ajax, JQuery, Vue
+  - Bootstrap4
 
-* System dependencies
+- バックエンド
+  - Ruby 2.7.2
+  - Ruby on Rails 6.0.3.4
+  - Postgresql
 
-* Configuration
+- 本番環境
+  - Heroku
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### 【ユーザー機能一覧】
+- ログイン、ログアウト機能(devise)
+- 経験者のインタビュープランの投稿機能
+- インタビュープランに対するお気に入り機能
+- インタビュープランに対するコメント機能
+- ユーザーフォロー機能
+- ダイレクトメッセージ機能
+- プラン購入後のルーム機能(インタビューする人とインタービューされる人の専用ルーム)
+- Action Cableを使ったチャット機能（ルーム内のみ可能）
+- Vueを使ったビデオ通話機能（ルーム内のみ可能）
+- サイト内検索機能
+- レーティング評価機能
+- ユーザーフォローおよびプランへコメント、お気に入りされたときの通知機能（アプリ画面上での通知）
+- カテゴリー機能
