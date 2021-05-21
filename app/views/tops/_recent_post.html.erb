@@ -29,9 +29,11 @@
                     <% @post_category_relation = PostCategoryRelation.where(post_id: recent_post.id).pluck(:category_id)%>
                     <% if @post_category_relation.present? %>
                     <% @category = Category.where(id: @post_category_relation)%>
+                    <li class="list-inline-item"><i class="fa fa-tags mr-1">
                       <% @category.each do |category|%>
-                        <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= "#{category.name}, " %></li>
+                      </i><%= "#{category.name}, " %>
                       <% end %>
+                    </li>
                     <% else %>
                       <li class="list-inline-item"><i class="fa fa-tags mr-1"></i><%= "未登録" %></li>
                     <% end %>

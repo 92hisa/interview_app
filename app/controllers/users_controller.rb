@@ -69,7 +69,7 @@ class UsersController < ApplicationController
     @current_entries.each do |entry|
       my_dm_room_ids << entry.dm_room_id
     end
-    @another_entries = Entry.where(dm_room_id: myDmRoomIds).where('user_id != ?', current_user.id).order(created_at: 'desc')
+    @another_entries = Entry.where(dm_room_id: my_dm_room_ids).where('user_id != ?', current_user.id).order(created_at: 'desc')
   end
 
   private

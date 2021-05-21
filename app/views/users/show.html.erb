@@ -163,24 +163,8 @@
       <% if @user.id == current_user.id %>
         <%= render partial: 'mypage/profile_sidebar', locals: { user: @user } %>
       <% else %>
-        <%= render partial: 'shared/saler_profile_sidebar', locals: { user: @user } %>
+        <%= render partial: 'shared/saler_profile_sidebar', locals: { user: @user, is_dm_room: @is_dm_room, dm_room: @dm_room, dm_room_id: @dm_room_id, entry: @entry } %>
       <% end %>
     </div>
   </div>
 </div>
-
-<% unless @user.id == current_user.id %>
-
-  <% if @is_dm_room == true %>
-    <%= link_to "チャットへ", dm_room_path(@dm_room_id.dm_room_id),data: {"turbolinks" => false} %>
-  <% else %>
-    <%= form_for @dm_room do |f| %>
-    <%= f.hidden_field :user_id, value: @user.id %>
-      <%= fields_for @entry do |e| %>
-        <%= e.hidden_field :user_id, value: @user.id %>
-      <% end %>
-      <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
-    <% end %>
-  <% end %>
-
-<% end %>
