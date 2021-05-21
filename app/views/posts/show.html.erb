@@ -168,9 +168,11 @@
                         <div class="d-flex align-items-center justify-content-between">
                           <%= link_to post_path(id: user_posts),data: {"turbolinks" => false} do %>
                             <div class="d-lg-flex align-items-center">
-                              <div>
-                                <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
-                              </div>
+                              <% if user_posts.plan_image.present? %>
+                                <%= image_tag user_posts.plan_image, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
+                              <% else %>
+                                <%= image_tag "comming_soon.jpg", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
+                              <% end %>
                               <div class="ml-lg-3 mt-2 mt-lg-0">
                                 <h4 class="text-inherit">
                                   <%= user_posts.title %>
@@ -186,29 +188,35 @@
                                       <%= user_posts.comments.count %>
                                     </span>
                                   </li>
+                                  <% @post_category_relation = PostCategoryRelation.where(post_id: user_posts.id).pluck(:category_id)%>
+                                  <% if @post_category_relation.present? %>
                                   <li class="list-inline-item">
                                     <i class="fa fa-tags mr-1"></i>
+                                    <% @category = Category.where(id: @post_category_relation)%>
+                                    <% @category.each do |category|%>
+                                    <%= "#{category.name}, " %>
+                                    <% end %>
+                                  <% else %>
+                                    <%= "未登録" %>
+                                  <% end %>
+                                  <li class="list-inline-item">
                                     <%= user_posts.experience %>
+                                  </li>
+                                  <li class="list-inline-item">
+                                    <i class="far fa-clock mr-1"></i>
+                                    <%= time_ago_in_words(user_posts.created_at) + "前" %>
                                   </li>
                                 </ul>
                               </div>
                             </div>
                           <% end %>
-                          <div>
-                            <!-- Dropdown -->
-                            <span class="dropdown dropleft">
-                              <i class="far fa-clock mr-1"></i>
-                              <%= time_ago_in_words(user_posts.created_at) + "前" %>
-                            </span>
-                          </div>
-                        </div>
+                        <div>
                       </li>
                       <% end %>
                     </ul>
                   </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                  <!-- profile -->
                   <div>
                     <h3 class="mb-3">自己紹介</h3>
                     <div class="mb-4">
