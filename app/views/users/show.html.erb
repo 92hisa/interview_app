@@ -25,71 +25,33 @@
         <!-- Tab Content -->
         <div class="tab-content" id="tabContent">
           <!-- Tab Pane -->
+          <% if @user.about_me != nil || @user.my_experience != nil %>
           <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="card">
               <div class="card-body">
+                <% if @user.about_me != nil %>
                 <div class="mb-4">
-                  <h3 class="mb-2">経験の詳細</h3>
-                  <p><%= @user.about_me %></p>
+                  <h3 class="mb-3 border-bottom">自己紹介</h3>
+                  <p><%= safe_join(@user.about_me.split("\n"),tag(:br)) %></p>
                 </div>
-                <h4 class="mb-3">What you’ll learn</h4>
+                <% end %>
+                <% if @user.my_experience != nil %>
+                <h3 class="mb-3 border-bottom">これまでの経験や実績</h3>
                 <div class="row mb-3">
-                  <div class="col-12 col-md-6">
-                    <!-- List group -->
-                    <ul class="list-unstyled">
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Recognize the importance of understanding your objectives when addressing an audience.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Identify the fundaments of composing a successful close.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Explore how to connect with your audience through crafting compelling stories.
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="col-12 col-md-6">
-                    <!-- List group -->
-                    <ul class="list-unstyled">
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Examine ways to connect with your audience by personalizing your content.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Break down the best ways to exude executive presence.
-                        </span>
-                      </li>
-                      <li class="d-flex align-item-center mb-2">
-                        <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                        <span>
-                          Explore how to communicate the unknown in an impromptu communication.
-                        </span>
-                      </li>
-                    </ul>
+                  <div class="col-12 col-md-12">
+                    <p><%= safe_join(@user.my_experience.split("\n"),tag(:br)) %></p>
                   </div>
                 </div>
-                <p>Maecenas viverra condimentum nulla molestie condimentum. Nunc ex libero, feugiat quis lectus vel,
-                  ornare euismod ligula. Aenean sit amet arcu nulla.</p>
-                <p>
-                  Duis facilisis ex a urna blandit ultricies. Nullam sagittis ligula non eros semper, nec mattis odio
-                  ullamcorper. Phasellus feugiat sit amet leo eget consectetur.
-                </p>
+                <% end %>
               </div>
             </div>
           </div>
+          <% else %>
+          <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <p>登録されていません</p>
+          </div>
+          <% end %>
+          <% if @user_posts.present? %>
           <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
             <div class="mb-2" style="font-weight: bold;">
               <h5 class="mb-0">掲載中のプラン</h5>
@@ -102,7 +64,7 @@
                   <!-- List group item -->
                   <li class="list-group-item px-0 pb-3 pt-0">
                     <div class="d-flex align-items-center justify-content-between">
-                      <%= link_to post_path(id: user_posts) do %>
+                      <%= link_to post_path(id: user_posts),data: {"turbolinks" => false} do %>
                         <div class="d-lg-flex align-items-center">
                           <div>
                             <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
@@ -144,6 +106,13 @@
             </div>
             <% end %>
           </div>
+          <% else %>
+          <div class="tab-pane fade" id="plan" role="tabpanel" aria-labelledby="plan-tab">
+            <div class="mb-2" style="font-weight: bold;">
+              <h5 class="mb-0">掲載中のプランはありません</h5>
+            </div>
+          </div>
+          <% end %>
           <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
             <div class=" mb-2 d-sm-flex flex-xs-sm-column align-items-center">
               <h6 class="mr-5 mb-0"><%= "#{@user.name}さんのレビュー" %></h6>
@@ -194,24 +163,8 @@
       <% if @user.id == current_user.id %>
         <%= render partial: 'mypage/profile_sidebar', locals: { user: @user } %>
       <% else %>
-        <%= render partial: 'shared/saler_profile_sidebar', locals: { user: @user } %>
+        <%= render partial: 'shared/saler_profile_sidebar', locals: { user: @user, is_dm_room: @is_dm_room, dm_room: @dm_room, dm_room_id: @dm_room_id, entry: @entry } %>
       <% end %>
     </div>
   </div>
 </div>
-
-<% unless @user.id == current_user.id %>
-
-  <% if @is_dm_room == true %>
-    <%= link_to "チャットへ", dm_room_path(@dm_room_id.dm_room_id)%>
-  <% else %>
-    <%= form_for @dm_room do |f| %>
-    <%= f.hidden_field :user_id, value: @user.id %>
-      <%= fields_for @entry do |e| %>
-        <%= e.hidden_field :user_id, value: @user.id %>
-      <% end %>
-      <%= f.submit "チャットを始める", class:"btn btn-primary btn-lg user-show-chat"%>
-    <% end %>
-  <% end %>
-
-<% end %>

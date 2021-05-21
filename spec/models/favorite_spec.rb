@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Favorite, type: :model do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
-  let!(:new_post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
+  let!(:new_post) { create(:post, user: user, title: "sample", price: 500, experience: "rails") }
   let!(:favorite) { create(:favorite, user_id: user.id, post_id: new_post.id) }
 
   describe "バリデーションテスト" do

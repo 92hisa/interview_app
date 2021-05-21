@@ -1,8 +1,8 @@
 module NotificationsHelper
   def notification_form(notification)
-  visitor = link_to notification.visitor.name, notification.visitor, style: "color: #696969; font-weight: bold;"
+  visitor = link_to notification.visitor.name, notification.visitor,data: {"turbolinks" => false}, style: "color: #696969; font-weight: bold;"
   your_post = link_to 'あなたの投稿', post_path(notification), style: "color: #696969; font-weight: bold;", data: { "turbolinks" => false }
-  your_dm = link_to 'メッセージ', notification.dm_room, style: "color: #696969; font-weight: bold;"
+  your_dm = link_to 'メッセージ', notification.dm_room,data: {"turbolinks" => false}, style: "color: #696969; font-weight: bold;"
 
   case notification.action
   when "follow"

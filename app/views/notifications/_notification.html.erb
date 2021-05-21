@@ -4,7 +4,7 @@
   <div class="row align-items-center">
     <div class="col">
       <div class="d-flex align-items-center">
-        <%= link_to user_path(visitor) do %>
+        <%= link_to user_path(visitor),data: {"turbolinks" => false} do %>
           <% if visitor.profile_image.present? %>
             <%=  image_tag visitor.profile_image.url, class:"avatar-md rounded-circle" %>
           <% else %>

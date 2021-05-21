@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "comments#destroy", type: :request do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
   let!(:other_user) { create(:user, name: "other_user", email: "other_user@example.com", gender: "woman") }
-  let!(:new_post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
+  let!(:new_post) { create(:post, user: user, title: "sample", price: 500, experience: "rails") }
   let!(:comment) { create(:comment, user_id: user.id, post_id: new_post.id, comment: "hello world") }
 
     describe "ログインしている場合" do

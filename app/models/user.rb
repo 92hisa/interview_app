@@ -17,7 +17,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :about_me, length: { maximum: 500 }
 
   enum gender: { man: 0, woman: 1 }

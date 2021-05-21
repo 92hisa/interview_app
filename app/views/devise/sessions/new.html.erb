@@ -38,10 +38,10 @@
               <%= f.submit "ログイン", class: "btn btn-success btn-block" %>
             </div>
             <div class="mt-3">
-              <span>アカウントをお持ちでない方はこちら「<%= link_to "無料登録", new_user_registration_path, style: "color: #2DAADB;"%> 」</span>
+              <span>アカウントをお持ちでない方はこちら「<%= link_to "無料登録", new_user_registration_path,data: {"turbolinks" => false}, style: "color: #2DAADB;"%> 」</span>
             </div>
             <div class="mt-3 text-center">
-              <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path, style: "color: #2DAADB;"%>
+              <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path,data: {"turbolinks" => false}, style: "color: #2DAADB;"%>
             </div>
           </form>
           <% end %>

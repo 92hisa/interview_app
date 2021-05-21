@@ -127,3 +127,7 @@ a {
 .form-control:focus {
     border-color: #2DAADB;
 }
+
+.btn-lg {
+  line-height: 1.0;
+}

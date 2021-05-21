@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
-  let!(:post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
+  let!(:post) { create(:post, user: user, title: "sample", price: 500, experience: "rails") }
   let!(:comments) { create(:comment, user: user, post: post, comment: "hello world") }
 
   describe "バリデーションテスト" do

@@ -13,7 +13,7 @@
           </div>
           <% if @search.present? %>
             <% @search.each do |search| %>
-            <%= link_to post_path(search), class: "text-inherit" do %>
+            <%= link_to post_path(search),data: {"turbolinks" => false}, class: "text-inherit" do %>
               <div class="card mb-5">
                 <div class="card-body pt-2 pb-2">
                   <div class="d-flex align-items-center justify-content-between">

@@ -35,4 +35,5 @@ Rails.application.routes.draw do
   end
   resources :dms, only: [:create]
   resources :dm_rooms, only: [:create,:show]
+  resources :recruitments, only: [:index]
 end

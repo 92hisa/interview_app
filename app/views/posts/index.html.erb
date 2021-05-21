@@ -13,7 +13,7 @@
           </div>
           <% if @post.present? %>
             <% @post.each do |post| %>
-            <%= link_to post_path(post), class: "text-inherit" do %>
+            <%= link_to post_path(post),data: {"turbolinks" => false}, class: "text-inherit" do %>
               <div class="card mb-5">
                 <div class="card-body pt-2 pb-2">
                   <div class="d-flex align-items-center justify-content-between">
@@ -45,7 +45,7 @@
                       <% if post.plan_image.present? %>
                         <%= image_tag post.plan_image.url, class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                       <% else %>
-                        <%= image_tag "interview_1", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
+                        <%= image_tag "comming_soon.jpeg", class: "img-fluid", style:"height: 100px; width: auto; object-fit: cover;"%>
                       <% end %>
                     </div>
                   </div>

@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update(user_params)
+    if current_user.update!(user_params)
       flash[:notice] = "ユーザー情報が更新されました"
       redirect_to user_path(current_user.id)
     else
@@ -69,13 +69,13 @@ class UsersController < ApplicationController
     @current_entries.each do |entry|
       my_dm_room_ids << entry.dm_room_id
     end
-    @another_entries = Entry.where(dm_room_id: myDmRoomIds).where('user_id != ?', current_user.id).order(created_at: 'desc')
+    @another_entries = Entry.where(dm_room_id: my_dm_room_ids).where('user_id != ?', current_user.id).order(created_at: 'desc')
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:gender, :about_me)
+    params.require(:user).permit(:gender, :about_me, :my_experience)
   end
 
   def correct_user

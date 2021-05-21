@@ -15,32 +15,32 @@
         <span class="navbar-header">アカウント</span>
         <ul class="list-unstyled ml-n2 mb-0">
           <li class="nav-item">
-            <%= link_to "/", class: "nav-link" do %>
+            <%= link_to "/",data: {"turbolinks" => false}, class: "nav-link" do %>
             <i class="fa fa-home nav-icon"></i>HOME
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to dm_list_user_path(current_user), class: "nav-link" do %>
+            <%= link_to dm_list_user_path(current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
             <i class="far fa-envelope nav-icon"></i>メッセージ
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to notifications_path, class: "nav-link" do %>
+            <%= link_to notifications_path,data: {"turbolinks" => false}, class: "nav-link" do %>
             <i class="fe fe-bell nav-icon"></i>通知
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to follows_user_path(id: current_user), class: "nav-link" do %>
+            <%= link_to follows_user_path(id: current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
             <i class="far fa-heart nav-icon"></i>フォローリスト
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to favorite_list_user_path(id: current_user), class: "nav-link" do %>
+            <%= link_to favorite_list_user_path(id: current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
             <i class="fe fe-star nav-icon"></i>お気に入りリスト
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to purchase_logs_user_path(current_user), class: "nav-link" do %>
+            <%= link_to purchase_logs_user_path(current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
             <i class="far fa-clipboard nav-icon"></i>購入履歴
             <% end %>
           </li>
@@ -56,12 +56,12 @@
             <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="dropdownUser">
             <ul class="list-unstyled">
             <li class="nav-item">
-              <%= link_to edit_user_registration_path(id: current_user), class: "nav-link" do %>
+              <%= link_to edit_user_registration_path(id: current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
                 <i class="fas fa-user-edit nav-icon"></i>プロフィール編集
               <% end %>
             </li>
             <li class="nav-item">
-              <%= link_to post_list_user_path(current_user), class: "nav-link" do %>
+              <%= link_to post_list_user_path(current_user),data: {"turbolinks" => false}, class: "nav-link" do %>
                 <i class="far fa-edit nav-icon"></i>経験者プラン
               <% end %>
             </li>

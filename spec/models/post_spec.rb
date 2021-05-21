@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   let!(:user) { create(:user, name: "user", email: "user@example.com", gender: "man") }
-  let!(:post) { create(:post, user: user, title: "sample", price: 100, experience: "rails") }
+  let!(:post) { create(:post, user: user, title: "sample", price: 500, experience: "rails") }
   let!(:favorite) { create(:favorite, user_id: user.id, post_id: post.id) }
 
   describe "バリデーションテスト" do
@@ -67,8 +67,8 @@ RSpec.describe Post, type: :model do
         expect(post).to be_invalid
       end
 
-      it "価格は1円以上でなければ登録できないこと" do
-        post = build(:post, price: 0)
+      it "価格は500円以上でなければ登録できないこと" do
+        post = build(:post, price: 499)
         post.valid?
         expect(post).to be_invalid
       end
@@ -158,7 +158,7 @@ RSpec.describe Post, type: :model do
   describe "インスタンスメソッドテスト" do
     context "taxメソッド" do
       it "消費税を含めた金額に変換すること" do
-        expect(post.tax).to eq "110"
+        expect(post.tax).to eq "550"
       end
     end
 

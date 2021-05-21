@@ -2,7 +2,19 @@
   <div class="position-relative text-center">
     <div class="font-size-md d-grid gap-2">
       <%= render partial: 'relationships/follow_button', locals: { user: @user } %>
-      <%= link_to "相談する", "/", class: "btn btn-success mb-3", style: "font-weight: bold;" %>
+      <% unless user.id == current_user.id %>
+        <% if is_dm_room == true %>
+          <%= link_to "相談する", dm_room_path(dm_room_id.dm_room_id),data: {"turbolinks" => false}, class: "btn btn-success mb-3", style: "font-weight: bold;" %>
+        <% else %>
+          <%= form_for dm_room do |f| %>
+          <%= f.hidden_field :user_id, value: user.id %>
+            <%= fields_for entry do |e| %>
+              <%= e.hidden_field :user_id, value: user.id %>
+            <% end %>
+            <%= f.submit "相談する", class: "btn btn-success mb-3", style: "font-weight: bold;" %>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <!-- Card -->

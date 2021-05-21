@@ -10,7 +10,7 @@
             <h1 class="mb-0 h2">通知</h1>
           </div>
           <div>
-            <%= link_to "通知を全て削除する", destroy_all_notifications_path, method: :delete, class: "btn btn-outline-success" %>
+            <%= link_to "通知を全て削除する", destroy_all_notifications_path,data: {"turbolinks" => false}, method: :delete, class: "btn btn-outline-success" %>
           </div>
         </div>
         <div class="card rounded-lg">
