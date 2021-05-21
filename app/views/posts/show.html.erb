@@ -3,11 +3,15 @@
     <div class="row">
       <div class="col-xl-9 col-lg-9 col-md-12 col-12 mb-5 mt-4">
         <div class="d-flex justify-content-betwee align-items-center">
-          <h2 class="font-weight-semi-bold mb-2">海外留学を目指す方におすすめ。</h2>
+          <h2 class="font-weight-semi-bold mb-2"><%= @post.title %></h2>
         </div>
-          <h3 class="font-weight-semi-bold">留学準備・海外生活について何でも話します！</h3>
+          <h3 class="font-weight-semi-bold"><%= @post.subtitle %></h3>
         <div class="rounded-lg embed-responsive embed-responsive-16by9" style="height: auto;">
-          <%= image_tag "study-abroad.jpg", class: "embed-responsive-item"%>
+          <% if @post.plan_image.present? %>
+          <%= image_tag @post.plan_image.url, class: "embed-responsive-item" %>
+          <% else %>
+          <%= image_tag "comming_soon.jpg", class: "embed-responsive-item" %>
+          <% end %>
         </div>
 
         <!-- Content -->
@@ -93,61 +97,6 @@
                     <h3 class="mb-2">経験の詳細</h3>
                     <p><%= @post.detail %></p>
                   </div>
-                  <h4 class="mb-3">What you’ll learn</h4>
-                  <div class="row mb-3">
-                    <div class="col-12 col-md-6">
-                      <!-- List group -->
-                      <ul class="list-unstyled">
-                        <li class="d-flex align-item-center mb-2">
-                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                          <span>
-                            Recognize the importance of understanding your objectives when addressing an audience.
-                          </span>
-                        </li>
-                        <li class="d-flex align-item-center mb-2">
-                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                          <span>
-                            Identify the fundaments of composing a successful close.
-                          </span>
-                        </li>
-                        <li class="d-flex align-item-center mb-2">
-                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                          <span>
-                            Explore how to connect with your audience through crafting compelling stories.
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="col-12 col-md-6">
-                      <!-- List group -->
-                      <ul class="list-unstyled">
-                        <li class="d-flex align-item-center mb-2">
-                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                          <span>
-                            Examine ways to connect with your audience by personalizing your content.
-                          </span>
-                        </li>
-                        <li class="d-flex align-item-center mb-2">
-                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                          <span>
-                            Break down the best ways to exude executive presence.
-                          </span>
-                        </li>
-                        <li class="d-flex align-item-center mb-2">
-                          <i class="far fa-check-circle text-success mr-2 lh-lg"></i>
-                          <span>
-                            Explore how to communicate the unknown in an impromptu communication.
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <p>Maecenas viverra condimentum nulla molestie condimentum. Nunc ex libero, feugiat quis lectus vel,
-                    ornare euismod ligula. Aenean sit amet arcu nulla.</p>
-                  <p>
-                    Duis facilisis ex a urna blandit ultricies. Nullam sagittis ligula non eros semper, nec mattis odio
-                    ullamcorper. Phasellus feugiat sit amet leo eget consectetur.
-                  </p>
                 </div>
                 <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="comment-tab">
                   <div class="mb-2">
@@ -160,17 +109,6 @@
                     <div class="d-lg-flex align-items-center justify-content-between mb-5">
                       <div class="mb-3 mb-lg-0">
                         <h4 class="mb-0">最新のコメント</h4>
-                      </div>
-                      <div>
-                        <!-- Search -->
-                        <form class="form-inline">
-                          <div class="d-flex align-items-center mr-2">
-                            <span class="position-absolute pl-3">
-                              <i class="fe fe-search"></i>
-                            </span>
-                            <input type="search" class="form-control pl-6" placeholder="Search Review" />
-                          </div>
-                        </form>
                       </div>
                     </div>
                     <% @comments.each do |comment| %>
@@ -214,108 +152,67 @@
                   </div>
                 </div>
                 </div>
-
                 <div class="tab-pane fade" id="other_plan" role="tabpanel" aria-labelledby="other_plan-tab">
-                    <!-- Card header -->
-                    <div class="card-header" style="background-color: #fff;">
-                      <h4 class="mb-0">
-                        掲載中のプラン <span class="text-muted font-size-xs"><%= "( #{@user.posts.count} )" %></span>
-                      </h4>
-                    </div>
-                    <!-- Description -->
-                    <div class="card-body">
-                      <!-- List group -->
-                      <ul class="list-group list-group-flush">
-                        <!-- List group item -->
-                        <% @user_posts.each do |user_posts| %>
-                        <li class="list-group-item px-0 pb-3 pt-0">
-                          <div class="d-flex align-items-center justify-content-between">
-                            <%= link_to post_path(id: user_posts),data: {"turbolinks" => false} do %>
-                              <div class="d-lg-flex align-items-center">
-                                <div>
-                                  <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
-                                </div>
-                                <div class="ml-lg-3 mt-2 mt-lg-0">
-                                  <h4 class="text-inherit">
-                                    <%= user_posts.title %>
-                                  </h4>
-                                  <ul class="list-inline font-size-xs mb-0 text-inherit">
-                                    <li class="list-inline-item">
-                                      <i class="mdi mdi-star text-warning mr-1"></i>
-                                      <%= user_posts.favorites.count %>
-                                    </li>
-                                    <li class="list-inline-item">
-                                      <i class="fa fa-comments mr-1"></i>
-                                      <span class="text-muted">
-                                        <%= user_posts.comments.count %>
-                                      </span>
-                                    </li>
-                                    <li class="list-inline-item">
-                                      <i class="fa fa-tags mr-1"></i>
-                                      <%= user_posts.experience %>
-                                    </li>
-                                  </ul>
-                                </div>
+                  <div class="card-header" style="background-color: #fff;">
+                    <h4 class="mb-0">
+                      掲載中のプラン <span class="text-muted font-size-xs"><%= "( #{@user.posts.count} )" %></span>
+                    </h4>
+                  </div>
+                  <!-- Description -->
+                  <div class="card-body">
+                    <!-- List group -->
+                    <ul class="list-group list-group-flush">
+                      <!-- List group item -->
+                      <% @user_posts.each do |user_posts| %>
+                      <li class="list-group-item px-0 pb-3 pt-0">
+                        <div class="d-flex align-items-center justify-content-between">
+                          <%= link_to post_path(id: user_posts),data: {"turbolinks" => false} do %>
+                            <div class="d-lg-flex align-items-center">
+                              <div>
+                                <img src="/geeks-1.0.1/dist/assets/images/course/course-wordpress.jpg" alt="" class="rounded img-4by3-lg" />
                               </div>
-                            <% end %>
-                            <div>
-                              <!-- Dropdown -->
-                              <span class="dropdown dropleft">
-                                <i class="far fa-clock mr-1"></i>
-                                <%= time_ago_in_words(user_posts.created_at) + "前" %>
-                              </span>
+                              <div class="ml-lg-3 mt-2 mt-lg-0">
+                                <h4 class="text-inherit">
+                                  <%= user_posts.title %>
+                                </h4>
+                                <ul class="list-inline font-size-xs mb-0 text-inherit">
+                                  <li class="list-inline-item">
+                                    <i class="mdi mdi-star text-warning mr-1"></i>
+                                    <%= user_posts.favorites.count %>
+                                  </li>
+                                  <li class="list-inline-item">
+                                    <i class="fa fa-comments mr-1"></i>
+                                    <span class="text-muted">
+                                      <%= user_posts.comments.count %>
+                                    </span>
+                                  </li>
+                                  <li class="list-inline-item">
+                                    <i class="fa fa-tags mr-1"></i>
+                                    <%= user_posts.experience %>
+                                  </li>
+                                </ul>
+                              </div>
                             </div>
+                          <% end %>
+                          <div>
+                            <!-- Dropdown -->
+                            <span class="dropdown dropleft">
+                              <i class="far fa-clock mr-1"></i>
+                              <%= time_ago_in_words(user_posts.created_at) + "前" %>
+                            </span>
                           </div>
-                        </li>
-                        <% end %>
-                      </ul>
-                    </div>
-
+                        </div>
+                      </li>
+                      <% end %>
+                    </ul>
+                  </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                   <!-- profile -->
                   <div>
                     <h3 class="mb-3">自己紹介</h3>
                     <div class="mb-4">
-                      <h4>xxx</h4>
                       <p><%= @post.user.about_me %></p>
-                    </div>
-                    <div class="mb-4">
-                      <h4>
-                        What is important of this course?
-                      </h4>
-                      <p>
-                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
-                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
-                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
-                        your markdown.
-                      </p>
-                    </div>
-                    <div class="mb-4">
-                      <h4>Why Take This Course?</h4>
-                      <p>
-                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
-                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
-                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
-                        your markdown.
-                      </p>
-                    </div>
-                    <div class="mb-4">
-                      <h4>
-                        Is able to create application after this course?
-                      </h4>
-                      <p>
-                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
-                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
-                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
-                        your markdown.
-                      </p>
-                      <p>
-                        We'll dive into GraphQL, the fundamentals of GraphQL. We're only gonna use the pieces of it that
-                        we need to build in Gatsby. We're not gonna be doing a deep dive into what GraphQL is or
-                        the language specifics. We're also gonna get into MDX. MDX is a way to write React components in
-                        your markdown.
-                      </p>
                     </div>
                   </div>
                 </div>
